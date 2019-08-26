@@ -1,0 +1,352 @@
+\documentclass{sigchi-ext}
+% * <andrei.k.1@gmail.com> 2018-07-06T09:15:32.671Z:
+%
+% ^.
+% Please be sure that you have the dependencies (i.e., additional
+% LaTeX packages) to compile this example.
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[scaled=.92]{helvet} % for proper fonts
+\usepackage{graphicx} % for EPS use the graphics package instead
+\usepackage{balance}  % for useful for balancing the last columns
+\usepackage{booktabs} % for pretty table rules
+\usepackage{ccicons}  % for Creative Commons citation icons
+\usepackage{ragged2e} % for tighter hyphenation
+\usepackage{hyperref}
+
+% Some optional stuff you might like/need.
+% \usepackage{marginnote} 
+% \usepackage[shortlabels]{enumitem}
+% \usepackage{paralist}
+% \usepackage[utf8]{inputenc} % for a UTF8 editor only
+
+%% EXAMPLE BEGIN -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP --
+% \copyrightinfo{Permission to make digital or hard copies of all or
+% part of this work for personal or classroom use is granted without
+% fee provided that copies are not made or distributed for profit or
+% commercial advantage and that copies bear this notice and the full
+% citation on the first page. Copyrights for components of this work
+% owned by others than ACM must be honored. Abstracting with credit is
+% permitted. To copy otherwise, or republish, to post on servers or to
+% redistribute to lists, requires prior specific permission and/or a
+% fee. Request permissions from permissions@acm.org.\\
+% {\emph{CHI'14}}, April 26--May 1, 2014, Toronto, Canada. \\
+% Copyright \copyright~2014 ACM ISBN/14/04...\$15.00. \\
+% DOI string from ACM form confirmation}
+%% EXAMPLE END
+ \copyrightinfo{
+ Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than the author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from \href{mailto:Permissions@acm.org}{Permissions@acm.org}. \\
+ \emph{CHI PLAY '18}, October 28--31, 2018, Melbourne, VIC, Australia \\
+ \textcopyright~2018 Copyright is held by the owner/author(s). Publication rights licensed to ACM. \\
+ ACM 978-1-4503-5624-4/18/10\ldots \$15.00 \\
+ DOI: \url{https://dx.doi.org/10.1145/3242671.3242704}
+ }
+
+% Paper metadata (use plain text, for PDF inclusion and later
+% re-using, if desired).  Use \emtpyauthor when submitting for review
+% so you remain anonymous.
+\def\plaintitle{SIGCHI Extended Abstracts Sample File: Note Initial
+  Caps} \def\plainauthor{First Author, Second Author, Third Author,
+  Fourth Author, Fifth Author, Sixth Author}
+\def\emptyauthor{}
+
+  \def\plainkeywords{Virtual body ownership; body transfer illusion; animal avatar control; animal embodiment; virtual reality games.}
+%\def\plaingeneralterms{Documentation, Standardization}
+
+\title{VR Animals: Surreal Body Ownership in Virtual Reality Games}
+
+\numberofauthors{6}
+% Notice how author names are alternately typesetted to appear ordered
+% in 2-column format; i.e., the first 4 autors on the first column and
+% the other 4 auhors on the second column. Actually, it's up to you to
+% strictly adhere to this author notation.
+\author{%
+  \alignauthor{%
+    \textbf{Andrey Krekhov}\\
+    \affaddr{University of Duisburg-Essen} \\
+    \affaddr{Duisburg, 47057, Germany} \\
+    \email{andrey.krekhov@uni-due.de} }
+      \alignauthor{%
+    \textbf{Sebastian Cmentowski}\\
+    \affaddr{University of Duisburg-Essen} \\
+    \affaddr{Duisburg, 47057, Germany} \\
+    \email{sebastian.cmentowski@stud.uni-due.de} }
+      \alignauthor{%
+    \textbf{Jens Kr\"uger}\\
+    \affaddr{University of Duisburg-Essen} \\
+    \affaddr{Duisburg, 47057, Germany} \\
+    \email{jens.krueger@uni-due.de} }
+   }
+
+% Make sure hyperref comes last of your loaded packages, to give it a
+% fighting chance of not being over-written, since its job is to
+% redefine many LaTeX commands.
+\definecolor{linkColor}{RGB}{6,125,233}
+\hypersetup{%
+  pdftitle={\plaintitle},
+%  pdfauthor={\plainauthor},
+  pdfauthor={\emptyauthor},
+  pdfkeywords={\plainkeywords},
+  bookmarksnumbered,
+  pdfstartview={FitH},
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=linkColor,
+  breaklinks=true,
+}
+
+
+% \reversemarginpar%
+%\hypersetup{draft}  %uncomment this if you get the "\pdfendlink ended up in different nesting level than \pdfstartlink." error, which is caused by hyperlinks split between pages. This error can randomly appear when your layout changes.  
+
+\include{ivda-macros}
+
+\begin{document}
+
+\maketitle
+% Uncomment to disable hyphenation (not recommended)
+% https://twitter.com/anjirokhan/status/546046683331973120
+\RaggedRight{} 
+
+% Do not change the page size or page settings.
+\begin{abstract}
+
+
+
+The illusion of being someone else and to perceive a virtual body as our own is one of the strengths of virtual reality setups. Past research explored that phenomenon regarding human-like virtual representations. In contrast, our ongoing work focuses on playing VR games in the role of an animal. We present five ways to control three different animals in a VR environment. The controls range from third person companion mode to first person full-body tracking. Our exploratory study indicates that virtual body ownership is also applicable to animals, which paves the way to a number of novel, animal-centered game mechanics. Based on  interview outcomes, we also discuss possible directions for further research regarding non-humanoid VR experiences in digital games.
+
+\end{abstract}
+
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10003120.10003121.10003124.10010866</concept_id>
+<concept_desc>Human-centered computing~Virtual reality</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10011007.10010940.10010941.10010969.10010970</concept_id>
+<concept_desc>Software and its engineering~Interactive games</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10011007.10010940.10010941.10010969</concept_id>
+<concept_desc>Software and its engineering~Virtual worlds software</concept_desc>
+<concept_significance>100</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Human-centered computing~Virtual reality}
+\ccsdesc[500]{Software and its engineering~Interactive games}
+\ccsdesc[100]{Software and its engineering~Virtual worlds software}
+
+\printccsdesc
+
+\keywords{\plainkeywords}
+% ``parentheses''
+\section{Introduction}
+
+
+
+
+Who do we want to be in a game? Sorcerer, rogue, or warrior, these are default roles most gamers would think of. Even when a game offers more exotic choices for our avatar, we usually still get a humanoid representation. Some successful games allow players to at least partly identify with realistic, non-humanoid avatars. For example, \textit{Black \& White}~\cite{BlackWhite} incorporated bipedal animals, \textit{Gothic 2}~\cite{Gothic} allowed players to transform into wild animals like wolves and scavengers to prevent fights or complete quests, and \textit{Deadly Creatures}~\cite{Deadly} offered combat experiences vs. other animals while being a tarantula or a scorpion. And although players seemed to enjoy such non-humanoid mechanics, playable, realistic animals remain a rarity in common digital games, not to mention VR titles. 
+
+
+Our claim is that incorporating animals as player avatars into VR has the potential to unveil a set of novel game mechanics and maybe even lead to a ``beastly'' VR game genre. Our claim is based on two assumptions. First, VR exposes the phenomenon of virtual body ownership (VBO)~\cite{slater2010first}. We suppose that VBO is transferable to non-humanoid characters, e.g., it is possible to experience the feeling of being in an animal body while playing a VR game. We suggest that such a feeling might be an interesting player experience worth further study. Second, utilizing the abilities of animals such as flying as a bird or crawling as a spider could be significantly more engaging in VR due to the increased presence compared to non-VR games.
+
+\begin{marginfigure}[-20pc]
+  \begin{minipage}{\marginparwidth}
+    \centering
+    \includegraphics[width=1.0\marginparwidth]{figures/animals}
+    \caption{Avatars of our study.}~\label{fig:animals}
+    \vspace{2pc} 
+        \centering
+    \includegraphics[width=1.0\marginparwidth]{figures/tiger}
+    \caption{Tiger control in the full body tracking (FB) mode: arm = forepaw, leg = hindpaw.}~\label{fig:tiger}
+    \vspace{1pc} 
+            \centering
+    \includegraphics[width=1.0\marginparwidth]{figures/spider}
+    \caption{FB spider: arm = front limb, leg = three hindlimbs.}~\label{fig:spider}
+  \end{minipage}
+\end{marginfigure}
+
+
+
+
+Hence, our first step into this direction was to explore whether and how VBO applies to animals in VR. We also researched how players could control their representation in such games, as there often is no straightforward mapping between human and animal postures. Therefore, we have implemented two first person and three third person control modes for three different animals. We evaluated our mechanisms in an exploratory survey with eight participants. In addition, we repeated parts of the study with two children, as we were curious regarding their VBO experiences and potential differences compared to adults. Our results indicate that VBO is indeed noticeable even with non-humanoid models, and the interview outcomes expose the general interest of participants regarding playing as animals with the respective set of virtual skills.
+
+The contribution of our work in progress report is twofold. Backed by our evaluation, we propose several possibilities how animal avatars could be controlled in VR and what advantages and disadvantages such modes could have. Furthermore, our paper describes a number of possible future experiments that we think are helpful to better understand the VBO phenomenon in VR games and to establish animal control as an engaging game mechanic.
+
+
+
+\section{Related Work}
+
+Our work can be classified as research in the areas of VBO and player experience in VR. We assume that the latter concepts are familiar to our community, hence we only briefly address them before going into detail regarding VBO. Player experience~\cite{Wiemeyer.2016} refers to aspects such as challenge, competence, immersion, and flow. The process of measuring such components was described by, e.g., IJsselsteijn et al.~\cite{ijsselsteijn2007characterising, ijsselsteijn2008measuring} and sublimed into the Game Experience Questionnaire~\cite{IJsselsteijn.2013}. 
+
+Playing in a VR setup adds \textit{immersion}~\cite{cairns2014immersion} as an influential factor. As often done by researchers (cf. \cite{Biocca:1995:IVR:207922.207926, sherman2002understanding}), we refer to immersion as the technical quality of a VR equipment and use the term \textit{presence}~\cite{slater1995taking, slater2003note} when talking about the influence of such equipment on our perception. Several ways to measure presence were exposed by, e.g., Lombard et al.~\cite{lombard1997heart} and IJsselsteijn et al.~\cite{IJsselsteijn}. Apart from presence, i.e., the feeling of being there~\cite{heeter1992being}, immersive setups are capable of inducing the illusion of virtual body ownership, also referred to as body transfer illusion, agency, or embodiment.
+
+
+\subsection{Virtual Body Ownership}
+
+
+One of the pioneering works regarding VBO was conducted by Botvinick et al.~\cite{botvinick1998rubber}. The authors detected the so-called rubber hand illusion in an experiment where they hid the real arm of the participant behind a screen that displayed an artificial rubber limb. Both the real and virtual arms were then simultaneously stroked by a brush and participants reported to sense the touch on the virtual rubber hand. Further studies by Tsakiris et al.~\cite{tsakiris2005rubber,tsakiris2010my} revisited the rubber hand illusion and established a first neurocognitive model that described (virtual) body ownership as an interplay between multisensory input and internal models of the body. As a follow-up to virtual arms, researchers also extended the experiments to a whole body representation~\cite{ehrsson2007experimental,petkova2008if,lenggenhager2007video}. These early findings were followed by a number of insights regarding the visuotactile correlation~\cite{slater2008towards,sanchez2010virtual} and the involved visuoproprioceptive cues~\cite{slater2009inducing,perez2012my,maselli2013building,slater2010first} that help us to enhance the VBO illusion. We will not go into more detail at that point, as the mentioned works focus on anthropomorphic  representations and, thus, we cannot assume that the same principles are also applicable for animals.
+
+\begin{marginfigure}[-14pc]
+  \begin{minipage}{\marginparwidth}
+    
+        \centering
+    \includegraphics[width=1.0\marginparwidth]{figures/human}
+    \caption{Human FB mode.}~\label{fig:human}
+    \vspace{0.5pc} 
+            \centering
+    \includegraphics[width=1.0\marginparwidth]{figures/bat}
+    \caption{FB bat: arm = wing, leg = claw.}~\label{fig:bat}
+        \vspace{1pc} 
+    \centering
+    \includegraphics[width=1.0\marginparwidth]{figures/fpspider}
+    \caption{Player perspective: looking in a mirror in HB mode.}~\label{fig:fpspider}
+
+  \end{minipage}
+\end{marginfigure}
+
+More related to our research, Lugrin et al.~\cite{lugrin2015anthropomorphism} varied the level of anthropomorphism in their experiments and stated that VBO is also noticeable with non-humanoid characters. Researchers have determined that adding virtual body parts does not necessarily destroy the VBO illusion. For instance, Guterstam et al.~\cite{guterstam2011illusion} experimented with a third arm that evoked a duplicate touch feeling, while Normand et al.~\cite{normand2011multisensory} rather focused on creating the illusion of having an enlarged belly. Won et al.~\cite{won2015homuncular} further analyzed our ability to inhabit non-humanoid avatars with additional body parts.
+
+
+
+Even more interesting for VR games, Steptoe et al.~\cite{steptoe2013human} added a tail-like, controllable body part to the avatar representation. The authors concluded that the tail movements need to be synchronized to provide a higher degree of body ownership. Another prominent example of body modification that could be promising for VR games are virtual wings. In that area, Egeberg et al.~\cite{Egeberg:2016:EHB:2927929.2927940} exposed several ways how wing control could be coupled with sensory feedback, and Sikstr\"om et al.~\cite{sikstrom2014role} assessed the influence of sound on VBO in such scenarios. Regarding realistic avatars, Waltemate et al.~\cite{waltemate2018impact} showed that customizable representations lead to significantly higher VBO effects.
+
+As a final remark regarding VBO experience, we point readers to the recent work in progress by Roth et al.~\cite{roth2017alpha}. In particular, the paper presented a VBO questionnaire based on a fake mirror scenario study. The authors suggested to measure acceptance, control, and change as the three factors that determine VBO. In our experiments, we applied the proposed questionnaire as we were curious to see how it performs for animal avatars.
+
+
+There is a body of literature related to the control of animal avatars that should be mentioned in this context. Leite et al.~\cite{leite2012shape} experimented with virtual silhouettes of animals that were used like shadow puppets and controlled by body motion. For 3D cases, Rhodin et al.~\cite{rhodin2014interactive} applied sparse correspondence methods to create a mapping between player movements and animal behavior and tested their approach with species such as spiders and horses. As a next step, Rhodin at al.~\cite{rhodin2015generalizing} experimented with the generalization of wave gestures to create control possibilities for, e.g., caterpillar crawling movements. Our research extends those methods by presenting additional mechanisms tailored to animal avatar control.
+
+
+\section{Controlling Animal Avatars in VR}
+
+
+    
+As we can see from related work, body ownership requires as much sensory feedback as possible. Hence, if we want to evoke such experiences in a VR game, a simple gamepad control is probably not adequate. Another well-established mechanism is to map player posture to the virtual representation. This is a challenging task, as most animals are not bipedal and there is no straightforward posture mapping. 
+
+We focused on three example animals (tiger, bat, spider) to cover a broad range of possible avatars as shown in \FG{fig:animals}. Tigers expose a similar skeleton and similar limb proportions compared to humanoids. Bats have a similar skeleton, but very different proportions. Finally, spiders have a completely different skeleton and an increased number of limbs with non-human proportions.
+
+We utilized a combination of Unity3D~\cite{unity} and HTC Vive~\cite{vive} including additional Vive trackers to implement five different control mechanisms for these animals. These modes are summarized on the left side. As we relied on the same testbed scene for all conditions, animals were scaled to roughly equal, human-like dimensions. Inspired by Debarba et al.~\cite{galvan2015characterizing}, we experimented with first and third person modes. For simplicity, we refer to them as \textit{FPM} and \textit{TPM}. From literature, we know that FPM are superior regarding VBO, but come with the disadvantage that players cannot see their whole virtual body if there are no reflective surfaces such as mirrors. Hence, we decided to integrate a wall-sized mirror into our testbed as shown in \FG{fig:fpspider}. 
+
+\marginpar{%
+  \vspace{-370pt} \fbox{%
+    \begin{minipage}{0.925\marginparwidth} 
+     \textbf{Control Modes} \\
+     \vspace{0.3pc}
+     \textit{FPM = First Person Mode TPM = Third Person Mode}\\
+      \vspace{1pc}
+      \textbf{FB:} \textit{Full Body (FPM).} Player posture is mapped to the whole virtual body. Mapping depends on the animal, see Figures 2-5 for details. \\
+      \vspace{0.5pc} \textbf{HB:} \textit{Half Body (FPM).} Lower body mapped to all limbs of an animal, e.g., moving the left leg triggers movements of the two left limbs of a tiger. Compared to FB, players remain in an upright posture for tiger and spider. \\
+      \vspace{0.5pc} \textbf{3CAM:} \textit{Avatar Sticks to Cam (TPM).} The avatar is in front of the player (cf. \FG{fig:3CAM}) and translated in sync upon player movement or rotation. A default walking animation is applied and the avatar always looks forward. \\
+      \vspace{0.5pc} \textbf{3NAV:} \textit{Agent Navigation (TPM).} Similar to 3CAM, but avatar walks towards the target on its own, leading to a more natural movement and rotation. \\
+      \vspace{0.5pc} \textbf{3FOL:} \textit{Cam Follows Avatar (TPM).} Default TPM known from non-VR games. Player ``is a cam'' that follows the avatar. Player rotation triggers cam translation and rotation around the avatar.  \\
+    \end{minipage}}\label{sec:sidebar} }
+    
+For two FPM, we implemented iterative and closed-form inverse kinematics (IK)~\cite{buss2004introduction} solvers to project player postures on the animal skeleton, which then deformed the skinned mesh of the virtual avatar. For more stable IK results, we equipped our players with three additional vive trackers that were mounted on the back and ankles.
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2.32\columnwidth]{figures/diagram}
+\caption{Mean values for our custom and most alpha IVBO questions. TPM is computed as an average from 3CAM, 3NAV, and 3FOL.}
+\label{fig:diagram}
+\end{figure*}
+% ``parentheses''
+
+\section{Exploratory Study}
+
+The goal of our experiment was to gather knowledge regarding the VBO phenomenon applied to animal avatars. In addition, we wanted to explore how potential players perceive the different control modes and what they like or dislike about our animal avatars in VR.
+
+\subsection{Procedure}
+We conducted a within-subjects study in our VR lab and tested the following conditions: FB human (as reference for VBO), FB spider, FB tiger, FB bat, HB spider, HB tiger, 3CAM spider, 3NAV spider, and 3FOL spider. We excluded the HB bat case, as that animal can be controlled in an upright pose in FB. Thus, we do not see any advantages of using the lower body only. We limited the three TPM to one animal, as these modes expose the same behavior for all three animals.
+
+For each condition, we told the participants to move around in the virtual arena and experiment with their virtual representation. For instance, subjects were able to move and drag various objects such as crates, pylons, and tires. Subjects stayed in the virtual world for around five minutes for each condition, which is, according to literature, enough to experience VBO effects. After each condition, we administered the alpha VBO questionnaire by Roth et al.~\cite{roth2017alpha} with a number of additional custom questions related to avatar control. Answers were captured on a 7 point Likert Scale ranging from 0 (\textit{totally disagree}) to 6 (\textit{totally agree}).
+
+In addition to the questionnaire, we conducted semi-structured interviews after each control mode, i.e., five interviews in total. In particular, we asked subjects what they liked best/least and why, whether they could imagine such controls in a game, and how we could further enhance that mode. Upon completion of all conditions, participants had the chance to provide general feedback regarding animal avatars and tell us their favorite animals to be included in the next experiments.
+
+
+\subsection{Results and Discussion}
+
+\begin{marginfigure}[-22pc]
+  \begin{minipage}{\marginparwidth}
+    \centering
+    \includegraphics[width=1.05\marginparwidth]{figures/d1}
+    \caption{Means for: \textit{I felt as if the body I saw in the virtual mirror might be my body.}}~\label{fig:d1}
+    \vspace{0.5pc}
+        \centering
+    \includegraphics[width=1.05\marginparwidth]{figures/d2}
+    \caption{Means for: \textit{The controls exhausted me [custom].}}~\label{fig:d2}
+        \vspace{0.5pc}
+        \centering
+    \includegraphics[width=1.05\marginparwidth]{figures/d3}
+    \caption{Means for: \textit{I could imagine such controls in a game [custom].}}~\label{fig:d3}
+  \end{minipage}
+\end{marginfigure}
+
+
+
+Overall, 8 adults (2 female) participated in our study with a mean age of 29.5 ($SD=6.38$). In addition, we had two children participators aged 8 and 10, however, we will address them in a separate section. All participants reported playing digital games at least a few times a month, and all had used VR gaming systems before. 
+
+The results depicted in \FG{fig:diagram} and \FG{fig:d1} indicate that FB and HB control modes can indeed create the illusion of owning an animal body in VR. Both modes did not perform notably worse than the reference virtual human and, as expected, outperform all three TPM. Note that there are no big differences regarding VBO when comparing FB and HB, which was a surprising observation because HB reflects only half of our posture changes.
+
+As can be seen in \FG{fig:d2}, subjects perceived FB modes for spider and tiger control as rather exhaustive because they had to kneel and crouch on a yoga mat. For such type of animals, HB modes seem to be more promising, as they expose the same amount of VBO without being aggravating. However, one disadvantage of HB is the less direct mapping, i.e., subjects \textit{``felt limited regarding possible interactions as it is difficult to forecast the avatar behavior sometimes''(\textbf{P2})}. Regarding missing control in HB, two participants mentioned that, in case of a spider, they would like \textit{``to control each limb separately, maybe even with finger movements''(\textbf{P5})}.
+
+Participants explained that the bat~(FB) was their favorite: \textit{``The bat behaved exactly how I expected and it was intriguing to precisely control my wing movements because it appeared realistic to me''(\textbf{P7})}. Subjects often expressed their desire to utilize the flying capability: \textit{``I could feel more like a giant bat if I could fly by moving my arms and maybe lean forward to accelerate''(\textbf{P4})}.
+
+
+
+Another finding to be mentioned is the different perception of FB spider and FB tiger modes. Participants reported that the tiger felt less engaging, and we recorded several similar statements such as the following: \textit{``the forepaws were too short, they even felt shorter than my real arms and I could not do much with them''(\textbf{P2})}. Of course, tiger paws are not shorter, but the tiger head position leads to such a distorted perspective. Hence, we suppose that perceiving virtual limbs as shorter than our real limbs feels rather limiting, whereas longer virtual limbs are rather classified as useful tools that enhance our interaction space in VR.
+
+\begin{marginfigure}[0pc]
+  \begin{minipage}{\marginparwidth}
+    \centering
+    \includegraphics[width=1.0\marginparwidth]{figures/tptiger}
+    \caption{Player perspective: avatar behavior in 3NAV mode when player walks backward.}~\label{fig:3NAV}
+    \vspace{1pc}
+        \centering
+    \includegraphics[width=1.0\marginparwidth]{figures/tpspider}
+    \caption{Player perspective: spider in 3CAM mode.}~\label{fig:3CAM}
+  \end{minipage}
+\end{marginfigure}
+
+In all three TPM, the measured VBO effects were rather low compared to FPM. Most participants reported to slightly prefer the 3CAM mode over 3NAV. In the 3NAV condition, subjects perceived the avatar to be \textit{``controlled telepathically''(\textbf{P8})} and to \textit{``orbit the player''(\textbf{P2})}. One participant was slightly surprised at one point (similar to \FG{fig:3NAV}): \textit{``when I walked backward, the spider suddenly looked at me and seemed to chase me''(\textbf{P1})}. We suggest that 3CAM and 3NAV are both suited for games (cf. \FG{fig:d3}), yet 3NAV resembles more a companion-like behavior rather than an avatar representation. In contrast, we do not recommend the usage of 3FOL mode, as it is capable of evoking dizziness, as was confirmed by two participants. Especially regarding the question about how exhausting the control was, 3FOL performed notably worse compared to 3CAM and 3NAV as depicted in \FG{fig:d2}.
+
+
+
+We also recorded a wish list of animals that subjects would like to control: birds, elephants, bunnies, fishes, slugs, apes, dinosaurs, and sharks. Furthermore, one participant requested a mapping of facial expressions.
+
+% ``parentheses''
+% \textit{`hello''(\textbf{P2}}
+
+
+\subsubsection{Children and Animal Avatars}
+
+Both children answered to most VBO-related questions with 6 (\textit{totally agree}). This could be an indicator that children might be more affected by such VR phenomena and we suggest follow-up research in that direction. In contrast, both TPM were perceived as least exciting, even if one \textit{``could see lots of details of the animal''(\textbf{P10})}.
+
+
+\section{Conclusion and Future Work}
+
+
+Our ongoing research revealed strong indications that the illusion of virtual body ownership is applicable to animal avatars. We suggest that integrating such avatars in VR games paves the way for interesting game mechanics, as the participants of our study expressed excitement about the possibility to play as an animal. We also exposed different possibilities to map player postures to virtual representations and observed that a half body tracking mode might be a valuable trade-off between comfort and VBO.
+
+Therefore, we suggest to examine such half body projections in more depth to find a sweet spot for emerging VR games. Furthermore, we are going to evaluate such animal controls in a complex VR scenario with realistic objectives and meaningful interactions. As desired by the majority of participants, we propose to enhance the virtual representations with appropriate capabilities such as flying to further enhance the VBO effect. Finally, we argue that animal VBO might be a method to increase our empathy regarding animals and nature in general~\cite{ahn2016experiencing} or even help against fears such as 
+arachnophobia and suggest further investigations of these claims.
+
+
+\balance{} 
+
+\bibliographystyle{SIGCHI-Reference-Format}
+\bibliography{vranimals}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

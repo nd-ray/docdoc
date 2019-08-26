@@ -1,0 +1,1188 @@
+% WSCG sample document
+%
+% based on Gabriel Zachmann's sample
+% http://zach.in.tu-clausthal.de/latex/
+%
+% modified Apr 2012 to match WSCG Word template
+%
+\documentclass[twoside,twocolumn,10pt]{article}
+%\documentclass[twoside,twocolumn,draft]{article}
+
+%  for debugging
+%\tracingall%\tracingonline=0
+%\tracingparagraphs
+%\tracingpages
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                             Packages
+
+\usepackage{wscg}           % includes a number of other packages (e.g., myalgorithm)
+\RequirePackage{ifpdf}
+\ifpdf
+ \RequirePackage[pdftex]{graphicx}
+ \RequirePackage[pdftex]{color}
+\else
+ \RequirePackage[dvips,draft]{graphicx}
+ \RequirePackage[dvips]{color}
+\fi
+%\usepackage[german,english]{babel}     % default = english
+%\usepackage{mypicture}      % loads graphicx.sty, color.sty, eepic.sty
+%\usepackage{array}          % better tabular's & arrays, plus math tabular's
+%\usepackage{tabularx}      % for selfadjusting p-columns
+%\setlength{\extrarowheight}{1ex}   % additional space between rows
+%\usepackage{booktabs}      % typographically much better
+%\usepackage{mdwlist}        % for compacted lists, and more versatile lists
+%\usepackage[intlimits]{amsmath} % more math stuff, see texdoc amsldoc
+%\usepackage{mymath}         % own commands, loads amssymb & array.sty
+%\usepackage{hyphenat}      % hyphenatable -, /, etc.
+%\usepackage{theorem}
+%\usepackage[sort&compress]{natbib}% better \cite commands, more flexible
+%\usepackage[sort&compress,super]{natbib} % better \cite commands, more flexible
+%\newcommand{\citenumfont}[1]{\textit{#1}}
+
+
+\usepackage{nopageno}       % no page numbers at all; uncomment for final version
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                Title
+
+\title{MorphableUI: Assisting Users with Distributed Multimodal Interaction in Dynamic Environments}
+
+\author{
+\small
+\parbox{0.29\textwidth}{\centering
+Andrey Krekhov\\[1mm]
+High Performance Computing\\
+University of Duisburg-Essen\\
+47057, Duisburg, Germany\\[1mm]
+andrey.krekhov@uni-due.de
+}
+\hspace{0.04\textwidth}
+\parbox{0.3\textwidth}{\centering
+J\"urgen Gr\"uninger\\[1mm]
+Intel VCI\\
+Saarland University\\
+66123, Saarbr\"ucken, Germany\\[1mm]
+juergen.grueninger@dfki.de
+}
+\hspace{0.04\textwidth}
+\parbox{0.29\textwidth}{\centering
+Kevin Baum\\[1mm]
+Intel VCI\\
+Saarland University\\
+66123, Saarbr\"ucken, Germany\\[1mm]
+baum@intel-vci.uni-saarland.de
+}\\ \\
+\small
+\hspace{0.05\textwidth}
+\parbox{0.35\textwidth}{\centering
+David McCann\\[1mm]
+Intel VCI\\
+Saarland University\\
+66123, Saarbr\"ucken, Germany\\[1mm]
+mccann@intel-vci.uni-saarland.de
+}
+\hspace{0.05\textwidth}
+\parbox{0.35\textwidth}{\centering
+Jens Kr\"uger\\[1mm]
+High Performance Computing\\
+University of Duisburg-Essen\\
+47057, Duisburg, Germany\\[1mm]
+jens.krueger@uni-due.de
+}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                          Hyperref
+
+
+% no hyperlinks
+\usepackage{url}
+\urlstyle{tt}
+
+% Donald Arsenau's fix for missing kerning of "//" and ":/"
+\makeatletter
+\def\Uslash{\mathbin{\mathchar`\/}\@ifnextchar{/}{\kern-.15em}{}}
+\g@addto@macro\UrlSpecials{\do \/ {\Uslash}}
+\def\Ucolon{\mathbin{\mathchar`:}\@ifnextchar{/}{\kern-.1em}{}}
+\g@addto@macro\UrlSpecials{\do : {\Ucolon}}
+\makeatother
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              My Commands
+
+
+%\DeclareMathOperator{\sgn}{sgn}
+
+%\theorembodyfont{\upshape}
+%\theoremstyle{break}
+%\theoremheaderfont{\bfseries\normalsize}
+
+%\newtheorem{lem}{Lemma}
+%\newtheorem{defn}{Definition}
+
+% % my
+\include{ivda-macros}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{times}
+\usepackage{booktabs}
+\usepackage{csquotes}
+\usepackage{tabularx}
+\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+\usepackage{algorithmic}% http://ctan.org/pkg/algorithms
+\usepackage{listings}
+\usepackage{graphics}
+%\def\denquote#1{%both single quotes
+\linespread{0.94}
+%\lq{#1}\rq}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                                Document
+
+
+\begin{document}
+
+\twocolumn[{\csname @twocolumnfalse\endcsname
+
+\maketitle  % full width title
+
+
+\begin{abstract}
+\noindent
+Nowadays, users interact with applications in heterogeneous and constantly changing environments. The plethora of interconnected I/O modalities is beneficial for a wide range of application areas such as virtual reality, cloud-based software, mobile devices, digital signage, or scientific visualization. These dynamic applications require interfaces based not only on the traditional mouse and keyboard but also on gestures, speech, or highly-specialized and environment-dependent equipment. However, implementing the large number of possible user interfaces is infeasible for developers and would overburden users.
+
+
+This paper introduces an interaction model and outlines its implementation as a distributed system, called MorphableUI. The resulting service offers a user- and developer-friendly way to establish dynamic connections between arbitrary applications and interaction device capabilities such as orientation or pinch gesture. We present an easy-to-use API for developers and a user-friendly mobile frontend for users to set up their preferred interfaces. During runtime, MorphableUI transports interaction data beween devices and applications. The system also accounts for higher-order I/O transfer functions by automatically splitting, merging, and casting inputs from different I/O modalities. One of the advantages of these mechanisms is the possibility to replace higher-dimensional input with a combination of lower-dimensional device capabilities. The admissible combinations are determined by searching a hypergraph that represents both, device capabilities and application requirements. As an additional result, the dynamic nature of our model emphasizes rapid prototyping in heterogeneous environments.
+\end{abstract}
+
+\subsection*{Keywords}
+User-defined interfaces; interaction model; dynamic scenarios; rapid prototyping.
+
+\vspace*{1.0\baselineskip}
+}]
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Ideas}
+%need to shorten 12p->8p
+%
+%sample code into example integration
+%
+%write developer survey
+%
+%improve medical example
+%
+%shorten model and graph
+%
+%emphasis on prototyping and dev. replacement
+%
+%reference survey in benefits and limitations
+%
+%iOS screenshots in mockup device
+% ERGEBNIS VOM SURVEY!!!
+
+%cloud allows to change environments
+\section{Introduction}
+\label{sec:introduction}
+\copyrightspace
+
+
+
+
+
+%
+% Motivating the need for adaptable UIs
+%
+Present-day technologies allow applications to run in heterogeneous and changing environments. Different environments provide users with different input and output devices. Even in the same environment, users typically have different needs and preferences with respect to such interaction devices. This wanted flexibility creates a demand for user interfaces that are adaptable to changing environments and user preferences by spanning the plethora of contemporary I/O modalities and devices. However, the engineering workload involved in making applications fully adaptable in this sense is very high, and, as a result, applications nowadays often support only a limited number of devices.
+
+
+
+%
+% Presinging a VR-like scenario and the usage of different I/O modalities
+%
+
+Consider the following use-case: A group of experts wants to perform a deep brain stimulation on a patient. This kind of brain surgery requires various medical datasets to be explored in advance as well as being monitored during the process. Further assume that a 3D visualization application that is able to handle those datasets is available.
+In the preparation stage, the experts review the dataset at the office. The interaction setup involves well-known devices such as mouse and keyboard, and the dataset is displayed on a monitor. Later, the experts meet in the conference room and review the surgery roadmap on a large display wall while standing in front of it. The interaction is done via gestures, speech, and personal mobile devices. During the surgery, the doctor relies on a big touchscreen to monitor the process and change parameters on the fly via touch-based or Leap-Motion-captured gestures. The latter is a benefit in aseptic environments where touching should be avoided or is not possible.
+
+
+
+%
+% Why does the scenario require a novel technology?
+%
+The scenario above outlines three different environments and workflows based on the same application but with different interaction requirements. One way to tackle this issue is to add support for various devices to the application itself and extend that range when needed. When new types of devices are introduced within the field of an application, the latter must be modified in order to accommodate these new interaction possibilities. In contrast to this approach, we propose a model that allows for dynamically connecting applications and devices in a way that makes user interfaces adaptable to changing environments and user preferences. This method helps developers avoid having to adapt their application to various types of devices and enhances rapid prototyping possibilities. Users are given the freedom to control applications in the way that best suits their needs by making use of any device that is available in their environment.
+
+In addition, we present an implementation of the proposed model. The implementation provides a uniform, easy-to-use API for arbitrary devices and applications and exposes a service that allows users and developers to configure and dynamically change their interfaces. We demonstrate the service's capabilities by a mobile application suitable for rapid and easy reconfiguration of user environments.
+
+
+
+
+\section{Related Work}
+
+To solve the outlined issues, two major tasks need to be addressed. First, a way to abstract from actual devices, manufacturers, and even modalities to cover all available interaction possibilities is required. Future devices should also be captured by the developed abstraction. Second, one needs a way to dynamically set up and modify interfaces by taking into account the environment and user preferences. A number of different approaches, especially to the first task, have been presented in the past. Our work builds on these achievements and establishes an interaction environment that includes device and application classification, UI generation, and I/O data streaming.
+
+
+\subsection{I/O Abstraction}
+
+
+
+%
+% existing frameworks often abstract at a hardware level. We are using events instead
+%
+I/O hardware abstraction layers hide the details of the underlying hardware. They are often used in VR/AR/MR environments where one has to deal with various kinds of often highly specialized I/O equipment such as motion tracking or 6 degree-of-freedom (6 DOF) devices. One example of the latter is the Control Action Table (\emph{CAT})~\cite{Hachet}. It combines both 3D and 2D interaction techniques and extends the UI design space. Another option is to combine the CAT with other devices such as HMDs or the sensors of a smartphone. In the case of 6 DOF controls, one should also pay attention to the human ability to coordinate movements~\cite{Zhai:1998:QCM:274644.274689}. One approach to wiring input devices and applications that is used in a number of VR environments is the \emph{VRPN}~\cite{Taylor:2001:VDN:505008.505019} system.
+
+
+
+Apart from introducing abstract classes such as joysticks, VRPN streams the device input data over the network, allowing, for example, distributed applications and scenarios. As opposed to the broad hierarchy of VRPN, the abstraction layer of \emph{DEVAL}~\cite{Ohlenburg:2007:DDA:1766311.1766369} establishes a deep hierarchy that puts more emphasis on the exchangeability of devices. Both approaches are based on abstracting from concrete devices and introducing hardware or device classes. These approaches have limitations when it comes to multi-modal exchangeability of interaction techniques. In contrast, \emph{DEMIS}~\cite{Jiang} relies on events. It also accounts for multi-level composite events and is placed between the operating system and an application. As presented in \cite{970514}, a framework that offers these kinds of low-level I/O abstractions is also beneficial for augmented reality applications. Frameworks such as emph{Midas}~\cite{Scholliers:2010:MDM:1935701.1935712} focus on multi-touch and further enhance the I/O abstraction.
+
+
+
+Systems that want to support multi-device interaction can benefit from the Device Indepentent Architecture~\cite{Chmielewski:2012:AAS:2405172.2405177}. Similar to our system, the authors propose to decouple devices from applications in order to adapt to the given environment. The work around the \emph{Virtual Interactive Namespace (VINS)}~\cite{VGH12} provides a distributed memory space that permits the reuse and exchange of various interactive techniques, which also enhances the development of reusable interaction components. Another library that supports designers and researchers with regard to the development of novel interaction techniques is \emph{Squidy}~\cite{Konig20108609394}. It unifies various device drivers, frameworks, and tracking toolkits and exposes a visual design environment to increase the overall ease of use.
+
+
+
+
+%
+% ok, we use types. but how to classify them?
+%
+In order to establish our interaction event types, we have chosen the contributions of Card et al.~\cite{Card:1990:DSI:97243.97263} and Mackinlay et al.~\cite{Mackinlay:1990:SAD:1456610.1456612} as our starting point. Their work in this area focuses on the design space for input devices. One key idea is to split a device into a set of atomic capabilities, e.g., a mouse wheel and mouse buttons and the movement sensor in the case of a mouse. These capabilities are captured by a taxonomy consisting of classes such as 1D-3D motion or rotation. Hence, mouse movement would be classified as 2D motion on the x- and y-axes. In contrast to that rather mechanical point of view, the work of Javob et al.~\cite{Jacob:1994:ISI:174630.174631} focuses more on the perceptual structures of interaction tasks.
+
+
+
+
+There is also work on other taxonomies dealing with less traditional I/O techniques. For example, one might consider gesture recognition. Here, \textit{Proton}~\cite{Kin:2012:PMG:2207676.2208694} proposes a regular expression-based classification of touch input. For mobile devices, user-defined gestures are composed into a motion gesture taxonomy of Ruiz et al.~\cite{Ruiz:2011:UMG:1978942.1978971}. Widgets are another important approach to generating user input. One example of widget classification with a focus on 3D tasks can be found in the work of Dachselt and H\"{u}bner~\cite{Dachselt:2006:STM:2386021.2386035}.
+
+
+%
+% some old stuff
+%
+We do not merely aim to classify devices but also to establish exchangeable connections to applications. For that reason, one has to deal with the application side of the interaction pipeline as well. Applications can have a variety of interaction tasks to be performed. The following six tasks, mainly suited for 2D, were proposed by Foley~\cite{FoleyWallaceEtAl1984}: select, position, orient, path, quantify, and text. For 3D interaction, five basic interaction tasks were introduced and refined by Bowman~\cite{Bowman99interactiontechniques, Bowman:2004:UIT:993837}: navigation, selection, manipulation, system control, and symbolic input.
+
+
+%
+% how do we assign I/O to tasks/requirements?
+%
+\subsection{UI Adaptation}
+
+%
+% ICON: same direction, more limitations. MUI has constraints in lan-less areas
+%
+Our scenario involves varying environments, tasks, and user preferences. The task of adapting a user interface to such constraints can be tackled in multiple ways. For instance, users can assign the output of directly connected devices to application functions with the visual editor \emph{ICON}~\cite{ICON}. To a limited degree, input transformation is possible as well, but requires a skilled user to perform the configuration. \emph{SUPPLE}~\cite{Gajos:2004:SAG:964442.964461} formalizes the UI configuration problem and focuses on the graphical aspect of automated UI generation. Its successor, \emph{SUPPLE++}~\cite{Gajos:2007:AGU:1294211.1294253}, adds support for physically disabled users by including user models. UI adaptation also plays an important role in the automotive industry, driven especially by the amount of external infotainment possibilities as discussed in \cite{deMelo:2009:TFU:1620509.1620518} and \cite{Hauslschmid:2013:GTA:2516540.2516580}.
+
+
+%
+% dynamic and multi-user
+%
+%To deal with dynamic scenarios, \emph{Open Project}~\cite{Negulescu:2013:OPL:2501988.2502030} provides the ability to project mobile applications onto public wall-sized displays. The wide range of possible video outputs devices necessitated novel solutions for UI adaptation \cite{Keranen:2002:ARL:572020.572058}. In the case of multi-user scenarios, there are further issues that must be addressed, e.g., concurrent input and conflict management. One system that targets such issues is \emph{FlowBlocks}~\cite{Block:2012:FMU:2380116.2380178} which allows users to drag and drop so-called \textit{UI-Blocks} over \textit{UI-Docks} to increase mutual awareness and improve conflict management. Considering interaction in other scenarios such as on large display walls, non-trivial and adapted interfaces have significant advantages and common mouse and keyboard setups are often inappropriate. The usage of mobile devices for high-precision pointing tasks is investigated in \cite{Nancel:2013:HPL:2470654.2470773}. \emph{HIPerPaper}~\cite{Weibel:2010:EPP:1866218.1866268} ports the natural pen and paper interface to display walls. Collaboration can be improved by, e.g., adding overlays proposed in \cite{Satyanarayan:2012:UOS:2166966.2166987}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%
+% Current author: David
+%
+\section{MorphableUI}
+
+
+%
+% model leads to graph which solves the ui gen issue. Finally, we show the impl.
+%
+To accomplish the outlined goals, we start off with developing an abstract model for UIs and user interaction in general. Based on that construct, we describe how to translate the process of generating admissible UIs into a graph theoretic problem and present an algorithm that solves it. We conclude by presenting an implementation of these concepts and offer a user- and developer-friendly way to establish dynamic connections between arbitrary applications and interaction devices.
+
+
+\subsection{Model} \label{model}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/reqcap}
+\vskip-1mm
+\caption{By introducing requirements and capabilities, the basic model decouples applications from devices. Both sides are associated with the corresponding interaction event types. In this example, moving the mouse can be used to pan the dataset. Since the swipe gesture is associated with the same interaction event type, these two interaction techniques can be exchanged.}
+\label{fig:reqcap}
+\end{figure}
+
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/wiring}
+\vskip-1mm
+\caption{Adding the split, merge, and cast operators allows the transformation of generated interaction events and combination of different devices to perform a task. Hence, rotating the dataset can be achieved by a combination of the directional pad (d-pad) of a gamepad and the stick rotation of a joystick.}
+\label{fig:wiring}
+\end{figure}
+
+
+
+%\subsection{UI Formalization, Preface}
+%The traditional picture looks like this: There is an user on the one side and an application on the other. Between the two we find a third layer: intuitively some kind of UI. Something that allows the user to control the application.
+
+%For a simple and old school example imagine the following scenario: Some user want to read a pdf in her favorite pdf viewer on her laptop. After a while the user has read everything on the current page and wants to scroll down. One simple movement on the right spot of the touch pad does the job. What we can observe from this, is that there are some essential components in use along with the application and the user. The user gets information from the app via the laptop display and she puts forward information to the application via the touch pad.
+
+
+%More generally speaking: There are possible outputs from the app that somehow need to be transformed and delivered to the user, e.g. the pdf-content has to be presented somehow. On the other side there are possible outputs from the user that shall trigger somehow certain behavior of the application. In both cases we have some kind of device in between, either the laptop display or the touch pad. Such devices are subject to specific needs: On the user side they need to be useful given the naturally specifications of users (otherwise the user would need other devices to use the devices in question -- imagine a display presenting frames in imperceptible wavelengths), on the app side, they need to specify valid inputs and outputs and deliver APIs to the application to handle them. In the following we will focus on one direction: the input.
+
+%This may motivate us to formulate what happens in an UI in traditional cases as follows:
+
+
+
+%Many applications do not allow interaction devices to be exchanged in a fully dynamic way. There are rigid connections between an application and a limited set of supported interaction devices. Three main issues associated with such rigid connections have to be pointed out. First, users' choices are restricted to the devices that are supported by the application. Second, developers have to consider all the interaction devices they want to support which results in work duplication across applications. Third, spatial decoupling of applications and devices is difficult since often both have to be executed on or connected to the same machine.
+
+
+
+\subsubsection{Events, Capabilities, and Requirements}
+
+%
+% intuitive exchangeabilitiy concept
+%
+Different interaction devices can be used to perform the same task. In our medical example, the visualization application allows users to move, i.e., pan, the dataset, which can be achieved by moving the mouse and also by swiping over a smartphone touchscreen. From a more abstract point of view, what the mouse and the smartphone provide is the ability to generate \emph{interaction events} of a specific type that are sent to and interpreted by the application. Both devices generate the same \emph{type} of interaction event, precisely, a two-dimensional motion event. Because the mouse and the smartphone provide the means of generating interaction events of the same type, they can be exchanged with respect to the task to be performed.
+
+The \emph{capability} of a device describes the type of generated or processed interaction events. Input capabilities generate interaction events triggered by the user, whereas output capabilities process interaction events received from the application such as video output. Note that some devices, e.g., smartphones, have input as well as output capabilities.
+
+%\begin{table}[htb]
+%\centering
+%\begin{tabular}{l|l}
+%Capability & Interaction event type \\
+%\hline \\[-1.0em]
+%Left click & \texttt{Firing Event} \\
+%Right click & \texttt{Firing Event} \\
+%Mouse movement & \texttt{2D Motion}\\
+%Wheel click & \texttt{Firing Event} \\
+%Wheel movement & \texttt{1D Motion}
+%\end{tabular}
+%\caption{Capabilities of a stabdard mouse.}
+%\label{tab:mousecap}
+%\end{table}
+\begin{table}[htb]
+\small
+\centering
+
+\begin{tabular}{l|l}
+Capability & Interaction event type \\
+\hline \\[-1.0em]
+Pinch gesture & \texttt{Zoom Event} \\
+Gyroscope & \texttt{3D Rotation} \\
+Slider widget & \texttt{1D Motion} \\
+Touchscreen position & \texttt{2D Position} \\
+Touchscreen display & \texttt{Video} \\
+Voice recognition & \texttt{Text}
+\end{tabular}
+\caption{Excerpt of the capabilities of a smartphone.}
+\label{tab:smartphonecap}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=2.0\columnwidth]{images/hg}
+\vskip-1mm
+\caption{A subset of the established hypergraph. Event types are captured as vertices whereas hyperedges represent the operators. To maintain clarity, a number of edges and vertices are omitted. The proposed iterative algorithm uses device tokens that traverse the hypergraph until the requirement vertex is reached. The result is a subgraph representing the wiring between device capabilities and a requirement. One example of a wiring is highlighted.
+%We also outline the entry points for various device capabilities and application requirements. Apart from ImageVis3D, controlling a quadcopter and annotating keynote slides are included as use-cases.
+}
+\label{fig:hg}
+\vskip-1mm
+\end{figure*}
+
+The capability classification includes low-level types of interaction events, e.g., \texttt{Firing Event} or \texttt{2D Position}, as well as higher-level types such as \texttt{3D Manipulation}.
+An example classification illustrating both input and output capabilities of a smartphone is given in Table~\ref{tab:smartphonecap}.
+The higher-level interaction events such as the \texttt{Zoom Event} have more specific semantics with respect to the task a user intends to accomplish.
+A \texttt{Zoom Event} can also be regarded as an event of type \texttt{1D Motion}.
+However, the pinch gesture capability of a smartphone is tailored to accomplish the very specific task of zooming in or out, which is why we associate it with that higher-level event type.
+As explained in the next section, such a fuzzy specification is not an issue since event types can be transformed into other types if certain criteria are met.
+
+
+Analogous to input and output capabilities of devices, applications have input and output \emph{requirements}. The former receive interaction events from input devices, and the latter send interaction events to output devices. Viewing devices and applications in this way allows the exchange of devices if their capabilities cover the requirements of the application as shown in \FG{fig:reqcap}.
+We call an admissible connection between a capability and a requirement a \emph{wiring}. The concept of a wiring is still of an abstract nature and does not imply any kind of physical connection. Since an application usually consists of multiple requirements, the complete user interface can be formally defined as a set of wirings.
+
+Considering the interaction pipeline in the suggested way bears some similarity to the well-established concept of interaction tasks and interaction techniques.
+The same interaction task can be realized by different interaction techniques, e.g., indicating a position can be realized by pointing and clicking with a mouse or by tapping on a touchscreen. The possibility to apply different interaction techniques to realize the same task corresponds in our case to the substitution of device capabilities that match an application requirement.
+
+
+The classification does not pretend to cover all available interaction devices and techniques. Instead, one might want to extend it for novel use-cases. Another aspect to be mentioned regarding the user experience is the I/O data sensitivity and range. These additional properties can be provided on both the application and device sides to enable automated unification inside the framework that internally uses a unit hypercube, which often results in improved interaction compared to raw input that might differ significantly across devices.
+
+%Call a demand for input of an application an \emph{input-requirement}. An input-requirement has a type, e.g. \enquote{firing} or \enquote{3D-motion}. Input for applications is provided by devices which have the ability to produce input of a matching type. Call the ability of a device to generate input an \emph{input-capability}. In the above example, the application has two input-requirements of the type \enquote{firing} which are connected to two distinct input-capabilities of the same type of the mouse. The mouse has further input-capabilities, e.g. a capability of type \enquote{2D-motion}, provided by moving the mouse, and a capability of type \enquote{1d-motion}, provided by scrolling the mouse wheel.
+
+%Application don't just require input from devices, they also require devices to process output which is provided by the application. Correspondingly, applications also have \emph{output-requirements} and devices can have \emph{output-capabilities}. For example, an application can have audio-output as an output-requirement and a set of speakers form a device that has audio-output as an output-capability.
+
+%Traditionally, many parts of the UI are under control of the application. The application decides which devices are used to satisfy its requirements. Especially, since the future will bring more and more of them to most users. Also the applications have become more req hungry: Some decades ago the main input came from command line. Then for many years 2D input was important, delivered by mice and varieties of joysticks. But then the gate to 3D broke. But given the number of different available devices nowadays things have changed. A app developer cannot easily take care of all possible devices possibly available and reasonable to consider for the apps requirements.
+
+\subsubsection{Operations on Interaction Events}
+
+
+
+
+
+In addition to panning, we now want to rotate our dataset, which requires a \texttt{3D Rotation} event. One might use a gyroscope in a smartphone to generate the necessary input. However, one also could combine, i.e., merge, different lower-dimensional input capabilities.
+Hence, the definition of a wiring must be extended to also include connections between one requirement and multiple capabilities. The latter have to generate interaction events that can be transformed to yield a single event matching the application requirement.
+
+%Consider a user who controls a virtual drone. By wearing a HMD and receiving \texttt{Video Output} events, she sees the virtual environment. A smartwatch is used to control the flying height of the drone. Turning the wrist in one direction makes the drone fly higher, turning the wrist in the other makes it fly lower. In addition, the user directs the drone along the other two axis with a gamepad. The requirement for controlling the movement of the drone is of the type \texttt{3D Motion}. However, there is no device with a matching capability available in this scenario and thus, the above example would not be realizable within our model.
+%Nonetheless, it is possible to generate interaction events of the required type by, e.g., merging the \texttt{1D Motion} interaction events generated by the smartwatch with the \texttt{2D Motion} events produced by the gamepad.
+
+
+We suggest three types of operations on interaction events that allow such transformations: cast, split, and merge. The \emph{cast operator} transforms the semantics of an interaction event if possible. In the case of a \texttt{Zoom Event}, one is able to cast it to \texttt{1D Motion}. The \emph{split operator} splits one event into multiple events, e.g., \texttt{3D Motion} can be split into \texttt{1D Motion} and \texttt{2D Motion}. The \emph{merge operator} works the other way around and merges multiple interaction events into one. An example transformation pipeline for the \texttt{3D Rotation} requirement is depicted in \FG{fig:wiring}.
+
+%We see now that at least two things are different now: First, not all devices must be directly connected to the system the app runs on. E.g. the smartphone may be assumed as part of the local are network without being connected implicitly to the app.
+
+
+% If someone is using the application in the role of an audience member his UI does not include the ability to draw on the slides. The corresponding requirement must therefore not be satisfied in order to yield a UI for a user in the role of an audience member. It isn't necessary that all requirements are satisfied that the application has \emph{in principle} but only the requirements of this role. We can therefore refine our definition of a UI as follows: A UI for a user in certain role is a set of wirings such that all the requirements of an application which are specific to this role are satisfied for this user.
+
+%\hspace{1em}
+%\TODO{keep or delete?}
+%The presented model allows developers to limit their work to specifying the requirements of an application without having to add support for each interaction device they want to enable.
+%There is no need to modify the application in order to benefit from new types of devices when they become available.
+%Spatial decoupling of applications and I/O devices can be easily accomplished.
+%As long as all devices are connected through some network---a constraint that is usually met nowadays---, available capabilities can be wired to matching requirements, no matter where the respective devices are located.
+%The users gain the ability to dynamically exchange devices if the appropriate capabilities are available.
+%The three operators defined on interaction events further enhance users' interaction possibilities.
+
+
+
+%
+%\begin{itemize}
+%\item Start with a simple example: E.g., mouse movement and pdf scrolling.
+%\item Break up into device and app side, into req and capability; one req (1d-motion and) one cap (1d-motion)
+%\item More complex example: Navigating a helicopter by using a leap for up-down-direction; tablet for left-right- and foreward-backward-movement; one two caps (1D-motion + 2D-motion) and one req (3D-motion)
+%\item Standard view: The UI is part of the app; it is the task of the app-developer to decide how the reqs of his app are satisfied by the caps of specific devices; e.g. the app-developer decides that a certain object navigated by using the mouse
+%\item But: reqs and caps can be decoupled logically and spatially! The app-developer only needs to specify the reqs of his app. The user can decide which devices he prefers to use to satisfy the reqs of the app.
+%\item Logical decoupling: Different devices can be used to satisfy the same req when the devices have the same cap; the caps of different devices can also be combined to provide a combined cap that satisfies a req
+%\item Spatial decoupling: There is no need that devices are physically coupled to the machine on which the app is running (network between devices and apps)
+%\item What we provide is a system that allows developers to decouple the reqs of their apps from specific devices and which allows users to decide for themselves which devices to use in order to control apps
+%\item A user can use an application in a certain role; a role defines the reqs an app has when used in this role (?)
+%\item Example: Presenter, Notes, Audience usw.
+%\item Wiring: Satisfaction of a req for a role for a user by a capability
+%\item There are constraints on wirings; exmaples: meaningful vs. meaningsless wiring
+%\item UI (WICHTIG: nicht mehr user environment) of an App for a User: Collection of all wirings which statisfy all the reqs of this app for this user
+%\item Interaction Environment: Collection of all UIs (?)
+%\end{itemize}
+%
+
+
+%
+%Extending the wiring to an interface or environment.
+%
+%Admissible UIs, constraints.
+%
+%User Interface Bild, reinzoomen, (Konzept hat jeder im Kopf), Pipeline detailliert beschreiben, Requirement, Capability
+%
+%Example: Powerpoint
+%2. Example: Helicopter
+%
+%Capabilities, Requirements
+%
+%
+%Zuerst: Bild vom User Interface im Kopf generieren, am besten gleich am Beispiel.
+%
+%
+%
+%Description of the introduced components
+%
+%Remapping to 2. Example
+%
+%2 Monitore: Notes + Projector
+%
+%Aufgreifen:
+%
+%Einführung Wiring: Sättigt requirement für eine rolle für einen nutzer
+%
+%UI (WICHTIG: nicht mehr user environment): Komposition aus wirings für einen User
+%
+%Interaction Environment
+%
+%Wie Kommen Daten
+
+
+
+
+%
+% author: andrey
+%
+\subsection{Graph} \label{graph}
+
+
+
+
+
+
+
+
+
+%
+% HYPERGRAPH algorithm, should be on the same page as the table with rules
+\begin{algorithm}[t]
+\caption{Iterative computation of admissible wirings. The algorithm returns tokens that arrive at the requirement vertex. The corresponding sequence of operators can be extracted from $hist(t)$. Traversal rules and definitions can be found in Table~\ref{tab:rules}. The algorithm sequentially executes the next cheapest traversal. After an execution and the resulting token movement, traversals of the affected vertices have to be updated.}
+\label{alg:algo}
+\begin{algorithmic}
+\STATE \textbf{Input:}
+\STATE application requirement $r$
+\STATE device capabilities $c_1, ..., c_n$
+\STATE
+\STATE \textbf{Initialization:}
+\FORALL {$c_i$}
+\STATE insert new $t$ into corresponding $v$
+\ENDFOR
+\STATE create empty $TraversalList$
+\STATE mark requirement vertex as $v_r$
+\FORALL {e}
+\STATE compute cheapest $trav_{~V \rightarrow W}$ on $e$ (see $R$)
+\STATE add $trav_{~V \rightarrow W}$ to $TraversalList$
+\ENDFOR
+\STATE
+
+\STATE \textbf{Iteration:}
+\REPEAT
+\STATE exec. cheapest $trav_{~V \rightarrow W}$ in $TraversalList$ (see $R$)
+\FORALL {$v \in V, W$}
+\FORALL {$e$, $e$ incident to $v$}
+\STATE remove $trav_{~V \rightarrow W}$ associated with $e$ from $TraversalList$
+\STATE compute cheapest $trav'_{~V \rightarrow W}$ on $e$
+\STATE add $trav'_{~V \rightarrow W}$ to $TraversalList$
+\ENDFOR
+\ENDFOR
+\UNTIL{new $t$ arrives in $v_r$}
+\RETURN $t$
+\end{algorithmic}
+\end{algorithm}
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+
+
+\begin{table}[t]
+  %\small
+  \centering
+  \resizebox{\columnwidth}{!}{
+  \begin{tabular}{l}
+    \toprule
+    \multicolumn{1}{c}{\textbf{Traversal rules $R$}} \\[.5\normalbaselineskip]
+    \midrule
+    \textbf{Definitions and notation} \\
+    \tabitem $v,w:$ vertices, $e:$ edge, $V,W:$ sets of vertices  \\
+    \tabitem $trav_{~V \rightarrow W}$ traversal on edge connecting $V$ and $W$ \\
+    \tabitem traversal types: $split_{~v \rightarrow W}$, $cast_{~v \rightarrow w}$, $merge_{~V \rightarrow w}$ \\
+    \tabitem $t$ a token with history $hist(t)$  of executed traversals  \\
+    \tabitem $t$ associated with one or more (after merging) \\ device capabilities $c$  \\
+    \tabitem $cost(t) = |hist(t)|$   \\ [.5\normalbaselineskip]
+    \midrule
+    \textbf{Candidate tokens for a traversal $trav_{~V \rightarrow W}$}  \\
+    \tabitem all $t$ in $v \in V$ not yet visited any $w \in W$  \\
+    \tabitem merge constraint: one $t$ from each $v \in V$ required\\and selected tokens must not be associated with  \\
+    the same $c$ (prevents merging a capability with itself) \\
+    \tabitem cheapest $trav_{~V \rightarrow W}$ (not necessarily unique) \\ defined as:  $min(\sum~cost(t)$ $|$ $t$ participating in $trav_{~V \rightarrow W})$ \\[.5\normalbaselineskip]
+    \midrule
+    \textbf{Executing a traversal $trav_{~V \rightarrow W}$} \\
+    \tabitem $split_{~v \rightarrow W}$: $\forall w \in W:$ insert duplicate $t_{d}$ of $t_{src}$ in $w$\\
+    \tabitem $cast_{~v \rightarrow w}$:   insert duplicate $t_{d}$ of $t_{src}$ in $w$ \\
+    \tabitem $merge_{~V \rightarrow w}$:  insert new $t_{n}$ in $w$, \\ $\forall t_{src}:$ add $hist(t_{src})$ to $hist(t_{n})$\\
+    \tabitem $\forall t$($t_{d}$ or $t_{n}$) add $trav_{~V \rightarrow W}$ to $hist(t)$ \\
+    \tabitem $\forall t_{src}:$ if visited all adjacent $v$ and $\not\exists$ outgoing\\ merge edge:  $delete(t_{src})$ \\
+    \tabitem \textit{note:} the second condition is needed since a \\ potential merge candidate might arrive later \\ [.5\normalbaselineskip]
+    \bottomrule
+  \end{tabular}}
+  \caption{Our Algorithm~\ref{alg:algo} operates on tokens. They initially represent device capabilities and are moved in a hypergraph on edges standing for operators between vertices representing the interaction event types.}
+  \label{tab:rules}
+\end{table}
+
+
+
+
+
+%
+% OUTLINE of the section
+%
+Being able to transform device I/O according to the three introduced operators clearly enhances the UI design space. This section tackles the issue of computing such wirings. First, a number of different representations for the interaction event types and their interconnection are discussed. Second, we present an iterative algorithm that proposes admissible wirings for a given requirement.
+
+
+%
+% preparation
+%
+
+%Recall the three operators split, merge, and cast.
+Taking interaction events as input, the operators execute a certain transfer function and return the corresponding interaction event (or events, in the case of a split operation) as a result. From the point of view of an interaction event, operators are perceived as incoming, if that event is the result, or outgoing, if that event is the input.
+
+
+
+%
+% wrong solutions
+%
+One way to project this model onto a data structure is to use trees with the event types as vertices and operators as edges. Another approach is to use context-free grammars with event types as symbols and operators as production trees. Intuitively, both approaches share the same computational logic: one starts at the type of the application requirement and examines all possible decompositions. %We won't go deeper at that point since
+At this point, two major drawbacks can already be observed. First, both representations contain duplicates of event types since each one can have multiple outgoing and incoming operators.
+As a result, the representation is difficult to maintain since one has to care about all production rules or trees if a type or operator is added or removed.
+Second, the need to account for all possible decompositions leads to an exponential runtime of the algorithm, which is a problem in cases with a mentionable number of devices and operators.
+
+
+
+%
+% introducing hypergraph
+%
+We design a hypergraph with event types as vertices and operators as hyperedges. Informally, this generalized graph form is needed because the split and merge operators represent a 1-to-N connection and involve more than two vertices. Hyperedges allow N-to-M connections and are a feasible data structure for our task. One additional concept based on the work in \cite{Gallo:1993:DHA:153578.153586} is utilized, the so-called \textit{backward} and \textit{forward arcs}. Both are special types of directed hyperedges, either 1-to-N (forward) or N-to-1 (backward). Hence, a forward arc precisely expresses the layout of the split operator, and a backward arc represents a merge operation. Thus, the task of computing admissible UIs can be completed by computing a sub-graph connecting the vertex associated with the application requirement to one or more vertices representing device capabilities as depicted in \FG{fig:hg}.
+
+
+
+%
+% the main algorithm
+%
+
+%Next, the wiring computation is tackled.
+Note that the length of a path between two vertices directly corresponds to the resulting transfer function applied on the I/O data. Thus, a large distance, i.e., a large number of required operators, corresponds to a less direct mapping. The distance aligns with one's intuition since using three \texttt{1D Motion} events to accomplish a \texttt{3D Motion} task is less direct than using a single \texttt{3D Motion} event. Based on that property, an iterative algorithm that presents possible wirings ordered by ascending distance between requirement and device capabilities is beneficial. Hence, a user would first receive a number of adjacent solutions and demand further solutions if needed.
+
+
+
+
+%
+% idea: tokens
+%
+Our key idea is to use tokens commonly known from Petri Nets. Each token represents a device and is initially placed at the corresponding vertex. For example, a token for the swipe gesture will start in the \texttt{2D Motion} vertex. Tokens can be moved over edges to adjacent vertices if the traversal requirements outlined in Table~\ref{tab:rules} are met.
+
+
+
+%
+% traversal rules
+%
+Possible traversals are executed sequentially, ordered by their cost. Similar to Dijkstra's shortest path algorithm, the cheapest traversal is estimated by computing the distance we already traveled as formalized in Table~\ref{tab:rules}. The approach is summarized in Algorithm~\ref{alg:algo}. Tokens arriving at the vertex corresponding to the requirement carry a valid wiring since the token history stores the sequence of executed traversals. In this way, solutions are presented to the user step by step. Again, later proposals indicate a less direct transfer function is needed to transform the I/O data required by the application. To sum up, the main advantages of the presented approach include the iterative solution generation, the in-place search with a data structure without duplicated event types, and the amortized polynomial time and space of the algorithm.
+
+
+%
+% external UIs
+%
+Finally, we establish a way to validate external, e.g., handcrafted, assignments of device capabilities for a requirement. For this purpose, the same algorithm can be employed. The corresponding device capability tokens are inserted, and the algorithm executed until a solution is found, no further traversals can be executed, or a step limit is reached. If the algorithm finds a solution, the demanded mapping is admissible, and the wiring including the required operator chain is returned. Note that this procedure allows for black box proposals consisting of the endpoints---requirement and capabilities---without the need to provide the complete operator sequence.
+
+
+
+%Ziel: arbitrary or dynamic Transferfunktionen
+%
+%We accounted for environmnent, but not exchengeability and g-g-conn. First step:
+
+
+%\subsubsection{Andrey Ergänzungen}
+%Da es eine VR Konferenz ist, sollten wir als 2. Beispiel vielleicht einen Roboter/Drohne in einer Smartfactory nehmen, also VR Bezug. Occulus Rift ist im Moment auch voll im Trend.
+
+
+%
+% current author: kevin
+%
+\subsection{Implementation of MorphableUI} \label{gates}
+
+
+%
+% section outline: focus on developer's point of view, i.e. connecting to MUI and runtime
+%
+We addressed the distributed multi-device design issue by developing an interaction model and a corresponding algorithm that computes admissible wirings for given application requirements.
+In the following, we demonstrate our implementation of MorphableUI to prove the established concepts. We introduce three main components: \emph{Gates} that serve as entry points for application and device developers. A \emph{topology server} that maintains the interaction topology and provides external services. The \emph{MasterUI}, a mobile frontend that builds on such a service and allows users to select and configure UIs.
+
+%We begin by introducing the gates since they are the starting point for developers. Afterwards, the server responsible for controlling the gates and establishing the wirings is described. The mobile frontend is discussed in the next section.
+
+%
+%The interconnection of these three software components relies on two external frameworks. The communication protocols are built upon ZeroMQ \cite{hintjens2013zeromq} connections---see \cite{Dworak:1391410} for an evaluation--- and rely on Protocol Buffer~\cite{protobuf} messages.
+
+ % In general, the approach can be separated into three distinct issues that must be addressed. First, one needs to collect all information from the environment necessary for the hypergraph algorithm and the later connections; second, one needs to enable the user to select or propose valid UIs for this environment; and third, the wirings contained in such UI must be applied and monitored.
+
+
+%
+% description ist kein gutes environment, auf keinen Fall behalten, sieht kaputt aus
+% ich weiß nicht, ob wir distributed system sagen sollten, wenn wir später von service reden. was denkt ihr?
+%
+\subsubsection{Gates}
+
+%
+% wrapper for specifying reqs and caps
+%
+A MorphableUI gate is a C-library that allows users to plug applications and devices into the interaction topology spanned by our framework.
+The gate component comes with a simple API that allows users to send and receive interaction events.
+An application that demands \texttt{3D Rotation} only has to call such a receive function or register a callback to obtain incoming events. On the other side of the pipeline, e.g., the gyro sensor of a smartphone constantly pushes its captured rotation events via a send function.
+
+Gates gather the information about application requirements and device capabilities from a developer-provided json file. In most cases, a single gate is responsible for one application or one or more devices. For example, our implementation for Kinect, Leap Motion, mouse, keyboard, and joystick running on a desktop internally links against a single gate. One also could use one gate for each device if preferred.
+
+
+%
+% portability and examples
+%
+Our implementation in plain C allows the use of the same gate implementation on desktops, mobile (iOS, Android), and other platforms such as Raspberry Pi. To faciliate the integration into modern software, a set of wrappers in other languages is available. The wrappers expose the same API and are available in languages such as Python, JavaScript, Java, C++, Objective-C, and Go. In terms of interaction event streaming performance, we point out that the gate-to-gate streaming is executed directly, i.e., without routing data over the server component presented in the next section.
+
+
+%
+% runtime, streaming
+%
+%During runtime, interaction events are generated at the sending side by, e.g., an input device, and pushed into the system through the same gate API. The receiver, e.g., an application, has two possibilities: Either pull the next event manually from the API or register a callback. \FG{fig:gate} demonstrates the data streaming pipeline in case of an input requirement. Regarding output examples, video streaming is of interest. Our prototype implementation relies on JPEG-encoded frame transmission, i.e., the application provides its video output by packing each frame into an interaction event.
+
+% Gates are very portable, they can be used on traditional systems as personal computers, but also on mobile devices like smartphones and tablets, and even on modern single-board computers like Intel Galileo or Raspberry Pi.
+
+% For example one could think of a notebook with a connected Leap Motion running a daemon with an integrated gate that gathers all inputs from the connected devices, as well as of a smart phone with nowadays standard capabilities running an app with integrated gate, but also of some central server running an application using a gate.
+
+% The internal communications between gates and the associated application or device capability gathering software works via a lightweight API that allows to receive information by either polling or pushing. Since we use an unified data format for I/O data types called \emph{Interaction Events} all along the data pipeline---even for video output, were we follow a MJPEG \cite{mjpeg} based approach, which allows to store each frame separately in Interaction Events--, it is guaranteed that everything pushed into and read from the gates, independently from any involved capabilities or requirements, is of the same easy to handle data type.
+
+\subsubsection{Topology Server}
+
+While gates are spread over the network, their operability depends on a central server that is responsible for the environment coordination.
+Precisely, the server contains a memory-efficient C++ implementation of Algorithm~\ref{alg:algo}, maintains user sessions, and keeps track of available gates.
+The server behaves as a broker between the gates and the users. It exposes necessary information about available applications and devices gathered from the gates to the users and configures gate streaming pipelines according to the user-definded interfaces. Apart from this UI configuration functionality, further explained in the next section, the topology server exposes a set of external services available for developers.
+For instance, REST interfaces are provided for both UI generation and interaction environment monitoring.
+
+
+%\TODO{evtl irgendwas aus anderem Abschnitt hierher damit 2 Absaetze da sind}
+
+% Obviously, the implementation must somewhere involve an implementation of the hypergraph algorithm presented in \ref{graph}. For this purpose, there is a second kind of component, called \emph{server}, providing a session based implementation of the algorithm.
+
+% Since all the input our algorithm needs, namely all the capabilities and requirements in the network, is possessed by the gates, the server must somehow communicate with them. Therefore, by using a simple broadcast system, the server introduces itself to the gates, whereby they are able to register to it, automatically delivering information about all available capabilities and requirements in the whole network.
+
+
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=1.0\columnwidth]{images/gate}
+%\vskip-1mm
+%\caption{The architecture of MorphableUI. Application and device developers use a C-API (or a wrapper) to integrate their software into our ecosystem. Users receive our mobile frontend to select applications and configure their UIs. Other external tools can be built upon the provided REST interfaces. During runtime, interaction events are exchanged directly between application and device gates.}
+%\label{fig:gate}
+%\end{figure}
+
+%\begin{figure*}
+%\centering
+%\mbox{
+%
+%\subfigure[Choosing an application. Here: ImageVis3D.]{\includegraphics[width=0.45\columnwidth]{images/e}}\quad
+%
+%
+%\subfigure[Automated proposals for the current user.]{\includegraphics[width=0.45\columnwidth]{images/d}}\quad
+%
+%%\subfigure[Manual configuration of the clipping plane translation.]{\includegraphics[width=0.45\columnwidth]{images/a}}\quad
+%%
+%%\subfigure[News screen that informs about recent changes.]{\includegraphics[width=0.45\columnwidth]{images/c} }
+%}
+%\caption{The mobile frontend MasterUI is a personal assistant running on iOS. It demonstrates the features of the MorphableUI service with regard to the UI generation pipeline. First, users choose from a set of running applications they want to control. This selection already prototypes the role feature addressed in future work. During the next step, one can either request and modify automated proposals based on information about previous usage or configure the wiring for each requirement individually. The news section contains recent notification about changes in the environment such as disconnected devices.} \label{fig:appnews}
+%\end{figure*}
+
+% In principle, this enables the server to compute or validate UIs. What is still missing is a possibility for the user to chose or suggest some UI. For this purpose the server hosts a public service, which will be introduced in detail in \ref{controls}.
+
+%\subsubsection{Wirings and I/O streaming}
+
+Assume that the server received a UI configured by a user via our frontend. According to our model, the UI consists of one wiring for each application requirement, while each wiring represents an I/O processing pipeline with a sequence of operators. This information is sent to all participating gates that then dynamically set up the necessary gate-to-gate streaming connections. The operator chain is always placed on the receiving side since data might be incomplete prior to that point. Hence, in the case of an input requirement, the operator chain resides in the application gate and vice versa.
+
+%\TODO{da stehn noch 3 Absätze, aber wir können das auf maximal einen zusammenfassen bzw auf die drei oben aufteilen, denk ich}
+% Finally, after selecting one of the computed UIs or accepting a suggested one, the UI must be established. Since a UI consists of a set of wirings, all the wirings need to be projected on the already existing components. For each wiring this can be done in two steps. Firstly, the gates involved must be determined, which can be done straightforwardly by looking at the involved capabilities as well as the requirement, as long as they are uniquely identifiable in the network, which can be easily be guaranteed.
+
+
+% Secondly, the operator chain must be build up somewhere. Since it may involve Interaction Events coming from different gates, the natural place for this is where the data flows together, namely in the gate receiving the data---e.g. for input this will be the gate connected to the application, for output it will be the gate connected to the associated output capability. All this can be done by the gates themselves after being informed by the server, as long as all needed information is contained in the distributed UI. The server only waits for reports of success or failure and may inform the user via the public service.
+
+% das hab ich ja quasi implizit in 3.4 drin im notification blub
+
+% After these steps have been processed successfully, the UI has been established. The server monitors and maintains the established system of gates and connections and listens to the public service. The server keeps track of the gate states all the time. If the server observes possible sources of trouble---e.g. disappearing gates or disappearing device capabilities involved in some established wiring---it may inform the user.
+
+
+% das mit Ausfall des Graphen is natürlich interessant, nur fraglich, ob das dann nichtn overkill ist
+
+% But the real work at runtime is done by the gates: all Interaction Events are ever transmitted through the server, the data flows directly from gate to gate. Hence, as long as no capability or requirement involved in any of the established wirings vanish for some reason, the UI will be fully usable---even if, for some reason, the server goes down.
+
+
+% The finally established system, including the applied UIs, is called a \emph{Interaction Environment}. The result are fast and prove very useful in practice. We use the ZeroMQ \cite{zmq} to handle the network connections between gates and other gates and the server, and Googles Protocol Buffers \cite{protobuf} for data serialization. Hence, the Interaction Events used along the data pipeline and as in- and outputs of the gates are also Protocol Buffer Messages. The Interaction Environment demonstrates how our theoretical solution can be employed to create a system that successfully addresses the issue we are concerned with.
+
+% \subsection{Exploring and Choosing UIs}\label{controls}
+
+% The server component, on the other hand, is best understood as a two sided hub. On one side, it maintains the connections to the gates. On the other side, it offers an API that supplies information about the available applications and devices, as well as admissible UIs for this configuration. It also allows to suggest own UIs or to choose a UI from the suggestions made by the server. This API enables developers to create a wide range of tools for use cases pertaining the Interaction Environment. Suppose the user selects one of the computed UIs via a graphical interface which uses the API. The server sends information about the selected UI to the gates, and the gates use this information to build the operator-chains and to establish direct network-connections between the gates as described earlier.
+
+% After all connections have been established, gates provide and are provided with input and output by devices and applications as prescribed by the wirings. The data between the gates is exchanged via direct connections between the gates---hence no data is transmitted via the server---and in a unified data format, so-called \emph{Interaction Events}.
+
+% The server components keeps track of the state of the gates at all time and whether they are involved in some wiring. If the server observes possible sources of trouble---disappearing gates, disappearing device capabilities, etc.---he may inform the user if necessary.
+
+% We use the ZMQ library \cite{zmq} to handle connections, and the Google Protocol Buffers library \cite{protobuf} for data serialization.
+
+% The Interaction Environment demonstrates how our theoretical solution can be employed to create a system that successfully addresses the issue we are concerned with. In the next subsection we will present two useful tools, that may be used for suggesting and/or choosing UIs through the server API.
+
+
+
+%\begin{enumerate}
+%\item There are two types of component
+%\item The Apps and Devices are connected to a component called "gate". Gates can provide information about the reqs and caps of the Apps and Devices they are connected to
+%\item There is also a server-component
+%\item The server collects information about all available reqs and caps from the registered Gates; this Information is then provided to the Graph-Algorithm which calculates the valid UIs
+%\item The server orders the Gates to actually establish the connections, according to wirings in selected UI; the gates establish 1-1-connections (data is not transferred via the server)
+%\item Devices provide data to Gates which sends the data via the established connections to the corresponding Gates; Gates receive data and provide data to the Apps
+%\end{enumerate}
+
+%\begin{enumerate}
+%\item The graph algorithm calculates the valid UIs. But how does the graph algorithm know which caps and reqs are actually physically available?
+%\item There is a component called TopologyServer at which Gates can register
+%\item The TopologyServer collects information about all available reqs and caps from the registered Gates; this Information is then provided to the Graph-Algorithm which calculates the valid UIs
+%\item How does the User select a UI? There is a component called MasterUI which allows the User to select one of the computed UIs
+%\item The TopologyServer orders the Gates to actually establish the connections , according to wiring in selected UI
+%\item Merging and Splitting, as computed by the GraphServer, is captured by OperatorChains
+%\item Devices provide data to Gates which sends the data via the established connections to the corresponding Gates; Gates receive data and provide data to the Apps
+%\item Introduce a nice picture: (imagine this arranged as a circle) Apps / Devices $\rightarrow$ Gates (provide information about reqs and caps of the Apps and Devices they are connected to) $\rightarrow$ TopologyServer (collects information about all reqs and caps of the Gates which are registered at the Server) $\rightarrow$ Graph Algorithm (is called by the TopologyServer and provided with information about all reqs and caps; computes all valid wirings for these reqs and caps) $\rightarrow$ MasterUI (user selects valid wiring) $\rightarrow$ TopologyServer (gets selected wiring and sends command to establish wiring to Gates) $\rightarrow$ Gates (establish network connections according to the selected wiring) $\rightarrow$ Apps / Devices (receive / provide data from / to the Gates which are transferred via the established network connections) [Circles that indicate the logical-physical separation]
+%\item What we provide: Gate-Component, TopologyServer-Component, GraphServer-Component; these components create an environment which allows app-developers and users to easily join the environment; app-developers can easily connect to the environment by specifying the reqs of their app; users can easily create personalized UIs by simply selecting their preferred UI using the MatserUI-component; ergo: developer-friendly and user-friendly
+%\item WebTools and Screenshot (fake) which demonstrates how UIs look like
+%\item Optional: Explain hierarchical TopoNode possibility
+%\item Optional: Graph as software as a service
+
+%\end{enumerate}
+
+
+
+%
+% current author: andrey
+%
+
+
+%\pagebreak
+\subsection{MasterUI: A Mobile Frontend for the UI Configuration} \label{masterui}
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/aplusb}
+\vskip-1mm
+\caption{The MasterUI is a mobile frontend for our system that allows to select and customize UIs. The application selection screen already prototypes the role feature addressed in future work. The right image displays possible assignments for a given requirement.}
+\label{fig:master}
+\end{figure}
+
+
+
+%
+% before: connecting stuff to MUI. now: user POV
+%
+%In the previous section, we mainly focused on connecting applications and devices to MorphableUI and briefly outlined the wiring realization. In the following, we will catch up on the UI configuration and the user's point of view.
+
+
+
+
+%
+% our great web api capable of rescuing dolphins
+%
+One of the services provided by the topology server is to allow configuration and launch of user-defined interfaces. To deliver a user- and developer-friendly contribution, MorphableUI comes with a default mobile frontend, the \textit{MasterUI}, depicted in \FG{fig:master}. This app guides users through the UI generation pipeline and allows on-the-fly customization during runtime, which is beneficial for, e.g., rapid prototyping tasks.
+
+%
+% introducing masterUI as a mobile app
+%
+This component is designed as a personal assistant that behaves according to the bring-your-own-device paradigm. Hence, everyone is able to use their private smartphone to create and apply desired UIs. A MasterUI establishes a connection to the MorphableUI server and fetches information about the environment, i.e., about devices and running applications. After the configuration process, the UI chosen by the user is sent back to the server, which then propagates the decision among the participating gates.
+
+%
+
+% step-by-step configuration
+%
+An example configuration process is depicted in \FG{fig:master}.
+First, the user has to choose the application he or she wants to control.
+In a second step, the UI is assembled.
+The straightforward way is to configure each application requirement manually.
+Hereby, wirings are requested from the hypergraph algorithm in an iterative way until the user sees a satisfying device assignment.
+Remember that the ordering corresponds to the length of the involved operator chain and thus affects the final transfer function between device I/O and the targeted application task.
+The other way is to fetch automated proposals described below and let the user choose between them or reconfigure them.
+
+
+
+%
+% proposed interfaces
+%
+The ability to obtain automated UI proposals is based on stored information about previous usage, i.e., on what the user already designed for this or similar applications.
+Similarity, then, is defined by the percentage of equal requirement types.
+Intuitively, there is a chance that requirements associated with the same type of interaction event behave analogously.
+Thus, we implicitly port UIs across applications by generating such proposals.
+Note that this also replaces the need to save UIs for future use.
+This approach also accounts for interfaces designed by others since it turned out to be a good starting point compared to blank initialization.
+One of our future goals is to enhance this automated proposal and learning ability to anticipate users' needs and minimize the UI configuration efforts.
+
+
+
+%Following main functionalities are exposed:
+%
+%\begin{itemize}
+%\item user management: create account, login (password protected), logout
+%\item request current interaction environment including all UIs and gates
+%\item request wiring for given requirement or an interface proposal for an application (will be discussed below)
+%\item apply a user interface for a given application
+%\item validate and apply an external UI without wiring information
+%\item subscribe for push notifications about disconnected devices
+%\end{itemize}
+
+
+
+
+%
+% other features
+%
+Apart from the UI generation, the MasterUI application subscribes to a news service of the topology server, which provides users information about new applications or devices appearing in the interaction topology.
+The news service also provides notifications about disconnected devices if they were in use before.
+For instance, answering a phone call will block the microphone and, thus, deactivate the speech capability of the device.
+The corresponding gate informs the server that reacts by notifying the users and proposing to reconfigure affected interfaces.
+Note that a MasterUI can also act as an interaction device simultaneously.
+To achieve this, MasterUI internally links against the gate library.
+
+
+
+
+
+
+
+
+
+%
+%Project the theory into the environment, gates that carry a couple of devices. Showing the device regisration, focus on developer friendliness. However, not much to say here, since we cant talk a lot about the gate-gate connections. Briefly mention auto-probe and ease-of-use for users.
+%
+%Well, instead, show a wide range of different examples: speech, video output, gestures, ... Point out: the allmighty API.
+%
+%
+%Zurück zum Ziel: wollen beliebige Apps mit bel. Geräten steuern
+%Logische Folgerung: wir stellen Blumenbeet bzw pipeline zur verfuegung. + Entry und Exit, Netzwerkbasiert
+%
+%Entry und Exit Points, erlauben Daten reinzustecken und rauszunehmen.
+%
+%Ok, last paragraph probably belongs here. Make a big picture, prove the validity of our model, show web tool, make a link to physical building layouts (minimap). Briefly explain which benefits such a vis might have, like monitoring children or stuff in big companies. Maybe mention the DNS-node approach.
+%
+%
+%Unterschiedliche Daten und weitere, dynamischere Kombination ist im übernächsten Kapitel
+%
+%Künstliche Frage: Was tun bei 3D wenn nur swipe und pinch da sind?
+
+
+\section{MorphableUI Example Integrations}
+\label{sec:results}
+
+\lstset{language=C,
+numberstyle=\footnotesize,
+basicstyle=\ttfamily\footnotesize,
+stepnumber=1,
+frame=shadowbox,
+breaklines=true}
+
+\begin{lstlisting}[language=java, captionpos=b, belowcaptionskip=4pt, caption={Example integration using the C++ language binding. The gate is initialized with a json file containing a list of requirements or capabilities. During runtime, the target software polls or sends interaction events.}, label={lst:code}]
+
+// initialization
+Gate gate("ImageVis3D.json");
+gate.start();
+...
+// runtime
+Event evt = gate.receiveEvent("Pan dataset");
+
+// something inside the target software
+translate(glm::vec3(evt.x, evt.y, 0), data);
+\end{lstlisting}
+
+
+%\begin{figure*}[t]
+%\centering
+%\includegraphics[width=2.0\columnwidth]{images/imagevis}
+%\caption{\TODO{caption}}
+%\label{fig:hg}
+%\end{figure*}
+
+
+The focus of our contribution is a novel interaction model that accounts for the exchangeability of different modalities and devices.
+To demonstrate how the theoretical model and its realization behave in the real world, we have added support for a set of devices and applications presented in this section. Additionally, having a number of MorphableUI-enabled devices further reduces the treshold for the overall framework usage.
+
+A few lines of code suffice to enable full access to the MorphableUI interaction features. The Listing~\ref{lst:code} provides an overview of the necessary steps including setup and runtime. Note that the appications does not need to know the available devices at all nor to restart or recompile if a new device becomes available. Other language bindings like Java and C\# are equally easy to grasp.
+
+
+\subsection{Device Support}
+
+MorphableUI supports iOS and Android smartphones and tablets.
+These devices expose capabilities such as swipe and pinch gestures, gyroscope and accelerometer sensors, and widgets such as sliders and virtual joysticks.
+Additionally, the iOS version supports speech input.
+Our prototype also covers conventional desktop environments, joysticks, gamepads, Kinects, Leap Motions, monitors and mobile displays for mono video output, and head-mounted displays for stereo video output.
+The underlying video streaming relies on a JPEG-encoded frame transmission, i.e., each frame is packed into an interaction event and transported to the output device.
+To demonstrate the range of possible use-cases, smart home sensors for temperature, wind speed, and air pressure were integrated.
+A number of mappings are shown in \FG{fig:hg}.
+
+
+%\subsubsection{Prototype Applications}
+%
+%
+%A number of sample applications was enhanced by connecting them to the MorphableUI service. As a first example, we implemented a slideshow application with a set of common requirements depicted in Table~\ref{tab:req1}.
+%
+%\begin{table}[htb]
+%\centering
+%\begin{tabular}{l|l}
+%Requirement & Interaction event type \\
+%\hline \\[-1.0em]
+%Next/previous slide & \texttt{Firing Event} \\
+%Move slide & \texttt{2D Motion} \\
+%Resize slide & \texttt{Zoom} \\
+%Annotate slide & \texttt{2D Position} \\
+%Select annotation color & \texttt{List Selection} \\
+%\end{tabular}
+%\caption{Requirements of a simple slideshot application.}
+%\label{tab:req1}
+%\end{table}
+%
+%As a result, one of the generated interfaces consists of a Leap Motion hand movement for moving slides and a Kinect hand distance gesture for resizing. Slide annotation is done via stylus input on a tablet combined with a dropdown list selection widget for color selection. A more convenient UI might stick to a presenter or swipe gestures to change the slides.
+%
+%As another example, we enabled MorphableUI support for a quadcopter.
+%Clearly, most vendors ship their machines with mobile applications for smartphones and tablets that allow to control the quadcopters via, e.g., two virtual joysticks and a set of buttons.
+%Exposing requirements such as lift (\texttt{2D Motion}), orientation (\texttt{3D Orientation}) and video output (\texttt{Stereo Video Out}) allows users to experiment with input modalities like the leap motion while wearing a head-mounted display for stereo video captured by the cameras of the quadcopter.
+
+
+%
+% ExpoDesign, back to Alice
+%
+%A scenario similar to the one outlined in the introduction was also realized. Hereby, users design an exposition by selecting and manipulating various objects while navigating through the scene. These tasks represent common interactions in VR/AR/MR environments and are covered by our API. For instance, the object rotation requirement is associated with the \texttt{3D Rotation} event, movement is expressed by \texttt{3D Motion} and object selection might require a \texttt{List Selection} or two \texttt{Fire events} to cycle through available items. Since the application generates both mono and stereo video output, a user can freely choose between a monitor, her Android tablet and a HMD. In the latter case, she also might want to use speech input to accomplish the list selection by spelling out the corresponding object names.
+
+%\subsection{Functional Mock-up Interface}
+%The \textit{Functional Mock-up Interface (FMI)}~\cite{Blochwitz11thefunctional} is a standard widely used by industrial companies and researchers to exchange dynamic models and for co-simulation processes. The key idea is to decouple the system into C-code input/output blocks. During runtime, data exchange can be performed between such \textit{Functional Mockup Units (FMU)}. In addition, all I/O variables of such a module are defined in an XML-file.
+%
+%We created a wrapper that allows to place a gate inside an FMU. The wrapper transforms the XML FMI description into requirements and refeshes the corresponding FMU variables by those received by the gate. One example application is a car simulation consisting of three modules: environment, car, and driver. The driver module generates output such as throttle, brake or steering wheel position. Having the MorphableUI wrapper in the driver module allows to dynamically take control over the simulation by, e.g., using a joystick to define the steering wheel position.
+
+
+\subsection{ImageVis3D}
+
+The volume rendering software \textit{ImageVis3D}~\cite{Fogal:2010:Tuvok} scales to very large biomedical datasets. It already accounts for heterogeneous environments by being able to run on everything from mobile devices to high-end graphics workstations. To allow such flexibility on the I/O side, we have connected the software to our framework by capturing a set of basic functionalities as shown in Table~\ref{tab:req2}.
+
+\begin{table}[htb]
+\small
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{l|l}
+Requirement & Interaction event type \\
+\hline \\[-1.0em]
+Rotate dataset & \texttt{3D Rotation} \\
+Pan dataset & \texttt{2D Motion} \\
+Resize dataset & \texttt{Zoom} \\
+Toggle between 1D-TF and Iso & \texttt{Toggle} \\
+%Translate clipping plane & \texttt{1D Motion} \\
+Rotate clipping plane & \texttt{3D Rotation} \\
+Set smoothstep function for TF & \texttt{2D Position} \\
+\end{tabular}}
+\caption{A set of ImageVis3D requirements. The one-dimensional transfer function is denoted by 1D-TF and isosurface rendering by Iso.}
+\vskip-1mm
+\label{tab:req2}
+\end{table}
+
+From the captured interaction tasks, manipulating the transfer function was of increased interest for the developers of ImageVis3D. One surprisingly intuitive interface was moving the hand over the leap motion and changing the inflection point of the smoothstep function by lifting or lowering the hand. Alternatively, rotating one's hand was also rated as intuitive for changing the slope of the smoothstep function.
+
+
+\subsection{Developer Survey}
+\label{sec:survey}
+
+To gain feedback on our approach, we asked nine application developers (all male) interested in MorphableUI to fill out a questionnaire after the first successful integration of our system into their target software, including both academic and industrial collaborations to cover a wide sample range. The questions included both subjective topics (difficulty of integrating the software, required support) and objective topics (needed development time for integrating the libraries into their software including glue code, time for defining the requirements/capabilities). The subjective questions were answered via a 7-point Likert scale, with 1 meaning very easy/none and 7 indicating very hard/always. The objective questions used minutes as a scale, since they targeted development efforts. Complementary questions about the programming experience and age of the participants were designed to provide hints about possible side effects for inexperienced users.
+
+\begin{table}[htb]
+\resizebox{\columnwidth}{!}{
+
+\begin{tabular}{l|l|l|l|l|l}
+& \begin{tabular}{@{}c@{}}Difficulty of\\Integration\end{tabular} & \begin{tabular}{@{}c@{}}Needed\\Help\end{tabular} & \begin{tabular}{@{}c@{}}Time for\\Integration\end{tabular} & \begin{tabular}{@{}c@{}}Time for\\Requirements\end{tabular} & Exp. \\
+\hline \\[-1.0em]
+P1 & $2$ & $2$ & $20$ min & $30$ min & $3$ yr. \\
+P2 & $3$ & $3$ & $40$ min & $30$ min & $1$ yr. \\
+P3 & $1$ & $1$ & $5$ min & $5$ min & $7$ yr. \\
+P4 & $2$ & $1$ & $15$ min & $10$ min & $2$ yr. \\
+P5 & $3$ & $2$ & $30$ min & $5$ min & $4$ yr. \\
+P6 & $2$ & $4$ & $40$ min & $20$ min & $6$ yr. \\
+P7 & $2$ & $2$ & $20$ min & $5$ min & $4$ yr. \\
+P8 & $2$ & $2$ & $30$ min & $5$ min & $4$ yr. \\
+P9 & $1$ & $1$ & $10$ min & $10$ min & $3$ yr. \\ \hline \hline
+ &  &  &  &  &  \\
+mean & $2.0$ & $2.0$ & $23.\overline{3}$ min & $13.\overline{3}$ min & $3.\overline{7}$ yr. \\
+sd & $1$ & $1$ & $12.5$ min & $10.61$ min & $1.86$ yr. \\
+\end{tabular}}
+\caption{P1 to P7 were integrations of MorphableUI into existing applications, P8 and P9 added new interaction devices to our system. In detail, P1-P4 were interactive 3D visualization tools,  P5 an interactive physical simulation, P6 a connection to the FMI standard, P7 the integration into OgreVR, P8 connected the Community Core Vision, and P9 added support for the Leap Motion.}
+\label{tab:devsurvey}
+\vskip-1mm
+\end{table}
+
+Our results show that the integration of MorphableUI could be done in less than one hour in all cases, but most participants required less than 30 minutes. The design time for capabilities/requirements fluctuated more, linearly depending on the amount and complexity of the targeted interaction. For the question regarding the difficulty of integrating MorphableUI into existing software, we see a mean value of $2.0$ with a standard deviation (SD) of $\sigma = 0.71$. Hence, the developers found the process easy and encountered no major difficulties. This result is further strengthened with the outcome for the question concerning the required support for integrating the software: it shows a mean value of $2.0$ with a SD of $\sigma = 1.0$, meaning the developers only needed little support.
+We cannot conclude that the developer experience had a direct impact on the integration or requirement/capabilities design time. Hence, the complexity of the target software seems to be a more prominent factor.
+
+
+\section{Benefits and Limitations} \label{limit}
+%
+% discussion points: widgets and security
+%
+A common question is whether MorphableUI is beneficial for a particular application. Despite that results from preliminary user studies indicate high acceptance, this topic requires further discussion.
+On the one hand, mapping a complex software such as Photoshop with hundreds of different tasks does not seem feasible with the proposed technique.
+First, the UI generation process will generally consume more time, and reassigning certain controls will often result in scrolling through large lists compared to, for example, browsing well-structured settings menus.
+Second, applications that are tightly coupled to a specific environment or device setup often cannot take advantage of the offered I/O exchangeability.
+On the other hand, applications often have a set of basic functionalities that are accessible in different environments and can be controlled in multiple ways depending on the use-case. In the Photoshop example, users still might want to control panning and zooming via a tablet with the non-dominant hand.
+
+Hence, we recommend combining MorphableUI with traditional hard-wired interfaces. That is, we suggest using our system to cover only a small subset of requirements where device exchangeability is expected to be important. In the case of our ImageVis3D scenario, we recommend users stick to a traditional UI for tasks such as opening a file and rely on MorphableUI for object manipulation or the streaming of the video output.
+
+
+\section{Future Work} \label{future}
+
+
+%
+% new devices and roles
+%
+There are a number of different issues to be targeted in the future. One goal is to increase the number of supported devices such as the Microsoft HoloLens, which is mainly an engineering task. Considering widgets as I/O capabilities, a sophisticated arrangement would be beneficial. For now, the system does not have any hierarchical concepts and places the widgets, such as virtual joysticks, at predefined positions. To fully support that kind of interaction, the UI configuration pipeline has to be extended to deal with layout settings.
+
+
+Another idea is to arrange requirements into roles on the application side as already prototyped in \FG{fig:master}. In our brain stimulation example, one would differ between the doctor and patient. The latter role has limited interaction requirements allowing, for example, only to panning and rotating the dataset. Another user-related feature that will be included in future work is security and authentication. One use-case is to prevent unauthorized I/O device access to a set of private devices limited to one particular user.
+
+
+
+%
+% learning and multi-user
+%
+In this paper, we mainly focused on I/O exchangeability and enabled a novel approach for multi-modal, distributed interaction and rapid prototyping.
+One of our next goals is to measure and enhance user experience in MorphableUI by conducting usability studies. Clearly, our framework can also be used to provide interfaces that are not very user-friendly. For this reason, we plan to combine the UI generation with a sophisticated online learning algorithm to further improve the UIs being proposed automatically based on prior knowledge.
+In addition, multi-user setups will be focused more since the framework does not impose any limitations on the number of users for one application.
+
+
+
+%
+% toolchain
+%
+The set of interaction events that we used for the capability and requirement classification does not pretend to be complete.
+Further refinement is needed depending on the application area and the use-case.
+To tackle this issue, we are developing a MorphableUI tool chain. The chain will include a GUI-based hypergraph modification tool that allows the addition of new types of events without the need to touch or (re-)compile code.
+Also, a web application that facilitates monitoring the interaction environment and assists developers and administrators would further enhance the framework.
+The main issue, therefore, is to find a compact and meaningful graphical representation of the environment including device locations, active user interfaces and the corresponding wirings between devices and applications.
+
+
+
+\section{Summary} \label{summary}
+
+%
+% what we did: model, exchangeability, algorithm, hypergraph, proposals orderd by quality
+%
+The paper established a requirement- and capability-based model for distributed, multi-modal interaction. We introduced a classification building upon interaction event types and expressed their relations by three operators: split, merge, and cast. This formalization allows higher-order I/O data transformation and enhances the exchangeability compared to other approaches. The problem of computing admissible UIs by generating wirings for each requirement is tackled by a token-based, iterative algorithm working on a hypergraph. The vertices correspond to the interaction event types, and edges represent the operators. The generated wiring proposals are ordered by the length of the resulting operator chain. Hence, the order expresses the amount of performed I/O data transformation.
+
+
+
+%
+% we realized the model by gates, server and masterUI
+%
+The implementation consists of three main components.
+The gate is a library that serves as an entry point for applications and devices.
+During runtime, I/O data is streamed directly between the gates over the network.
+The topology server monitors the devices and applications and exposes services such as the UI configuration.
+MasterUI is a mobile frontend built upon such a service.
+It allows users to dynamically configure their interfaces and receive notifications about changes in the interaction topology.
+Finally, as a proof of concept, a set of sample devices and applications was linked to our system.
+
+
+\bibliographystyle{unsrt}
+\bibliography{mui}
+
+%\begin{thebibliography}{99}
+%\label{references}
+%\bibitem[And01a]{and01a} Anderson, R.E. Social impacts of computing: Codes of professional ethics. Social Science, pp.453-469, 2001.
+%\bibitem[Con00a]{con00a} Conger., S., and Loch, K.D. (eds.). Ethics and computer use. Com.of ACM 38, No.12, 2000.
+%\bibitem[Con00b]{con00b} Mackay, W.E. Ethics, lies and videotape, in Conf.proc. CHI'00, Denver CO, ACM Press, pp.138-145, 2000.
+%\bibitem[Jou01a]{jou01a} Journal of WSCG \& WSCG templates: http://wscg.zcu.cz/jwscg/template.doc (MSWord)
+%http://wscg.zcu.cz/jwscg/template.pdf (PDF)
+%\end{thebibliography}
+
+
+
+\end{document}
+
+
+
+

@@ -1,0 +1,854 @@
+\documentclass{sigchi}
+
+% Use this command to override the default ACM copyright statement (e.g. for preprints). 
+% Consult the conference website for the camera-ready copyright statement.
+
+% \toappear{Permission to make digital or hard copies of all or part of this work for personal or classroom use is      granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than ACM must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from permissions@acm.org. \\
+%% \emph{CHI'14}}, April 26--May 1, 2014, Toronto, Canada. \\
+%% Copyright \copyright~2014 ACM ISBN/14/04...\$15.00. \\
+%% 2405
+% }
+ 
+
+%% EXAMPLE BEGIN -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP -- (July 22, 2013 - Paul Baumann)
+% \toappear{Permission to make digital or hard copies of all or part of this work for personal or classroom use is 	granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than ACM must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from permissions@acm.org. \\
+% {\emph{CHI'14}}, April 26--May 1, 2014, Toronto, Canada. \\
+% Copyright \copyright~2017 ACM ISBN/14/04...\$15.00. \\
+% DOI string from ACM form confirmation}
+%% EXAMPLE END -- HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP -- (July 22, 2013 - Paul Baumann)
+
+
+\toappear{\scriptsize Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page. Copyrights for components of this work owned by others than ACM must be honored. Abstracting with credit is permitted. To copy otherwise, or republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee. Request permissions from permissions@acm.org. \\
+{\emph{CHI 2017, May 6-11, 2017, Denver, CO, USA.} } \\
+Copyright \copyright~2017 ACM ISBN 978-1-4503-4655-9/17/05\ ...\$15.00. \\
+http://dx.doi.org/10.1145/3025453.3025641}
+% Update the XXXX string to your assigned DOI from ACM. 
+
+\clubpenalty=10000 
+\widowpenalty = 10000
+
+
+% Arabic page numbers for submission. 
+% Remove this line to eliminate page numbers for the camera ready copy
+% \pagenumbering{arabic}
+
+
+% Load basic packages
+\usepackage{balance}  % to better equalize the last page
+\usepackage{graphics} % for EPS, load graphicx instead
+\usepackage{times}    % comment if you want LaTeX's default font
+\usepackage{url}      % llt: nicely formatted URLs
+
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{\def\UrlFont{\sf}}{\def\UrlFont{\small\bf\ttfamily}}}
+\makeatother
+\urlstyle{leo}
+
+
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+% Make sure hyperref comes last of your loaded packages, 
+% to give it a fighting chance of not being over-written, 
+% since its job is to redefine many LaTeX commands.
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+pdftitle={SIGCHI Conference Proceedings Format},
+pdfauthor={LaTeX},
+pdfkeywords={SIGCHI, proceedings, archival format},
+bookmarksnumbered,
+pdfstartview={FitH},
+colorlinks,
+citecolor=black,
+filecolor=black,
+linkcolor=black,
+urlcolor=black,
+breaklinks=true,
+}
+
+% create a shortcut to typeset table headings
+\newcommand\tabhead[1]{\small\textbf{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                              My Commands
+
+
+%\DeclareMathOperator{\sgn}{sgn}
+
+%\theorembodyfont{\upshape}
+%\theoremstyle{break}
+%\theoremheaderfont{\bfseries\normalsize}
+
+%\newtheorem{lem}{Lemma}
+%\newtheorem{defn}{Definition}
+
+% % my
+\include{ivda-macros}
+
+%\sidecaptionvpos{figure}{c}
+%\usepackage{graphicx}
+%\usepackage{floatrow}
+%%\usepackage{graphicx}
+%\usepackage{subfig}
+%\usepackage[utf8]{inputenc}
+%\usepackage{graphicx}
+%\usepackage{epstopdf}
+%\usepackage{times}
+%\usepackage{booktabs}
+%\usepackage{csquotes}
+%\usepackage{tabularx}
+%\usepackage{algorithm}% http://ctan.org/pkg/algorithms
+%\usepackage{algorithmic}% http://ctan.org/pkg/algorithms
+%\usepackage{listings}
+%\usepackage{graphics}
+%\def\denquote#1{%both single quotes
+%\linespread{0.94}
+%\lq{#1}\rq}
+
+
+% End of preamble. Here it comes the document.
+\begin{document}
+
+
+
+\title{Gestures From the Point of View of an Audience: Toward Anticipatable Interaction of Presenters With 3D Content.}
+
+\numberofauthors{4}
+\author{
+  \alignauthor Andrey Krekhov\\
+    \affaddr{High Performance Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{andrey.krekhov@uni-due.de}
+  \alignauthor Katharina Emmerich\\
+    \affaddr{Entertainment Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{katharina.emmerich@uni-due.de}  
+  \alignauthor Maxim Babinski\\
+    \affaddr{High Performance Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{maxim.babinski@stud.uni-due.de}
+  \alignauthor Jens Kr\"uger\\
+    \affaddr{High Performance Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{jens.krueger@uni-due.de}
+}
+
+%\numberofauthors{1}
+%\author{%
+%  \alignauthor{Submission ID: 1932}
+%}
+
+\maketitle
+
+\begin{abstract}
+
+
+Presenting content to an audience is important in several fields, including education, marketing, and entertainment. Therefore, the main goal of the presenter is to transport messages to the audience. 
+
+The paper aims to improve the process of message transportation by providing audience-friendly and anticipatable gestures for the presenter to be used for 3D interaction with the content. For this purpose, we first gathered input from a potential audience through a Wizard of Oz experiment and implemented three coherent gesture sets using the Kinect. We conducted an online survey to evaluate the hypotheses regarding the anticipation rate and perceived user experience. In particular, two of our three gesture sets show tendencies to be intuitively predictable by an untrained, uninformed audience. As the three sets differ significantly in the anticipation level, we conclude that future improvements of such gestures would enhance the audience's ability to predict the intended actions even further.
+
+\end{abstract}
+
+\keywords{
+	Gestures; Presentation; Audience; Kinect
+}
+
+\category{H.5.2.}{Information Interfaces and Presentation (e.g., HCI)}{User Interfaces}
+
+%See: \url{http://www.acm.org/about/class/1998/}
+%for more information and the full list of ACM classifiers
+%and descriptors. \newline
+%\textcolor{red}{Optional section to be included in your final version, 
+%but strongly encouraged. On the submission page only the classifiers’ 
+%letter-number combination will need to be entered.}
+
+\section{Introduction}
+
+%%%% NEU (aenderung)
+Being able to transport certain key messages to the audience is what distinguishes excellent presenters. Hereby, the behavior of the presenters is as important as their messages. Improving presentation skills has been the subject of recent research, not to mention the plethora of workshops and schools that provide courses designed to improve these skills. The latter teach us how to breathe, when to speak up, how to move, when to stop, how to engage, how not to lose the audience, and many more. Other hot topics target the presented material: how to build pitch decks, which font size to use, impacts of images, and how to present live content.
+%%%% NEU END
+
+%%%% NEU
+Gestures are an important part of the presenter’s behavior. Those gestures which can be easily interpreted by the audience greatly enhance the understanding of the content as shown in various studies~\cite{importance1, importance2, importance3}. On the other hand, less intuitive gestures increase the cognitive load of the audience as the attendees need time to process and understand these movements, even if they might be more ergonomic for the presenter. For that reason, having gestures that are easily linked to what currently happens in the application (what we refer to as \textit{anticipation}) provides a significant improvement for the audience.
+
+Thus, good presenters are willing to learn new techniques, if it rewards them with reduced cognitive load for their audiences. The audience, on the other hand, is not prepared for misleading and counter-intuitive gestures. An ergonomic interaction for one person, the presenter, might therefore still result in misunderstandings on part of many attendees. All these reasons motivate our proposed change of the perspective, i.e., to look at the audience and not only the “user” (presenter) while designing the gestures. 
+%%%% NEU END
+
+We focus on the case when the presenter interacts with an application---in 2D or 3D---and the audience both listens and spectates. One common scenario is a medical school where the presenter, or teacher in that case, performs a virtual autopsy on a dataset and explains different specs to the students while interacting with the data. Another scenario, mostly entertaining in its nature, is a digital planetarium. The presenter interactively navigates through the universe while giving insights into astrophysics. In addition, the audience might ask live questions, which then results in, for example, navigation tasks being carried out by the presenter.
+
+Based on input from planetarium content presenters, we decided to investigate the gestures from the point of view of the audience, instead of focusing our attention to the person who performs the interaction. Our goal is to find out whether gestures can help the audience anticipate the interaction of the presenter with 3D content. That goal poses a first and crucial step to answering the final question: whether it is a benefit to include gesture-based interaction in our daily presentations when it comes to software demonstrations rather than PowerPoint slides. For that purpose, we first ask a potential, yet untrained, audience in a Wizard of Oz study to gather ideas of how the target group would perform these 3D interactions. We then implement and group the gestures in three coherent sets. Finally, we perform an online survey regarding the anticipation rate and perceived user experience to validate the respective hypotheses.
+
+
+
+%\newpage
+\section{Related Work}
+
+Our contribution mainly benefits from related work in two areas: enhancing presentations and improving gesture-based interaction. The former includes techniques and systems that aid a presenter during the presentation. The latter deals with the question of crafting intuitive, comprehensive interaction methods as well as technically improving gesture recognition.
+
+% PRESENTATIONS
+\subsection{Enhancing Presentations}
+
+%%%% NEU
+Giving an engaging presentation is a challenging task and the presenter’s behavior is as important as her message. This is illustrated in various prominent works on presentations such as Haider et al.~\cite{7472190} or Keith et al.~\cite{Curtis:2016:SIA:2993148.2993194}. That literature points out that the behavior of the presenter (such as gestures) has a huge impact on how the presentation is perceived by the audience.
+%%%% NEU END
+
+Cuccurullo et al.~\cite{Cuccurullo:2012:GAP:2254556.2254584} proposed enhancing public presentations by allowing a natural user interface for the presenter. Their approach, Kinect Presenter (KiP), adds gesture based interaction metaphors for presentation software such as PowerPoint. Several other publications also aim to enhance and improve the default PowerPoint presentation scenario by, e.g., using the Wiimote as an input device~\cite{wiimote}. However, to our knowledge, there is no similar work with regard to presenting 3D applications. To improve presentations in large auditoriums, Tan et al.~\cite{Tan:2010:GAI:1873951.1874041} demonstrate an approach relying on a live video view that combines the presenter and the presented material. In addition, the system leverages the possible amount of interaction between the presenter and the local or remote audience.
+
+Roth et al.~\cite{Roth:2015:PAP:2739011.2739026} propose seven techniques that enhance the slide-based transmission of information and, thus, have a positive impact on the quality of a presentation. Another system is \textit{Fly}\cite{Holman:2006:FOP:1125451.1125620}, a prototype presentation system that enhances presentations by adding a visual structure to the underlying content. In particular, a spatial organization based on Mind Maps is applied. In contrast, Trinh et al.~\cite{Trinh:2014:PIR:2611528.2557286} focus on the rehearsal stage of the presentation. In particular, their system \textit{PitchPerfect} has been shown to have a positive impact on the overall presentation quality.
+
+
+
+
+
+Another interesting approach to generate comprehensible gestures is to rely on popular science fiction movies. Filmmakers have to create futuristic interactions that the audience should be able to understand intuitively. In this area, the work of Figueiredo et al.~\cite{Figueiredo:2015:OCH:2702613.2732888} aims to establish a compilation of hand interactions in Sci-Fi movies and, thus, to generate useful input for further research in that area. Shedroff et al.~\cite{Shedroff:2012:MSL:2254556.2254561} also point out that Sci-Fi interfaces often mirror the actual expectations of potential users.
+
+
+% GESTURE CRAFTING
+\subsection{Crafting Gestures}
+
+Nielsen et al.~\cite{Nielsen03aprocedure} describe suitable approaches to craft a gesture-based interaction. They also emphasize the lack of a universal gesture vocabulary, which reinforces us conducting a Wizard of Oz experiment for our particular scenario. Similar to our Wizard of Oz procedure, a crowd-sourcing approach was applied by Grijincu et al.~\cite{Grijincu:2014:UIG:2669485.2669511} to annotate video-based gesture data sets.
+
+%%%% NEU
+Rovelo Ruiz et al.~\cite{RoveloRuiz:2014:MGI:2611222.2557113} focused their work on gesture-based interaction with omni-directional video. Similar to our approach, the authors asked participants to execute mid-air gestures that they consider to be appropriate. Based on such input, a user-defined gesture set for the given scenario was established. Fikkert et al.~\cite{Fikkert2010} explored how uninstructed users gesture when asked to perform basic tasks in the context of large public displays. After rating these outcomes in a second study, a gesture set for explicit command-giving to large displays was established.
+
+Intuitiveness and effectiveness of gestures for large displays in the public space was researched by Hespanhol et al.~\cite{Hespanhol:2012:IIE:2307798.2307804}. The authors focus on simple gestures for the execution of the basic actions of selecting and rearranging items in a large-scale dashboard. Grandhi et al.~\cite{Grandhi:2011:UNI:1978942.1979061} also aim for naturalness and intuitiveness in gesture production by providing guidelines for the characteristics of gestures and according user mental models in their work.
+%%%% NEU END
+
+The work of Soh et al.~\cite{Soh:2013:UOM:2534329.2534338} focuses on the establishment of a set of 3D object manipulation gestures that can be realized with the Microsoft Kinect. The authors note that the focus of gesture crafting is on either reproducing real-world interaction or on the technical possibilities, i.e., gestures that are well recognized by the Kinect. Intuitively, the former approach seems to be more suitable with the audience in mind.
+
+Song et al.~\cite{Song:2012} propose a handle bar metaphor to resolve the mode switching issue with regard to object manipulation. Since the Kinect is not able to track fine-grained hand rotations robustly, the authors propose to skewer an object with a bimanual handle bar and rely on relative 3D motion instead.
+
+
+
+% TECH IMPROVEMENTS
+From a more technical point of view, several studies have been conducted to improve the gesture recognition process. Alexander et al.~\cite{Alexander2009} created the \textit{Gestur} framework to improve the optical recognition of hand gestures. A neural network (semi-supervised Fuzzy ARTMAP) allows for incremental online learning and recognition of static gestures, and hidden Markov models serve the same purpose for dynamic gestures. Ren et al.~\cite{Ren2011} use the Kinect to create a hand gesture recognition system that is especially suited for uncontrolled environments and ignores hand variations and distortions by considering both the color and depth information. Oikonomidis et al.~\cite{3D-Tracking} aim to recover the full articulation of a human hand captured with the Kinect. Therefore, they handle that task as an optimization problem and solve it with a variant of Particle Swarm Optimization.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/planetarium}
+\vskip-1mm
+\caption{The original planetarium scenario used as inspiration for our research. The presenter interactively maneuvers through the universe, visiting a number of points of interest. The audience is often asked about the next destination. Without gesture support, an assistant is required to execute the respective commands and stay in sync with the presenter.}
+\label{fig:dome}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/scene}
+\vskip-1mm
+\caption{A simplified planetarium scene used for our surveys. The setting includes a number of planets, the sun, and a space ship in the foreground. The space ship is used to accomplish object manipulation tasks. The displayed left-handed coordinate system with z pointing into the scene is used throughout the paper to describe the interaction axes.}
+\label{fig:scene}
+\end{figure}
+
+
+
+
+% OTHER AREA
+\subsection{Further Application Areas}
+Aside from the presentation context, other situations that are potential candidates to be enhanced with natural user interfaces have been studied. Particularly in a medical context, the touch-free nature of gesture-based interactions provides significant benefits for aseptic environments and can be applied in operating rooms. The work of Gallo et al.~\cite{Gallo2011} presents such a Kinect-based system for the interactive exploration and manipulation of medical data sets. The system automatically determines the dominant hand and provides interactions such as browsing through data sets, zooming, translating, rotating, and windowing. Instead of using the Kinect, Tani et al.~\cite{Tani:2007:GIR:1251969.1252060} work with a glove-driven interface to meet the requirements of 3D visualization applications for radiological workstations. Combining trajectory recognition with hand posture provides a broader set of domain-specific functionalities. 
+
+Mixing Kinect-based posture recognition with virtual reality is also applicable for evaluations of balance training performance~\cite{Hsieh2013}. Another way to enhance the Kinect experience is presented in the work of Nebelig et al.~\cite{Nebeling:2014:WWR:2669485.2669497}. The authors evaluate user-defined Kinect gestures and speech commands with regard to controlling a wall-projected web browser. Carter et al.~\cite{Carter:2015:RGG:2838739.2838778} evaluated combining gestures with gaze. Using the Kinect, the authors describe a novel lounge-style remote-interaction and conduct a user experience and preference study in order to provide a number of design recommendations.
+ 
+
+Another area that increasingly relies on natural user interfaces is the car industry. Zobl et al.~\cite{Zobl2004, Zobl01ausability} study the reasonability of using hand gestures to control a number of car systems such as the speaker volume. Other areas often involve multi-user setups. Tang et al.~\cite{Tang:2015:FOD:2702613.2732848} use three Kinect sensors to create a collaborative virtual ball playing environment. Such scenarios might benefit from comprehensive gestures to enhance the player experience.
+
+
+
+\section{Building the Gesture Sets}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/wizard}
+\vskip-1mm
+\caption{The setup of the Wizard of Oz experiment. The participants faced the Kinect and had to invent gestures to complete given camera and object manipulation tasks for the application projected in front of them. They were told that the Kinect automatically detects and understands their interaction and, thus, allows them to control the application by their preferred gestures. In truth, a wizard, located in another room, monitored the subjects with the Kinect camera and triggered interactions in a timely manner within the target application.}
+\label{fig:oz}
+\end{figure}
+
+
+\begin{figure*}[t]
+\centering
+\hspace*{-0.2cm} 
+\includegraphics[width=2.1\columnwidth]{images/collage}
+\vskip-1mm
+\caption{An extract of the proposed gestures. All interactions were captured on video and used to craft the three gesture sets. The superman-like pose (center of the top row) was one of the most prominent input methods to navigate forwards. Certain gestures, such as the shown object rotation, were not included in our final sets due to their poor recognition rate by the Kinect.}
+\label{fig:wizard}
+\vskip-1mm
+\end{figure*}
+
+
+
+
+We consider the planetarium scenario similar to that shown in \FG{fig:dome} to investigate the anticipation level of various gestures. Our underlying scene in \FG{fig:scene} represents a similar, simplified space setting including the sun, planets in the background, and a space ship. The tasks of the presenter are limited to navigation in 6 degrees of freedom (6-DoF) and 6-DoF object manipulation. In our case, manipulated object is given by the space ship. Furthermore, a selection option is needed to enter the manipulation mode for the specific object. 
+
+As already mentioned by Nielsen et al.~\cite{Nielsen03aprocedure}, there is no universal gesture vocabulary. Apart from relying on the discussed related work, we also consider the input of a potential audience for our precise scenario. For this purpose, a Wizard of Oz study is applied.
+
+
+
+
+
+\subsection{Wizard of Oz Study}
+A first step toward building appropriate, anticipatable gesture sets was to gather ideas about suitable gestures from a typical audience, i.e., subjects who are unexperienced both with natural user interfaces and the target application. For this purpose, we conducted a Wizard of Oz experiment~\cite{Althoff2004, Dahlback:1993, Maulsby:1993, Salber:1993}. The overall setup is depicted in \FG{fig:oz}. The application was displayed on a wall. The Kinect was located on the table in the middle of the room and faced the subject. 
+
+Upon entering the room, we introduced the subjects to the application. The story was based on the real planetarium example, i.e., we told the subjects that the software interactively renders the universe and that they would be able to explore an excerpt of it. In the next step, we informed them that their task was to use body movements to complete a set of tasks within the application. Each task would be displayed on the screen and we would notify the subjects upon task completion in the same way. We informed the subjects that their gestures would be automatically recognized by the Kinect and transformed into appropriate actions within the target application. In addition, we notified the subjects that all interactions would be recorded and used for an offline evaluation.
+
+The tasks to be completed consisted of 6-DoF navigation, object selection, and 6-DoF object manipulation. Hence, the subjects received on-screen task commands before each task, such as \textit{``move forwards''} or \textit{``tilt to the left''}. The wizard was located in another room and monitored the subjects via the Kinect camera. The task of the wizard was to trigger the corresponding behavior within the target application in a timely manner.  Most subjects experienced a trial period as they were trying out different approaches. Hence, the wizard waited for consistency, i.e., until a consistent gesture was applied for at least 10 seconds. At this point, the wizard initiated an on-screen notification that signaled the task completion to the subject.
+
+Overall, 18 subjects (10 females) between 24 and 27 years old participated in our study. We invited subjects with no experience with the Kinect and gesture-based interfaces in general because an audience is anticipated to contain attendees with no gesture-based interaction experience, and we wanted the presentation to be comprehensive for all subjects.”
+
+All interactions were recorded and used as input for the development of our gesture sets. Sample outcomes of the experiment are depicted in \FG{fig:wizard}. Surprisingly, a number of subjects did not limit the interaction to arm gestures and used the whole body instead. On the other hand, various gestures known from related work were also represented. Furthermore, continous movements dominated over discrete gestures in the experiment.
+
+
+
+
+
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/set1}
+\vskip-1mm
+\caption{The \textit{green set} is mostly based on bimanual gestures. Gestures in a) - d) are used to move the camera. e) - g) present camera rotation by moving the upper body in the same direction. After selecting an object with j), the presenter moves her clenched fists as shown in h) to move the object. Changing the distance between the fists as in i), k), and m) results in object rotation. Object deselection is performed with the same gesture as the selection, i.e., with j).}
+\label{fig:set1}
+\end{figure}
+
+
+
+
+
+
+
+\subsection{Establishing Three Gesture Sets}
+\label{sets}
+Based on the results of the described experiment, three different gesture sets were elaborated. For simplicity reasons, we color coded the sets and referred to them as the \textit{green, red,} and \textit{blue sets}. To illustrate the gestures, the sketch doll \textit{DesignDoll}~\cite{DesignDoll} was used. Each set covers the four subtasks for camera rotation, camera translation, object rotation, and object translation. Additionally, the \textit{green set} contains an explicit gesture for object selection. 
+
+Two criteria were dominant for the creation process. Firstly, the gestures should be consistent within the four subtasks, i.e., a gesture should work for all three axes. Otherwise, it would not be possible to, e.g., modify the object position on multiple axes simultaneously, which is clearly a notable drawback. For instance, these cases often occur in the depicted scenario to achieve certain kinematical effects. Secondly, driven by that same real-world motivation, we favored gestures that permit execution of multiple subtasks simultaneously, e.g., rotating and moving the camera.
+
+We applied a clustering approach to determine the gesture sets. In the first stage, we filtered out all gestures that did not span a continuous 3D space and, thus, did not allow interaction on all axes. Based on the remaining gestures, three similarity groups were identified:  bimanual gestures, one-armed gestures, and full-body movements. Finally, we determined the cluster representatives by accounting for majorities, while keeping the mutual interference as minimal as possible.
+
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/set2}
+\vskip-1mm
+\caption{The set consists of minimalist, one-armed gestures. The finger gestures determine whether the camera or the object is manipulated. The functionalities for both arms differ, i.e., the left arm is responsible for translation and the right arm for rotation. a) translates the camera, c) translates the object, b) rotates the camera, and d) rotates the object.}
+\label{fig:set2}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=1.0\columnwidth]{images/set3}
+\vskip-1mm
+\caption{The set relies on weight shift and bimanual gestures. a) - b) are examples for camera movement, c) - f) are gestures executed with two open hands that control the camera rotation. Object manipulation is performed by grabbing the object with the left hand. The lasso gesture in g) is then responsible for object translation, whereas the open right hand performs object rotation.}
+\label{fig:set3}
+\end{figure}
+
+
+
+\subsubsection{Green Set}
+The \textit{green set} mostly consists of bimanual gestures as depicted in \FG{fig:set1}. To move the camera, the user has to clench both fists and move them in the corresponding direction. Due to anatomical reasons, the magnitude of drawing back one's arms, i.e. moving the camera backwards, is more limited compared with other directions. Camera rotation is coupled to the movements of the upper body. In particular, the presenter needs to tilt to the sides, bend forward/backward, and rotate sideward.
+
+
+To select an object, the presenter has to move the right hand toward the object while holding the forefinger and the middle finger stretched out (\textit{lasso gesture}). After the successful selection, the presenters use their clenched fists to move the object in space, such as they would hold it. To rotate the object, the steering wheel metaphor is applied, i.e., the presenters change the distance between their fists in the desired rotation plane.
+
+
+
+%\newpage
+\subsubsection{Red Set}
+The \textit{red set} contains minimalist, one-armed gestures as shown in \FG{fig:set2}. The movement of the left arm is dedicated to translation, and the right arm movement controls rotation. Clenched fist and lasso with the appropriate hand trigger between object and camera manipulation, respectively. Hence, left-armed lasso is used to translate the camera, whereas the right clenched fist allows the presenter to rotate the object. No extra gesture is needed for selection since the interactions do not interfere and thus, are distinguishable by the Kinect.
+
+
+
+
+
+\subsubsection{Blue Set}
+
+The \textit{blue set} combines the shifting of weight with bimanual gestures and is outlined in \FG{fig:set3}. Camera translation is performed by shifting the weight in the corresponding directions. Leaning forward/backward results in moving the camera in the corresponding direction. Sidelong camera movement is performed by a weight shift to the appropriate leg.
+To move the camera upward and downward, the presenter has to perform tiptoeing and a slight squat, respectively. The presenter uses the movement of her open hands to rotate the camera up, down, left, and right. In order to tilt the camera (rotation around the axis pointing into the screen), one hand has to be moved up, while the other is being moved down.
+
+Object manipulation mode is triggered by clenching the left fist and stands for grabbing the object. The lasso gesture of the right hand can then be used to translate the object in space. To rotate the object, an open hand gesture is used to remain consistent with the camera rotation gestures. 
+
+
+
+
+
+\subsubsection{Technical Realization}
+Finally, to validate the practical feasibility of the established sets, all gestures were implemented and connected to our target application written in Unity3D~\cite{UnityFacts}. Having our real-life planetarium example in mind, we relied on consumer devices to track and recognize the gestures of the presenter. In particular, our implementation uses the Kinect 2~\cite{WindowsKinect} as underlying hardware in combination with the Kinect plugin~\cite{UnityPlugin} for Unity.
+
+\section{Evaluation}
+We conducted a survey to evaluate the established gesture sets. Our main goal was to study the effects of the gestures on an untrained audience. Therefore, our focus was on the potential anticipation rate, i.e., whether the audience would be able to predict the impact of the gestures on the target application solely by observing their execution by the presenter. To examine that question, a between-subjects design was applied. For each of the three gesture sets described in the previous section, a dedicated group of subjects was established. 
+
+
+\subsection{Hypothesis}
+Our main hypothesis is that the audience, to a certain degree, is able to anticipate effects of the presenter’s gesture-based interactions with the 3D content. We base the hypothesis on the fact that our gestures were crafted based on user input in our Wizard of Oz experiment and, thus, should be intuitively understandable even by an untrained and unexperienced audience.
+
+Furthermore, we want to evaluate whether the anticipation level and the perceived user experience significantly differ among the three established sets. Such differences could point out potential weaknesses and strengths of the corresponding sets and pave the way for future improvements.
+
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2.0\columnwidth]{images/study1}
+\vskip-1mm
+\caption{After displaying the initial situation (see \FG{fig:scene}, the subjects were shown a video of the presenter executing a certain gesture (left image). Subsequent to writing a free form text about their assumption on the outcome, the real outcome was presented in a second video (right image). The green ray occurs only for object manipulation and helps the subject to perceive the outcome. After the second video, the subjects assessed their anticipation rate on a seven-point Likert scale. That setup was repeated for all 12 gestures of the underlying gesture set.}
+\label{fig:setup}
+\vskip-1mm
+\end{figure*}
+
+
+
+\subsection{Procedure and Applied Measures}
+
+
+
+
+
+We executed our survey online by sharing the participation link over available social media channels such as Facebook. Each subject was randomly assigned to one of the three groups, i.e., to one of three gesture sets.
+
+After informing the subjects that the study would take about 20 minutes and focus on different gesture-based interactions from the point of view of an audience, the demographical data was gathered. We asked subjects to indicate their gender, age, their highest level of education, their current employee status, and their experience with the Microsoft Kinect. The latter question consisted of the following options: no experience, having heard of it or seen it, having played games with it, and having developed software for it.
+
+In the next step, we instructed the subjects to watch a video of the target application. The video lasted one minute and implicitly contained all possible interactions, i.e., 6-DoF camera manipulation and 6-DoF object manipulation.
+
+Subsequent to the introduction video, the subjects entered the main part of the survey. Since each set consists of 6-DoF interactions for both camera and object manipulation, 12 interactions were presented for each group. The selection gesture of the \textit{green set} has been implicitly built into the corresponding object manipulations to maintain consistency between groups. Furthermore, since each gesture was symmetrical along each axis, only one randomly picked direction was demonstrated. Example interactions include \textit{camera movement to the right} or \textit{object rotation around the y-axis}. A detailed list is given in \FG{fig:evalgreen}, \FG{fig:evalred}, and \FG{fig:evalblue}.
+
+We applied the following process for each demonstrated interaction. Firstly, we showed the subject a screenshot of the initial setup of the target application. For consistency reasons, we used the same initial setup (see \FG{fig:scene}) for all interactions for all groups. Secondly, we showed a video of the presenter executing the corresponding gesture in front of a blank canvas as depicted in \FG{fig:setup} on the left. We asked The subjects to write a free form text about what impact the gesture would have on the initial setup. Thirdly, we demonstrated the same interaction in front of the target application as shown in \FG{fig:setup} on the right such that the subjects could observe the real effects of the gesture. At this point, we asked the subjects once again to write a free form text and describe what actually happened in the target application. Finally, we posed the most important question: the subjects were asked to assess how much their predicted outcome matched the real effects. Therefore, we used a seven-point Likert scale, with 1 being \textit{total coincidence} and 7 indicating \textit{no coincidence at all}. For simplicity, we will refer to that scale as our \textit{anticipation scale}.
+
+
+
+Subsequent to demonstrating these 12 interactions, the subjects were asked to fill in the User Experience Questionnaire (UEQ)~\cite{Laugwitz2008}. For our survey, we used the UEQ from~\cite{UEQDeutsch}, which contains the dimensions \textit{attractiveness}, \textit{perspicuity}, \textit{efficiency}, \textit{dependability}, \textit{stimulation}, and \textit{novelty}. The UEQ relies on a seven-point Likert scale ranging from -3 to +3 with larger numbers indicating a more positive outcome for the user experience. As the main goal of this study is to investigate whether the gestures are predictable and understandable, the dimensions \textit{perspicuity} (\textit{is it easy to get familiar with the gestures?} and \textit{dependability} (\textit{does the system react/work as intended?}) are of special interest in the following analysis. 
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=1.5\columnwidth]{images/evalgreen}
+\vskip-1mm
+\caption{Mean values and standard deviation for the \textit{green set} with regard to our anticipation scale. The order of interactions is encoded on the horizontal axis from left to right and was randomly chosen for each set, yet remained consistent for all subjects within that group. Refer to \FG{fig:scene} for the orientation of the axes.}
+\label{fig:evalgreen}
+\vskip+10mm
+\end{figure*}
+
+\begin{figure*}[h!]
+\centering
+\includegraphics[width=1.5\columnwidth]{images/evalred}
+\vskip-1mm
+\caption{Mean values and standard deviation for the \textit{red set} with regard to our anticipation scale. The order of interactions is encoded on the horizontal axis from left to right and was randomly chosen for each set, yet remained consistent for all subjects within that group. Refer to \FG{fig:scene} for the orientation of the axes.}
+
+\label{fig:evalred}
+\vskip+10mm
+\end{figure*}
+
+\begin{figure*}[h!]
+\centering
+\includegraphics[width=1.5\columnwidth]{images/evalblue}
+\vskip-1mm
+\caption{Mean values and standard deviation for the \textit{blue set} with regard to our anticipation scale. The order of interactions is encoded on the horizontal axis from left to right and was randomly chosen for each set, yet remained consistent for all subjects within that group. Refer to \FG{fig:scene} for the orientation of the axes.}
+\label{fig:evalblue}
+\vskip-1mm
+\end{figure*}
+
+\subsection{Results}
+The survey was completed by 70 participants, 41 female and 29 male. The average age of the subjects was 24.3 years (\textit{SD}~=~5.48). Most participants were students or employees. About half of the participants had no prior experience with the Microsoft Kinect (\textit{n}~=~36), 15 participants reported to have seen it before, and 19 persons had already used the Kinect for playing or developing before.
+%Their average experience with the Kinect is \TODO{Kathi} with \TODO{Kathi Deviation?}. 
+As participants were randomly assigned to one of the three experimental groups, the number of participants in each group differs slightly with \textit{n}~=~23 in the \textit{green set}, \textit{n}~=~22 in the \textit{red set}, and \textit{n}~=~25 in the \textit{blue set}. However, the groups did not differ significantly regarding age or gender distribution or prior Kinect experiences and, thus, are comparable.
+
+
+%\begin{figure}[t]
+%\centering
+%\hspace*{-1cm} 
+%\includegraphics[width=1.2\columnwidth]{images/evalgreen}
+%\vskip-1mm
+%\caption{Mean values and standard deviation for the \textit{green set} with regard to our anticipation scale. The order of interactions is encoded on the horizontal axis from left to right and was randomly chosen for each set, yet remained consistent for all subjects within that group.}
+%\label{fig:evalgreen}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\centering
+%\hspace*{-1cm} 
+%\includegraphics[width=1.2\columnwidth]{images/evalred}
+%\vskip-1mm
+%\caption{Mean values and standard deviation for the \textit{red set} with regard to our anticipation scale. The order of interactions is encoded on the horizontal axis from left to right and was randomly chosen for each set, yet remained consistent for all subjects within that group.}
+%\label{fig:evalred}
+%\end{figure}
+%
+%\begin{figure}[h!]
+%\centering
+%\hspace*{-1cm} 
+%\includegraphics[width=1.2\columnwidth]{images/evalblue}
+%\vskip-1mm
+%\caption{Mean values and standard deviation for the \textit{blue set} with regard to our anticipation scale. The order of interactions is encoded on the horizontal axis from left to right and was randomly chosen for each set, yet remained consistent for all subjects within that group.}
+%\label{fig:evalblue}
+%\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+To test our main hypothesis, we focus on the evaluation of the anticipation scale. Keep in mind that lower values indicate higher anticipation, i.e., 1 stands for \textit{total coincidence}. The average outcomes for the \textit{green set} (\textit{M}~=~2.99, \textit{SD}~=~1.09) and the \textit{blue set} (\textit{M}~=~3.28, \textit{SD}~=~.71) are within the positive scope. 
+
+
+The mean values of the dimensions \textit{perspicuity} and \textit{dependability} of the UEQ confirm that outcome as they are above zero (on a scale ranging from -3 to +3) for the \textit{green set} (perspicuity: \textit{M}~=~1.18, \textit{SD}~=~1.02; dependability: \textit{M}~=~.40, \textit{SD}~=~.66) and \textit{blue set} (perspicuity: \textit{M}~=~.56, \textit{SD}~=~1.17; dependability: \textit{M}~=~.30, \textit{SD}~=~.63). 
+In contrast, our \textit{red set} is within the negative scope regarding its anticipation score (\textit{M}~=~4.00, \textit{SD}~=~.86) with the UEQ dimensions confirming that tendency (perspicuity: \textit{M}~=~.05, \textit{SD}~=~1.54; dependability: \textit{M}~=~-.41, \textit{SD}~=~.70).
+
+
+Comparing the anticipation scores among the three experimental groups using a one-way ANOVA leads to the conclusion that the sets significantly differ with regard to the provided anticipation level (\textit{F}~(2, 67)~=~7.53, \textit{p}~=~.001). A detailed comparison using post hoc Bonferroni tests shows that this difference is due to a significant difference of the anticipation score of the \textit{red set} compared to the \textit{green set} (\textit{p}~=~.001) and the \textit{blue set} (\textit{p}~=~.023), whereas the \textit{green} and the \textit{blue sets} do not differ significantly (\textit{p}~=~.811). Hence, the \textit{red set} shows a significantly worse anticipation rate than the other two sets. An ANOVA comparing the scores of the perspicuity and the dependability dimensions shows a similar outcome: there is a significant difference between the three sets regarding perspicuity (\textit{F}~(2, 67)~=~4.65, \textit{p}~=~.013) and dependability (\textit{F}~(2, 67)~=~10.02, \textit{p}~~$ < .001$). Post hoc tests show that perspicuity differs significantly between the \textit{green set} and the \textit{red set} (\textit{p}~=~.010), but not between the other sets. Dependability, on the other hand, differs significantly between the \textit{red set} and the \textit{green set} (\textit{p}~$ < .001$) as well as between the \textit{red set} and the \textit{blue set} (\textit{p}~=~.001). 
+
+\FG{fig:evalgreen}, \FG{fig:evalred}, and \FG{fig:evalblue} show detailed outcomes for each gesture for each set. All three sets contain positive and negative peaks, i.e., certain gestures that led either to a high level of anticipation, or to no or rather faulty anticipation.
+
+
+
+%
+
+
+
+
+
+
+
+\newpage
+
+
+\section{Discussion}
+
+Our anticipation hypothesis holds for two of the three gesture sets. Hence, relying on gestures for 3D interaction tasks might be a valid option to enhance the presentation. In particular, certain gestures render the upcoming interaction predictable, which, in turn, could improve the process of transporting messages to the audience. 
+
+The \textit{blue set} offered three interactions with an average anticipation rate below 2 (remember that 1 stands for \textit{total coincidence}): moving the camera forward (\textit{weight shift toward the application}), moving the camera sideward (\textit{weight shift to the appropriate leg}), and pulling the object to oneself (\textit{grabbing with the left hand, pulling with the lasso}). In particular, the weight shift seems to be robust in terms of possible misinterpretations. Hence, our future gesture sets might rely even more on intuitive full body movements instead of hand gestures. However, shifting the weight comes with the disadvantage of being more exhausting, which, in combination with constantly speaking, might make the job as a presenter even more stressful.
+
+The minimalist, \textit{red set} often leads to completely wrong assumptions of the triggered effect. The fact that different arms lead to different interactions despite executing the same gesture seems to be hard to grasp. This result suggests that further gestures should be as distinct as possible and provide analog behavior for both arms.
+
+Surprisingly, for all three sets, we did not observe any learning effects over time. However, the main reason might also be the small number of iterations, since each gesture was shown only once and similarities across different axes did not pay off within the survey. As an example, the object rotation of the \textit{red set} can be considered. After observing object rotations on the x- and the z-axis, the subjects completely failed to anticipate the third rotation (z-axis): the anticipation rate was worse even compared to the first rotation. Other examples where the third interaction of the same kind was anticipated to be at least slightly worse than its predecessors include object rotation (\textit{green and red sets}), object movement (\textit{green and blue sets}), and camera movement (\textit{red set}). Only the anticipation of camera rotation improved in all three sets in its third occurrence.
+
+Hence, we conclude that taking the \textit{green} and \textit{blue sets} and fixing the negative peaks might further improve the anticipation rate. Furthermore, our survey required a certain commitment with regard to the audience. Firstly, each subject was exposed to the same angle of vision. This is usually not the case in a presentation and might have a heavy impact on how much of the actual gesture is being perceived. Second, the presenter was seen from behind in order to naturally interact with the content on the projection and have the same orientation toward the content as the audience. A number of presenters, however, would prefer to not turn their back to the audience. In that case, certain issues with the directions will occur, even if the presenter does not have to look over same shoulder and uses a dedicated monitor in front of same. In particular, the axis pointing into the scene (moving backward and forward) will always have a different spatial orientation for the audience and the presenter.
+
+
+\section{Conclusion and Future Work}
+
+%%%% NEU aenderung
+The goal of our paper is to improve and shape the future of 3D content presentations. We investigated gesture-based interaction from the point of view of an audience based on the planetarium example. Certainly, our research question is also transferable to many other 3D content presentation contexts. We established the hypothesis that such an input method for the presenter is able to enhance the overall anticipation rate of the audience. To prove the hypothesis, we first conducted a Wizard of Oz experiment to gather input from a potential audience in order to craft three distinct gesture sets. Finally, an online survey was executed. The results show that two of the three gesture sets have a rather positive outcome regarding the anticipation scale. The poorly comprehended set indicates that the audience benefits from easily distinguishable gestures and pays less attention to whether a gesture is executed by the left or right arm.
+%%%% NEU end
+
+The next step toward helping the audience anticipate the interaction would be to carefully analyze each positive and negative peak of the three sets and craft an optimal set for our target application. Once completed, several additional variables have to be introduced. The same survey could be executed offline rather than online, simulating a real audience in order to converge toward the real-world example. Hence, factors such as the point of view, the auditorium layout, partial occlusions, and distance to the presenter might have a significant impact on the usefulness of the gestures. Such adaptations of our research will significantly enhance presentations for large audiences as they will better understand the transported message.
+
+Another direction for further research is to explicitly study the learning curve of the audience. In our setup, the subjects were exposed to each gesture three times, each time on a different axis. A real presentation would, however, contain each gesture multiple times and, thus, the aspect of how easily a gesture can be learned might play an even more important role than the initial anticipation. 
+
+
+% \newpage
+%\section{Page Size and Columns}
+%
+%On each page your material (not including the page number) should fit
+%within a rectangle of 18 x 23.5 cm (7 x 9.25 in.), centered on a US
+%letter page, beginning 1.9 cm (.75 in.) from the top of the page, with
+%a .85 cm (.33 in.) space between two 8.4 cm (3.3 in.) columns.  Right
+%margins should be justified, not ragged. Beware, especially when using
+%this template on a Macintosh, Word can change these dimensions in
+%unexpected ways. Please be sure that your PDF is US letter and not
+%A4. If your PDF or paper are formatted for A4, the submission will be
+%returned to you to fix.
+%
+%\section{Typeset Text}
+%
+%Prepare your submissions on a word processor or typesetter.  Please
+%note that page layout may change slightly depending upon the printer
+%you have specified.  \LaTeX\ sometimes will create overfull lines
+%that extend into columns.  To attempt to combat this, the .cls
+%file has a command, {\textbackslash}sloppy, that essentially asks
+%\LaTeX\ to prefer underfull lines with extra whitespace.  For more
+%details on this, and info on how to control it more finely, check out
+%{\url{http://www.economics.utoronto.ca/osborne/latex/PMAKEUP.HTM}}.
+%
+%\subsection{Title and Authors}
+%
+%Your paper's title, authors and affiliations should run across the
+%full width of the page in a single column 17.8 cm (7 in.) wide.  The
+%title should be in Helvetica 18-point bold; use Arial if Helvetica is
+%not available.  Authors' names should be in Times Roman 12-point bold,
+%and affiliations in Times Roman 12-point.  For more than three authors,
+%you may have to place some address information in a footnote, or in a named
+%section at the end of your paper. Please use full international addresses and
+%telephone dialing prefixes.  Leave one 10-pt line of white space below the last
+%line of affiliations.
+%
+%\subsection{Abstract and Keywords}
+%
+%Every submission should begin with an abstract of about 150 words,
+%followed by a set of keywords. The abstract and keywords should be
+%placed in the left column of the first page under the left half of the
+%title. The abstract should be a concise statement of the problem,
+%approach and conclusions of the work described.  It should clearly
+%state the paper's contribution to the field of HCI.
+%
+%The first set of keywords will be used to index the paper in the
+%proceedings. The second set are used to catalogue the paper in the ACM
+%Digital Library. The latter are entries from the ACM Classification
+%System~\cite{acm_categories}.  In general, it should only be necessary
+%to pick one or more of the H5 subcategories, see
+%\url{http://www.acm.org/class/1998/ccs98.html}
+%
+%\subsection{Normal or Body Text}
+%
+%Please use a 10-point Times Roman font or, if this is unavailable,
+%another proportional font with serifs, as close as possible in
+%appearance to Times Roman 10-point. The Press 10-point font available
+%to users of Script is a good substitute for Times Roman. If Times
+%Roman is not available, try the font named Computer Modern Roman. On a
+%Macintosh, use the font named Times and not Times New Roman. Please
+%use sans-serif or non-proportional fonts only for special purposes,
+%such as headings or source code text.
+%
+%\subsection{First Page Copyright Notice}
+%
+%Leave 3 cm (1.25 in.) of blank space for the copyright notice at the
+%bottom of the left column of the first page. In this template a
+%floating text box will automatically generate the required space. Note
+%however that the text box is anchored to the \textbf{ABSTRACT}
+%heading, so if that heading is deleted the text box will disappear as
+%well.  You can replace the default copyright notice by uncommenting
+%the {\textbackslash}toappear block at the beginning of the document
+%and inserting your own text, for example, for versions under review.
+%
+%
+%\subsection{Subsequent Pages}
+%
+%On pages beyond the first, start at the top of the page and continue
+%in double-column format.  The two columns on the last page should be
+%of equal length.
+%
+%\begin{figure}[!h]
+%\centering
+%\includegraphics[width=0.9\columnwidth]{Figure1}
+%\caption{With Caption Below, be sure to have a good resolution image
+%  (see item D within the preparation instructions).}
+%\label{fig:figure1}
+%\end{figure}
+%
+%\subsection{References and Citations}
+%
+%Use a numbered list of references at the end of the article, ordered
+%alphabetically by first author, and referenced by numbers in brackets
+%\cite{ethics,
+%  Klemmer:2002:WSC:503376.503378,
+%  Mather:2000:MUT,
+%  Zellweger:2001:FAO:504216.504224}. For
+%papers from conference proceedings, include the title of the paper and
+%an abbreviated name of the conference (e.g., for Interact 2003
+%proceedings, use \textit{Proc. Interact 2003}). Do not include the
+%location of the conference or the exact date; do include the page
+%numbers if available. See the examples of citations at the end of this
+%document. Within this template file, use the \texttt{References} style
+%for the text of your citation.
+%
+%Your references should be published materials accessible to the
+%public.  Internal technical reports may be cited only if they are
+%easily accessible (i.e., you provide the address for obtaining the
+%report within your citation) and may be obtained by any reader for a
+%nominal fee.  Proprietary information may not be cited. Private
+%communications should be acknowledged in the main text, not referenced
+%(e.g., ``[Robertson, personal communication]'').
+%
+%\begin{table}
+%  \centering
+%  \begin{tabular}{|c|c|c|}
+%    \hline
+%    \tabhead{Objects} &
+%    \multicolumn{1}{|p{0.3\columnwidth}|}{\centering\tabhead{Caption --- pre-2002}} &
+%    \multicolumn{1}{|p{0.4\columnwidth}|}{\centering\tabhead{Caption --- 2003 and afterwards}} \\
+%    \hline
+%    Tables & Above & Below \\
+%    \hline
+%    Figures & Below & Below \\
+%    \hline
+%  \end{tabular}
+%  \caption{Table captions should be placed below the table.}
+%  \label{tab:table1}
+%\end{table}
+%
+%\section{Sections}
+%
+%The heading of a section should be in Helvetica 9-point bold, all in
+%capitals. Use Arial if Helvetica is not available. Sections should
+%not be numbered.
+%
+%\subsection{Subsections}
+%
+%Headings of subsections should be in Helvetica 9-point bold with
+%initial letters capitalized.  For
+%sub-sections and sub-subsections, a word like \emph{the} or \emph{of}
+%is not capitalized unless it is the first word of the heading.)
+%
+%\subsubsection{Sub-subsections}
+%
+%Headings for sub-subsections should be in Helvetica 9-point italic
+%with initial letters capitalized.  Standard {\textbackslash}section,
+%{\textbackslash}subsection, and {\textbackslash}subsubsection commands
+%will work fine.
+%
+%\section{Figures/Captions}
+%
+%Place figures and tables at the top or bottom of the appropriate
+%column or columns, on the same page as the relevant text
+%(see Figure~\ref{fig:figure1}). A figure or table may extend across both
+%columns to a maximum width of 17.78 cm (7 in.).
+%
+%Captions should be Times New Roman 9-point bold.  They should be numbered (e.g.,
+%``Table~\ref{tab:table1}'' or ``Figure~\ref{fig:figure2}''), centered
+%and placed beneath the figure or table.  Please note that the words
+%``Figure'' and ``Table'' should be spelled out (e.g., ``Figure''
+%rather than ``Fig.'') wherever they occur.
+%
+%Papers and notes may use color figures, which are included in the page
+%limit; the figures must be usable when printed in black and white in
+%the proceedings.  The paper may be accompanied by a short video figure
+%up to five minutes in length.  However, the paper should stand on its
+%own without the video figure, as the video may not be available to
+%everyone who reads the paper.
+%
+%\section{Language, Style and Content}
+%
+%The written and spoken language of SIGCHI is English. Spelling and
+%punctuation may use any dialect of English (e.g., British, Canadian,
+%US, etc.) provided this is done consistently. Hyphenation is
+%optional. To ensure suitability for an international audience, please
+%pay attention to the following:
+%
+%\begin{itemize}
+%\item Write in a straightforward style.
+%\item Try to avoid long or complex sentence structures.
+%\item Briefly define or explain all technical terms that may be
+%  unfamiliar to readers.
+%\item Explain all acronyms the first time they are used in your text---e.g.,
+%``Digital Signal Processing (DSP)''.
+%\item Explain local references (e.g., not everyone knows all city
+%  names in a particular country).
+%\item Explain ``insider'' comments. Ensure that your whole audience
+%  understands any reference whose meaning you do not describe (e.g.,
+%  do not assume that everyone has used a Macintosh or a particular
+%  application).
+%\item Explain colloquial language and puns. Understanding phrases like
+%  ``red herring'' may require a local knowledge of English.  Humor and
+%  irony are difficult to translate.
+%\item Use unambiguous forms for culturally localized concepts, such as
+%  times, dates, currencies and numbers (e.g., ``1-5-97'' or ``5/1/97''
+%  may mean 5 January or 1 May, and ``seven o'clock'' may mean 7:00 am or
+%  19:00).  For currencies, indicate equivalences---e.g., ``Participants
+%  were paid 10,000 lire, or roughly \$5.''
+%\item Be careful with the use of gender-specific pronouns (he, she)
+%  and other gendered words (chairman, manpower, man-months). Use
+%  inclusive language that is gender-neutral (e.g., she or he, they,
+%  s/he, chair, staff, staff-hours,
+%  person-years). See~\cite{Schwartz:1995:GBF} for further advice and
+%  examples regarding gender and other personal attributes.
+%\item If possible, use the full (extended) alphabetic character set
+%  for names of persons, institutions, and places (e.g.,
+%  Gr{\o}nb{\ae}k, Lafreni\'ere, S\'anchez, Universit{\"a}t,
+%  Wei{\ss}enbach, Z{\"u}llighoven, \r{A}rhus, etc.).  These characters
+%  are already included in most versions of Times, Helvetica, and Arial
+%  fonts.
+%\end{itemize}
+%
+%\section{Accessibility}
+%The Executive Council of SIGCHI has committed to making SIGCHI conferences more inclusive for researchers, practitioners, and educators with disabilities. As a part of this goal, the all authors are asked to work on improving the accessibility of their submissions. Specifically, we encourage authors to carry out the following five steps:
+%\begin{enumerate}
+%	\item Add alternative text to all figures
+%	\item Mark table headings
+%	\item Add tags to the PDF
+%	\item Verify the default language
+%	\item Set the tab order to ``Use Document Structure''
+%\end{enumerate}
+%Unfortunately good tools do not yet exist to create tagged PDF files from Latex. LaTeX users will need to carry out all of the above steps in the PDF directly using Adobe Acrobat, after the PDF has been generated.
+% 
+%For more information and links to instructions and resources, please see:
+%{\url{http://chi2014.acm.org/authors/guide-to-an-accessible-submission}}.
+%
+%\section{Page Numbering, Headers and Footers}
+%Your final submission SHOULD NOT contain any footer or header string information 
+%at the top or bottom of each page. The submissions will be paginated in a determined 
+%order by the chairs and page numbers added to the pdf during the compiling, 
+%indexing, and pagination processes.
+%
+%\section{Producing and Testing PDF Files}
+%
+%We recommend that you produce a PDF version of your submission well
+%before the final deadline.  Your PDF file must be ACM DL
+%Compliant. The requirements for an ACM Compliant PDF are available at:
+%{\url{http://www.sheridanprinting.com/typedept/ACM-distilling-settings.htm}}.
+%
+%Test your PDF file by viewing or printing it with the same software we
+%will use when we receive it, Adobe Acrobat Reader Version 7. This is
+%widely available at no cost from~\cite{acrobat}.  Note that most
+%reviewers will use a North American/European version of Acrobat
+%reader, which cannot handle documents containing non-North American or
+%non-European fonts (e.g. Asian fonts).  Please therefore do not use
+%Asian fonts, and verify this by testing with a North American/European
+%Acrobat reader (obtainable as above). Something as minor as including
+%a space or punctuation character in a two-byte font can render a file
+%unreadable.
+%
+%\section{Blind Review}
+%
+%For archival submissions, CHI requires a ``blind review.'' To prepare
+%your submission for blind review, remove author and institutional
+%identities in the title and header areas of the paper. You may also
+%need to remove part or all of the Acknowledgments text.  Further
+%suppression of identity in the body of the paper and references is
+%left to the authors' discretion. For more details, see the submission
+%guidelines and checklist for your submission category.
+%
+%\section{Conclusion}
+%
+%It is important that you write for the SIGCHI audience.  Please read
+%previous years' Proceedings to understand the writing style and
+%conventions that successful authors have used.  It is particularly
+%important that you state clearly what you have done, not merely what
+%you plan to do, and explain how your work is different from previously
+%published work, i.e., what is the unique contribution that your work
+%makes to the field?  Please consider what the reader will learn from
+%your submission, and how they will find your work useful.  If you
+%write with these questions in mind, your work is more likely to be
+%successful, both in being accepted into the Conference, and in
+%influencing the work of our field.
+%
+%\section{Acknowledgments}
+%
+%We thank CHI, PDC and CSCW volunteers, and all publications support
+%and staff, who wrote and provided helpful comments on previous
+%versions of this document.  Some of the references cited in this paper
+%are included for illustrative purposes only.  \textbf{Don't forget
+%to acknowledge funding sources as well}, so you don't wind up
+%having to correct it later.
+
+% Balancing columns in a ref list is a bit of a pain because you
+% either use a hack like flushend or balance, or manually insert
+% a column break.  http://www.tex.ac.uk/cgi-bin/texfaq2html?label=balance
+% multicols doesn't work because we're already in two-column mode,
+% and flushend isn't awesome, so I choose balance.  See this
+% for more info: http://cs.brown.edu/system/software/latex/doc/balance.pdf
+%
+% Note that in a perfect world balance wants to be in the first
+% column of the last page.
+%
+% If balance doesn't work for you, you can remove that and
+% hard-code a column break into the bbl file right before you
+% submit:
+%
+% http://stackoverflow.com/questions/2149854/how-to-manually-equalize-columns-
+% in-an-ieee-paper-if-using-bibtex
+%
+% Or, just remove \balance and give up on balancing the last page.
+%
+\balance
+
+% REFERENCES FORMAT
+% References must be the same font size as other body text.
+
+\bibliographystyle{acm-sigchi}
+\bibliography{sample}
+\end{document}

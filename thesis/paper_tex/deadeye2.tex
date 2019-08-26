@@ -1,0 +1,892 @@
+\documentclass[journal]{vgtc}                % final (journal style)
+%\documentclass[review,journal]{vgtc}         % review (journal style)
+%\documentclass[widereview]{vgtc}             % wide-spaced review
+%\documentclass[preprint,journal]{vgtc}       % preprint (journal style)
+
+%% Uncomment one of the lines above depending on where your paper is
+%% in the conference process. ``review'' and ``widereview'' are for review
+%% submission, ``preprint'' is for pre-publication, and the final version
+%% doesn't use a specific qualifier.
+
+%% Please use one of the ``review'' options in combination with the
+%% assigned online id (see below) ONLY if your paper uses a double blind
+%% review process. Some conferences, like IEEE Vis and InfoVis, have NOT
+%% in the past.
+
+%% Please note that the use of figures other than the optional teaser is not permitted on the first page
+%% of the journal version.  Figures should begin on the second page and be
+%% in CMYK or Grey scale format, otherwise, colour shifting may occur
+%% during the printing process.  Papers submitted with figures other than the optional teaser on the
+%% first page will be refused. Also, the teaser figure should only have the
+%% width of the abstract as the template enforces it.
+
+%% These few lines make a distinction between latex and pdflatex calls and they
+%% bring in essential packages for graphics and font handling.
+%% Note that due to the \DeclareGraphicsExtensions{} call it is no longer necessary
+%% to provide the the path and extension of a graphics file:
+%% \includegraphics{diamondrule} is completely sufficient.
+%%
+\ifpdf%                                % if we use pdflatex
+  \pdfoutput=1\relax                   % create PDFs from pdfLaTeX
+  \pdfcompresslevel=9                  % PDF Compression
+  \pdfoptionpdfminorversion=7          % create PDF 1.7
+  \ExecuteOptions{pdftex}
+  \usepackage{graphicx}                % allow us to embed graphics files
+  \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg} % for pdflatex we expect .pdf, .png, or .jpg files
+\else%                                 % else we use pure latex
+  \ExecuteOptions{dvips}
+  \usepackage{graphicx}                % allow us to embed graphics files
+  \DeclareGraphicsExtensions{.eps}     % for pure latex we expect eps files
+\fi%
+
+%% it is recomended to use ``\autoref{sec:bla}'' instead of ``Fig.~\ref{sec:bla}''
+\graphicspath{{figures/}{pictures/}{images/}{./}} % where to search for the images
+
+\usepackage{microtype}                 % use micro-typography (slightly more compact, better to read)
+\PassOptionsToPackage{warn}{textcomp}  % to address font issues with \textrightarrow
+\usepackage{textcomp}                  % use better special symbols
+\usepackage{mathptmx}                  % use matching math font
+\usepackage{times}                     % we use Times as the main font
+\renewcommand*\ttdefault{txtt}         % a nicer typewriter font
+\usepackage{cite}                      % needed to automatically sort the references
+\usepackage{tabu}                      % only used for the table example
+\usepackage{booktabs}                  % only used for the table example
+%% We encourage the use of mathptmx for consistent usage of times font
+%% throughout the proceedings. However, if you encounter conflicts
+%% with other math-related packages, you may want to disable it.
+
+
+\include{ivda-macros}
+\usepackage{todonotes}
+\usepackage{fixltx2e}
+\usepackage{dblfloatfix}
+%% In preprint mode you may define your own headline.
+%\preprinttext{To appear in IEEE Transactions on Visualization and Computer Graphics.}
+
+%% If you are submitting a paper to a conference for review with a double
+%% blind reviewing process, please replace the value ``0'' below with your
+%% OnlineID. Otherwise, you may safely leave it at ``0''.
+
+\onlineid{1104}
+
+%% declare the category of your paper, only shown in review mode
+\vgtccategory{Research}
+%% please declare the paper type of your paper to help reviewers, only shown in review mode
+%% choices:
+%% * algorithm/technique
+%% * application/design study
+%% * evaluation
+%% * system
+%% * theory/model
+\vgtcpapertype{Algorithm/Technique}
+
+%% Paper title.  Deadeye Visualization Revisited: Preattentiveness and Applicability in Virtual Environments 
+\title{Deadeye Visualization Revisited: Investigation of Preattentiveness and Applicability in Virtual Environments}
+
+%% This is how authors are specified in the journal style
+
+%% indicate IEEE Member or Student Member in form indicated below
+\author{Andrey Krekhov, \textit{Student Member, IEEE}, Sebastian Cmentowski, \textit{Student Member, IEEE},\\ Andre Waschk, \textit{Student Member, IEEE}, and Jens Kr\"uger, \textit{Member, IEEE}}
+\authorfooter{
+%% insert punctuation at end of each item
+\item
+ Andrey Krekhov, Sebastian Cmentowski, Andre Waschk and Jens Kr\"uger are with Center of Visual Data Analysis and Computer Graphics (COVIDAG), University of Duisburg-Essen. E-mail: \{andrey.krekhov, sebastian.cmentowski, andre.waschk, jens.krueger\}@uni-due.de.
+\item
+ Jens Kr\"uger is also with SCI Institute, University of Utah. E-mail: jens@sci.utah.edu.
+}
+
+
+
+
+
+%other entries to be set up for journal
+\shortauthortitle{Krekhov \MakeLowercase{\textit{et al.}}: Deadeye Visualization Revisited: Investigation of Preattentiveness and Applicability in Virtual Environments}
+%\shortauthortitle{Firstauthor \MakeLowercase{\textit{et al.}}: Paper Title}
+
+\abstract{
+
+Visualizations rely on highlighting to attract and guide our attention. To make an object of interest stand out independently from a number of distractors, the underlying visual cue, e.g., color, has to be preattentive. In our prior work, we introduced Deadeye as an instantly recognizable highlighting technique that works by rendering the target object for one eye only. In contrast to prior approaches, Deadeye excels by not modifying any visual properties of the target. However, in the case of 2D visualizations, the method requires an additional setup to allow dichoptic presentation, which is a considerable drawback. As a follow-up to requests from the community, this paper explores Deadeye as a highlighting technique for 3D visualizations, because such stereoscopic scenarios support dichoptic presentation out of the box. Deadeye suppresses binocular disparities for the target object, so we cannot assume the applicability of our technique as a given fact. With this motivation, the paper presents quantitative evaluations of Deadeye in VR, including configurations with multiple heterogeneous distractors as an important robustness challenge. After confirming the preserved preattentiveness (all average accuracies above 90 \%) under such real-world conditions, we explore VR volume rendering as an example application scenario for Deadeye. We depict a possible workflow for integrating our technique, conduct an exploratory survey to demonstrate benefits and limitations, and finally provide related design implications.
+
+
+} % end of abstract
+
+
+%% Keywords that describe your work. Will show as 'Index Terms' in journal
+%% please capitalize first letter and insert punctuation after last keyword
+\keywords{Popout, virtual reality, preattentive vision, volume rendering, dichoptic presentation, binocular rivalry}
+
+%% ACM Computing Classification System (CCS). 
+%% See <http://www.acm.org/class/1998/> for details.
+%% The ``\CCScat'' command takes four arguments.
+%
+%\CCScatlist{ % not used in journal version
+% \CCScat{K.6.1}{Management of Computing and Information Systems}%
+%{Project and People Management}{Life Cycle};
+% \CCScat{K.7.m}{The Computing Profession}{Miscellaneous}{Ethics}
+%}
+
+%% Uncomment below to include a teaser figure.
+\teaser{
+  \centering
+  \includegraphics[width=\linewidth]{figures/teaser.jpg}
+  \caption{Left: Our experiments in VR with homogeneous and heterogeneous distractors, as we investigate the preattentiveness and robustness of Deadeye in such scenarios. Right: We demonstrate and evaluate volume rendering in VR as a possible real-world application scenario for our technique.}
+	\label{fig:teaser}
+}
+
+%% Uncomment below to disable the manuscript note
+%\renewcommand{\manuscriptnotetxt}{}
+
+%% Copyright space is enabled by default as required by guidelines.
+%% It is disabled by the 'review' option or via the following command:
+% \nocopyrightspace
+
+\vgtcinsertpkg
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% START OF THE PAPER %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%% The ``\maketitle'' command must be the first command after the
+%% ``\begin{document}'' command. It prepares and prints the title block.
+
+%% the only exception to this rule is the \firstsection command
+\firstsection{Introduction}
+
+ 
+
+\maketitle
+
+%% \section{Introduction} %for journal use above \firstsection{..} instead
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2\columnwidth]{figures/examples.jpg}
+\caption{A selection of VR visualizations that can benefit from Deadeye highlighting. (a) Educational visualizations of particle physics~\protect\cite{duer2018belle2vr}: Deadeye can be used to capture and guide the attention of the students. (b) Immersive graph visualizations~\protect\cite{kwon16imsv}: Utilizing Deadeye during user interaction to highlight the selected vertices and edges. (c) Dinosaur track formation~\protect\cite{novotny2019developing}: Emphasizing 3D pathlines of interest in unsteady flow visualizations.}
+\label{fig:examples}
+\end{figure*}
+
+
+
+
+Highlighting objects of interest in scientific visualizations allows our attention to be attracted and guided. Researchers have uncovered a number of effective ways to make an object pop out, be it color, motion, or flickering. Such visual cues can be recognized by our visual system preattentively, i.e., within a split second, no matter how complex the overall visualization. Hence, advances in the exploration of preattentive features can provide substantial benefits to visualization researchers and practitioners.
+
+
+
+Our prior work introduced \textit{Deadeye}~\cite{krekhov2019deadeye}, a preattentive visualization technique based on dichoptic presentation. Deadeye attracts and guides attention by rendering the target object for one eye only, which works preattentively due to the induced binocular rivalry. One particular benefit to visualizations is that Deadeye does not modify any visual properties of the target object in contrast to other preattentive cues that have to alter the target by recoloring, reshaping, or displacing (3D depth cue). Clearly, such alterations are undesirable, as they might lead to data misinterpretation. Also, by using Deadeye, we do not have to reserve visual dimensions, such as color for highlighting, and can use these variables for, e.g., encoding more data dimensions. Our studies also confirmed that the display of inconsistent stimuli for each eye does not lead to headache or any other physical strain, which is an important consideration for real-world applicability.
+
+
+To render the target for one eye only, Deadeye relies on a stereoscopic setup such as a 3D TV with stereo glasses. The only difference between the left and right image is the presence or absence of the target. Hence, one might consider such a setup solely for highlighting purposes as an overkill, and several members of our community proposed applying Deadeye in a truly stereoscopic environment. In such a case, our technique would not require any additional hardware and would perform out of the box. Furthermore, due to the availability nowadays of consumer VR equipment, visualization research increasingly employs virtual environments as a target scenario~\cite{kratz2006gpu,shen2008medvis,laha2012effects,hanel2016visual,scholl,milan2018extending}, and having more complex visualizations in VR triggers the need for suitable highlighting approaches.
+
+Given that community-driven motivation, we revisit Deadeye under stereoscopic conditions. In contrast to more established preattentive cues such as color or flickering, it is rather difficult to predict the behavior of Deadeye in such a setup due to its monocular nature. By removing the object for one eye, we lose the binocular disparity information for the target, which is a crucial part of depth estimation. However, the disparity-based mechanism is not the single point of failure, as our vision system relies on numerous mechanics, such as occlusion geometry~\cite{tsirlin2012vinci}, to estimate the depth of an object, which suggests a successful application of Deadeye in VR scenarios.
+
+
+
+\subsection{Motivation for Extending Deadeye to VR}
+
+
+There are manifold reasons for visualization in VR, such as a better understanding of spatial relationships~\cite{schuchardt2007benefits}, or the increased presence and an improved cognitive map due to natural locomotion (i.e., walking)~\cite{ruddle2011walking,Krekhov:2018:GVRA,ruddle2009benefits}. Nevertheless, these advantages cannot prevent us from possibly getting lost in the amount of visualized data, and, thus, we continue to need robust and intuitive highlighting techniques. And while certain preattentive cues, such as color, are not affected by the transition to VR, temporal approaches, such as flickering, often interfere with aliasing caused by constant micromovements in VR. Hence, we postulate that establishing Deadeye as a validated highlighting approach in VR without occupying any additional visual dimension offers significant benefits for the visualization community, as outlined in \FG{fig:examples}.
+
+One possible application scenario of Deadeye is the educational context. Instructors in virtual reality classes need a subtle, yet efficient way to draw the students' attention to a certain element or an area, such as a particle shower caused by a near-light-speed collision in the Belle II experiment~\cite{duer2018belle2vr}. Similarly, we can utilize Deadeye to highlight particles or pathlines in flow field visualizations~\cite{novotny2019developing}, as our method is not limited to a single target. The only requirement is that the highlighted property, target, or region need to be binary in their nature, as Deadeye either shows or removes it for one eye.
+
+Such highlighting is also beneficial for visual storytelling, be it for experts or the general audience. One example is the biological exploration of cells in VR to better understand the cellular processes~\cite{johnston2018journey}. Again, Deadeye can be used to emphasize various points of interest, such as the nucleus or endosomes, and help the audience to follow their movement during the visualization.
+
+Another candidate for our method would be visualizations that involve cluttered, complex graphs. One important reason for such application scenarios is that VR usually allows to perceive and analyze larger graphs compared to non-stereo setups~\cite{ware1996evaluating}. Naturally, aspects like layout and interaction~\cite{kwon2015spherical,kwon2016study,kwon16imsv} are the dominant factors that impact the success of such visualizations. However, as color is often over-represented in these scenarios, we postulate that Deadeye is a valuable alternative to, e.g., highlight the vertices or edges being currently selected by the user. To summarize, we assume that the unique selling point of Deadeye, i.e., the fact that it does not require a dedicated visual dimension, such as color or motion, is of enough value for a number of VR visualizations, which justifies our follow-on research.
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2\columnwidth]{figures/relwork.jpg}
+\caption{(a) Color as a cue: The red circle can be recognized preattentively independent of the number of blue distractors. (b) Da Vinci stereopsis: The near surface results in different occlusions for both eyes, which leads to monocular regions in the far plane. (c) Valid and invalid setups of unpaired image points in da Vinci stereopsis according to Nakayama and Shimojo\protect\cite{NAKAYAMA19901811}. Images redrawn from \protect\cite{ASSEE20072585} and \protect\cite{krekhov2019deadeye}.}
+\label{fig:relwork}
+\end{figure*}
+
+
+
+\subsection{Key Advances of the Follow-On Research}
+
+In this section, we briefly outline the key novelties to facilitate comprehension. Especially readers that are familiar with the basic idea of Deadeye~\cite{krekhov2019deadeye} will find four key advances in this paper:
+
+
+\textbf{Preattentiveness in VR.} As a first step, we explore whether Deadeye is still preattentive in a VR setup, despite being considered a subtle cue~\cite{zou2017binocularity}. Apart from the listed benefits for VR visualizations, having Deadeye in VR would also remove its prior disadvantage of requiring extra stereo hardware for highlighting.
+
+
+\textbf{Heterogeneous Distractors.} The original studies on Deadeye were executed with one type of objects, i.e., colored circles. And while this is a valid and most commonly used approach for detecting preattentive cues, it is not guaranteed that these cues perform equally well in a heterogeneous setup with varying distractors. As visualizations are rarely limited to homogeneous objects, we need to assure that the method maintains its robustness under such circumstances. Therefore, we extend the initial research scope by studying the performance of Deadeye under different combinations of heterogeneous distractors: color, shape, and 3D depth.
+
+
+
+\textbf{Deadeye and depth perception.} As Deadeye removes the object for one eye, our visual system cannot rely on binocular disparity for depth estimation of the target object anymore. We examine whether our visual system is still able to extrapolate the depth based on additional cues, such as occlusion geometry. This is an important detail, as otherwise, Deadeye might limit our understanding of spatial relationships in VR.
+
+\textbf{Evaluation of real-world applicability.} We demonstrate how to integrate Deadeye into complex scientific visualizations in VR using the example of volume rendering (cf. \FG{fig:teaser}). In particular, we present a workflow for an intuitive application of such a highlighting feature and conduct an exploratory survey with visualization practitioners. Based on the survey outcomes, we discuss the benefits and drawbacks of Deadeye in such scenarios and generate a set of design implications for future research and applications.
+
+
+
+
+\section{Preattentive Cues}
+
+Before exploring the behavior of Deadeye~\cite{krekhov2019deadeye} in a virtual, stereoscopic environment, we briefly introduce the essence of preattentive features and provide a motivation for such research. We will not go into detail regarding the basics of our visual system~\cite{NOTON1971929,itti2001computational,yarbus1967eye} in order to maintain focus on the visualization-related aspects. We recommend the state-of-the-art summary by Healey and Enns~\cite{Healey:2012:AVM:2225054.2225226} for a broad overview of preattentive research done in past decades.
+
+In short, our visual system is able to detect certain outstanding features such as color in a glance, i.e., before our eyes initiate a saccadic movement. Consider the example in \FG{fig:relwork}: looking at such an image for a split second would suffice to tell whether or not there was a red circle among blue ones. Since a saccade usually needs about 200-250 ms~\cite{Healey:2012:AVM:2225054.2225226} to initiate, researchers utilize that threshold to determine if a cue is preattentive. 
+
+Apart from color, prior work has already discovered a large set of other preattentive features, including size, density, lighting direction, flicker, or orientation. For a more detailed overview, we refer to the work by Wolfe and Horowitz~\cite{wolfe2017five} and Healey and Enns~\cite{Healey:2012:AVM:2225054.2225226}. At this point, we also emphasize that preattentive cues differ in their underlying nature, and, thus, the performance or detectability usually depends on various factors, such as the type and heterogeneity of distractors, viewing angle, or lighting condition.
+
+A straightforward application for preattentive cues in visualization is to draw and guide attention~\cite{ware2012information,Hall:2016:FEI,Borji:2013:SAV} due to the nearly instant recognition time. Here, an even more important advantage is that preattentive features perform equally well, no matter how many other objects---also called distractors---are present. In other words, we can confirm a red circle from the previous example in less than 250 ms, even if hundreds of blue elements are on the screen.
+
+
+
+
+
+Our community has made extensive use of preattentive cues for different approaches, such as dynamic narrative visualizations in the case of \textit{Attractive Flicker}~\cite{Waldner:2014:AFG} or document representations as done with \textit{Popout Prism}~\cite{Suh:2002:PPA:503376.503422}. Other examples include the shading-effects-based \textit{Stylized Focus}~\cite{Cole:2006:DGM:2383894.2383942} and the utilization of 3D depth in graph visualizations~\cite{Alper:2011:SHG:2068462.2068634}. Readers seeking further application examples and higher level design guidelines for such visual features might also be interested in the work by Huber and Healey~\cite{huber2005visualizing}. In addition, studies by Gutwin et al.~\cite{Gutwin:2017:PPI:3025453.3025984} provide insights into performance differences of preattentive cues in the peripheral sight area. Note that Deadeye also suffers from decreasing performance in areas far from the focus point~\cite{krekhov2019deadeye}, and, if this aspect is of high importance (e.g., multimonitor setups), other cues such as motion or flickering should be favored instead.
+
+Although we can spot a single cue instantly, searching for a combination of multiple features often results in a serial and no longer parallel process~\cite{treisman1980feature, treisman1988feature, treisman1986illusory,wolfe1989guided,townsend1990serial,mcleod1988visual}. A detailed discussion of that so-called conjunction search is outside the scope of this paper, yet it is important to know about this limitation of preattentive cues when designing complex visualizations. This rule has a few exceptions, i.e., conjunction search setups where parallel processing can be achieved. Prominent examples are the works by M\"uller and Muhlenen~\cite{muller1999visual} (form and motion) and Nakayama Silverman~\cite{nakayama1986serial} (3D depth and color/motion). That latter report was the main motivation for studying conjunction search abilities of Deadeye, since 3D depth and Deadeye both rely on binocular disparities. However, the experiments did not support the hypothesis that Deadeye is suitable for parallel processing when combined with color. Hence, we are not further examining conjunction search in our VR setup, as we do not see any evidence for a change in behavior in this regard.
+
+To fully understand the underlying mechanisms behind conjunction search and preattentive processing in general, we recommend starting with the Integration Theory by Treisman~\cite{treisman1980feature}. Other fundamental research regarding preattentive models includes the Texton Theory by Julesz et al.~\cite{julesz1981textons} and the Boolean map theory by Huang and Pashler~\cite{huang2007boolean}. As we will not go into detailed explanations of these models, the state-of-the-art paper by Healey and Enns~\cite{Healey:2012:AVM:2225054.2225226} might be considered as a starting point for obtaining an overview.
+
+
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2\columnwidth]{figures/preattentive.jpg}
+\caption{ Top: \textit{Exp-1} with an increasing number of homogeneous distractors on the same depth plane with a slight positional jittering applied to each cube. Bottom: \textit{Exp-2} with heterogeneous distractors, from left to right: \textit{depth2} (two depth planes), \textit{depth2-color-shape} (two depth planes, different color and shape), and \textit{depth3-color} (three depth planes, different color).}
+\label{fig:preattentive}
+\end{figure*}
+
+\section{Underlying Mechanics of Deadeye}
+
+
+
+The concept behind the original Deadeye visualization technique is to highlight an object by removing it for one eye only. We refer to such a principle when each eye is exposed to a different stimulus as \textit{dichoptic presentation}. In general, that difference in stimuli leads to binocular rivalry~\cite{logothetis1996rivalling, blake1989neural, friedenberg2012visual, alais2005binocular, Paffen2011}, i.e., our vision system enters a context-switching mode that allows us to perceive both monocular images alternately instead of experiencing a superimposition.
+
+Whether or not binocular rivalry can be perceived in a preattentive manner has been discussed in a number of prior works. Wolfe and Franzel~\cite{wolfe1988binocularity} assumed that such a cue is not preattentive in general, with the exception of the so-called luster effect where the target object is dimmer than the background for one eye and brighter for the other eye. Such luminance variations and luminance disparities in general were subjects of further extensive research~\cite{de1974binocular,teller1967brightnesses,anstis1998nonlinear,formankiewicz2009psychophysics}. Zou et al.~\cite{zou2017binocularity} reported that although dichoptic presentation can be preattentive, it is usually too weak and overridden by more pronounced features such as orientation. Consequently, dichoptic presentation has only rarely been employed in visualization or for highlighting purposes in general~\cite{Zhang:2012:BSE,Zhang:2014:SBE}. 
+
+On the other hand, research by Paffen et al.~\cite{paffen2012interocular} and especially the work by Zhaoping~\cite{zhaoping2008attention} has provided further evidence that binocular rivalry should be reconsidered as a preattentive cue. In particular, Zhaoping confirmed that ocular discontinuities can be used for drawing attention by comparing ocular singletons to orientation singletons and evaluating the role of the primary visual cortex during the construction of related bottom-up saliency maps. The original studies on Deadeye also align with these findings and confirm the achievable preattentiveness.
+
+
+
+
+
+
+
+A well-known case of dichoptic presentation is the binocular disparity generated by the horizontal offset of our eyes. That information is processed by our visual system to gather depth information and forms the basis for stereo vision~\cite{julesz1960binocular,julesz1971foundations,Caziot:2015:SOM,marr1976cooperative,marr1979computational}. On a side note, a number of related stereo cues such as lighting direction and three-dimensionality have also been proven to be preattentive~\cite{enns1990influence, enns1990sensitivity,o1997preattentive}.
+
+
+In contrast to the disparity-based depth perception, ~\textit{da Vinci stereopsis}~\cite{NAKAYAMA19901811} provides depth information based on monocular vision. This phenomenon is common in daily life, i.e., when an object is partially occluded by another, our vision system perceives monocularly occluded regions as depicted in \FG{fig:relwork}. Although receiving little attention by the general public, monocular occlusion plays an important role in our depth perception process~\cite{gillam1999quantitative,liu1997binocular,shimojo1990real,shimojo1994interocularly,harris2009role}. Consequently, prior research~\cite{marr1979computational,cao2005laminar,hayashi2004integrative,zitnick2000cooperative,watanabe1999stereo} established several models that show how such unpaired image points contribute to depth estimation. 
+
+
+
+Regarding Deadeye, one important aspect of da Vinci stereopsis is the classification of monocular areas in valid and invalid combinations as shown in \FG{fig:relwork}. Clearly, only valid cases appear in nature. As shown by Shimojo and Nakayama~\cite{shimojo1990real}, such valid regions are not subject to binocular rivalry and usually appear as part of more distant surfaces, whereas invalid regions appear more ambiguous in depth estimation. In the case of Deadeye, the exposed image pair falls into the invalid category. Hence, at first glance, depth estimation for the highlighted object might be error prone. However, more recent research~\cite{HAKKINEN19963815,ASSEE20072585,gillam2003monocular} has revealed that da Vinci stereopsis works in a rather stimulus-dependent way, i.e., the quantitative depth computation approach depends on the given occlusion configuration. Tsirlin et al.~\cite{tsirlin2012vinci} concluded that occlusion geometry is most likely the main source for depth extraction in such cases. These recent findings allow us to assume that Deadeye-enhanced objects would also perform well regarding depth estimation in VR setups, especially when we consider that such a stereoscopic environment allows us to observe the object in question from multiple perspectives to achieve a more sophisticated depth impression~\cite{shimojo1988occlusion}.
+
+
+
+% img cap: nakayama90: unpaired image points: This is the origin of da vinci. Distant surfaces are occluded by nearer surfaces to different extents in the two eyes. Our findings indicate that the visual system makes use of occlusive relations in the real world to recover depth, contour, and surface from unpaired points. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Preattentiveness of Deadeye in VR}
+
+We conducted an evaluation to understand whether and how the preattentiveness of Deadeye behaves in a virtual environment. In a first step, we recreated an experiment similar to the original Deadeyes tudy~\cite{krekhov2019deadeye} to generate a set of comparable data. The design of our experiment follows the traditional approach for preattentive cues: series of images---or scenes in our case---are displayed for a short amount of time (100-250 ms), and participants have to decide for each image whether a highlighted object is present or not. If a cue is preattentive, the high success rate (typically $>80$\%) is maintained independently from the number of overall objects on the screen. Hence, preattentive experiments are performed with a varying number of distractors to verify the performance stability.
+
+Accordingly, we formulated a first hypothesis \textbf{H1}: \textit{Stereoscopic environments do not impact the accuracy of Deadeye in the case of \textbf{homogeneous} distractors.} Note that although we utilized stereoscopic equipment in the original experiments to hide the target object for one eye, the image pairs were otherwise identical, i.e., no disparity-based depth cues were present. In contrast, the experiments to be presented utilize a 3D scene that allows spatial vision and where all objects are three-dimensional, as shown in \FG{fig:preattentive}. 
+
+
+
+In a second step, we significantly extended the original setup by utilizing objects that vary in protruding properties, such as color or shape, to explore the robustness of our technique. Note that preattentive cues perform differently under heterogeneous conditions, and understanding such behavior is crucial because visualizations seldom consist of only one type of objects. Since prior research~\cite{zou2017binocularity} has demonstrated that dichoptic presentation is a rather weak cue that could be easily overridden by stronger features, we regard an evaluation under heterogeneous conditions as an important milestone for establishing Deadeye as a ``working'' cue for real-world visualizations. Hence, our second hypothesis is that \textit{Deadeye accuracy remains robust in scenarios where distractors and the targets have \textbf{heterogeneous} visual properties} (\textbf{H2}). 
+
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=2\columnwidth]{figures/results.jpg}
+\caption{Average accuracies for \textit{Exp-1} and \textit{Exp-2} compared to our previous results~\cite{krekhov2019deadeye} for the 2D case. A repeated measures ANOVA shows no significant difference in accuracy between the sets, supporting our hypotheses that the transition to 3D scenes does not impact the performance of Deadeye and that our technique remains robust even in the presence of strong visual cues such as color or shape.}
+\label{fig:results}
+\end{figure*}
+
+% parentheses ``aaaa''
+
+
+\begin{figure}[!b]
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/questionnaire.jpg}
+\caption{Excerpt from our VR implementation of the NASA-TLX survey. All briefings, pauses, and questionnaires were done via the HMD to provide same conditions to all participants.}
+\label{fig:questionnaire}
+\end{figure}
+
+
+
+\subsection{Procedure and Applied Measures}
+
+
+
+Our experiments took place in a virtual reality lab. In our recruitment call, we requested normal or corrected to normal visual acuity and no defects of vision as a study prerequisite. Upon entrance, we informed the participants about the overall procedure and administered a questionnaire to obtain general demographic data. 
+
+We then provided the participants an Oculus Go~\cite{oculus} HMD with a per eye resolution of 1280 x 1440 pixel and briefly explained its usage. The remainder of the study took place in the VR environment, i.e., all trials, briefings, pauses, and questionnaires were done via the HMD to guarantee equal conditions (e.g., between-run delays) for all participants.
+
+
+On-screen text briefed the participants that they would see a series of static 3D scenes consisting of floating objects, and one of the objects might pop out. Each scene was shown for a split second, and, subsequently, participants would vote via \textit{yes} and \textit{no} buttons whether they thought that a highlighted object was present. Before each scene, participants saw a crosshair in the middle of the screen and were asked to maintain focus on it. This detail is important to prevent saccadic eye movements such that the eyes would remain in the focus stage when a scene becomes visible. The briefing also mentioned that there would be a training stage before each round where participants would receive audio feedback that indicated the correctness of the given answer. During the real run, the audio would be replaced by a neutral sound to prevent distractions, i.e., reflecting upon wrong answers and lack of concentration as a result.
+
+
+
+
+
+
+
+
+The entire study consisted of two parts: \textit{Exp-1} with homogeneous distractors and \textit{Exp-2} focusing on heterogeneous distractors. \textit{Exp-1} consisted of three sets that differed only in the number of displayed objects: 4, 16, and 30. We utilized randomly generated cubes on a 5 x 6 grid
+with jittering/offset functions as depicted in \FG{fig:preattentive}. All cubes were aligned on the same depth plane, resulting in a horizontal viewing angle of $14.93^\circ$ from the focus point (vertical: $12.23^\circ$). Each cube had a size of approximately $1.8^\circ$. Each of the three sets included 48 scenes, half of them with a target object at a random position in a randomized order. We exposed each scene for 250 ms to the participants; the previously displayed crosshair lasted for 2500 ms. Furthermore, each set began with a training round with 20 scenes. To summarize \textit{Exp-1}, we replicated our setup from the previous study as precisely as possible to generate statistically comparable data. The only altered condition was the shift from a 2D image with flat objects to a scene with three-dimensional objects with binocular disparity.
+
+
+
+\textit{Exp-2} included the three sets \textit{depth2}, \textit{depth2-color-shape}, and \textit{depth3-color} in random order. All three sets consisted of 30 objects and varied only in the type and/or depth distribution of utilized elements. All other conditions were similar to \textit{Exp-1} to allow direct comparisons. For \textit{depth2}, we chose the same objects as in \textit{Exp-1}, but distributed them on two distinct depth planes as shown in \FG{fig:preattentive} and also included a minor depth jittering function. The distance between the depth planes was twice the cube-side length. The maximum partial occlusion of a far-plane object by a closer one was 10 \% of its screen space, i.e., at least 90\% of the far object remained visible. For \textit{depth2-color-shape}, we included different forms of objects and also randomly assigned different colors to see how Deadeye performs in the presence of two rather dominant visual cues. In addition, we kept the depth distribution over two planes. The scenes of \textit{depth3-color} further increased the depth variance by adding a third plane and increasing the maximum possible occlusion of the furthermost object to 20 \%. The objects were all cubes with randomly assigned color.
+
+Between all sets of our study, we displayed a stereoscopic 3D landscape photo for 30 seconds to provide short pauses and reduce task fatigue, similar to the original Deadeye experiments. We also re-implemented the original questionnaire in VR, as shown in \FG{fig:questionnaire}, and administered it after \textit{Exp-1} and after \textit{Exp-2}. The questionnaire is based on the NASA-TLX survey~\cite{hart1988development}, which includes six subscales: mental demand (low/high), physical demand (low/high), temporal demand (low/high), performance (good/poor), effort (low/high), and frustration level (low/high). Each scale ranges from 0 to 100 in increments of 5. Our questionnaire also contains two additional items on a seven-point Likert scale ranging from 0 to 6, with larger numbers indicating a more positive outcome: \textit{\textbf{Clearness}: how well have you perceived the highlighted object?} and \textit{\textbf{Decision-making}: how sure were you that you made the right decisions?}
+
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=2\columnwidth]{figures/nasa.jpg}
+\caption{ Results of the NASA-TLX survey for \textit{Exp-1} and \textit{Exp-2} compared to the prior values of the 2D case. Lower values are preferable.}
+\label{fig:nasa}
+\end{figure*}
+
+
+
+\begin{figure}[!b]
+\centering
+\includegraphics[width=0.78\columnwidth]{figures/custom.jpg}
+\caption{Results of our custom questions. Larger numbers indicate a more
+positive outcome.}
+\label{fig:custom}
+\end{figure}
+
+
+
+
+\subsection{Results}
+
+The quantitative study included twenty-four persons (fifteen females, nine males), aged 18 to 43 ($M = 26.71,\,SD = 6.82$). All reported normal or corrected to normal visual acuity and no defects of vision. The presented results are based on the automated logging of our VR application. All variables were normally distributed according to Kolmogorov-Smirnov tests.
+
+The average accuracies, as depicted in \FG{fig:results}, for \textit{Exp-1} (4 objects: $M = 0.93,\,SD = 0.08$; 16 objects: $M = 0.91,\,SD = 0.09$; 30 objects: $M = 0.91,\,SD = 0.07$) and \textit{Exp-2} (\textit{depth2}: $M = 0.93,\,SD = 0.08$; \textit{depth2-color-shape}: $M = 0.91,\,SD = 0.06$; \textit{depth3-color}: $M = 0.90,\,SD = 0.06$) are similar to the values of other preattentive cues. We applied a repeated measures ANOVA with the set type as a within-subject variable to investigate whether the number and kind of distractors influence the accuracy of Deadeye in VR. The result, $F(5,115) = 1.04,\,p = .397$, shows no significant difference. In other words, the performance of the participants was affected by neither increasing the number of cubes nor adding depth layers and modifying the shape and color of displayed objects. Regarding the false negatives to false positives ratio in case of wrong answers as depicted in \FG{fig:results}, it is more likely to miss a target than to report a false alarm, which is also a common behavior of other preattentive cues.
+
+We also performed independent samples t-tests to explore whether the transition to VR had an impact on performance. To enable such comparisons, our sets in \textit{Exp-1} replicated the prior 2D setup~\cite{krekhov2019deadeye} as close as possible. The results for 4 ($t(43) = -1.97, p = .055$), 16 ($t(42.18) = -0.02, p = .988$), and 30 objects ($t(43) = -0.85, p = .402$) show no significant differences in accuracy between 2D and 3D experiments.
+
+
+To evaluate the subjective perception of Deadeye, we conducted a paired-samples t-test to compare the outcomes of the NASA-TLX questionnaire for \textit{Exp-1} and \textit{Exp-2}, as shown in \FG{fig:nasa}. Physical demand ($t(23) = -2.22, p = .037$) and temporal demand ($t(23) = 2.72, p = .012$) are significantly different. Physical demand was reported to be significantly higher ($M = 39.58,\,SD = 18.65$ vs $M = 26.88,\,SD = 23.35$) in \textit{Exp-2}, whereas temporal demand was significantly higher in \textit{Exp-1} ($M = 48.33,\,SD = 20.62$ vs $M = 38.13,\,SD = 24.44$). Furthermore, we applied independent samples t-tests to compare the NASA-TLX results of \textit{Exp-1} with the prior 2D experiment and found no significant differences between any of the subscales. 
+
+% NASA NEW 1 VS OLD 1 independent samples t test: VR is not more demanding! subj rating. still high means, vorsichtig!
+
+
+In a similar way, we compared our custom questions regarding clearness (\textit{Exp-1}: $M = 3.83,\,SD = 1.90$; \textit{Exp-2}: $M = 3.54,\,SD = 1.35$) and decision-making (\textit{Exp-1}: $M = 3.58,\,SD = 1.44$; \textit{Exp-2}: $M = 3.00,\,SD = 1.29$) as can be seen in \FG{fig:custom}. We found no significant differences between \textit{Exp-1} and \textit{Exp-2}, or between \textit{Exp-1} and our prior 2D results. 
+
+
+% parentheses ``aaaa''
+
+
+
+
+
+
+
+
+
+\subsection{Discussion}
+
+Our results support our assumption that a virtual environment does not limit the preattentive nature of Deadeye, because the feature is still recognized with an average accuracy of $\sim$~90\%. In particular, the outcomes of our independent samples t-tests for the sets of \textit{Exp-1} and the respective sets of the prior 2D experiment support our hypothesis \textbf{H1}, i.e., the transition to fully stereoscopic environments does not impact the behavior of Deadeye in the case of \textbf{homogeneous} distractors.
+
+The behavior regarding wrong answers also remains unchanged: about $\sim$~65\% of the errors were false negatives, which is quite common for preattentive cues. In other words, it is easier to overlook a highlighted object rather than it is to mistakenly call out a false alarm in the absence of a highlight.
+
+
+
+In our opinion, the most important finding of our experiment is that the performance of Deadeye was not impacted by \textbf{heterogeneous} distractors, because our evaluation did not reveal any significant differences in performance and fully supported our second hypothesis \textbf{H2}. We intentionally picked strong visual attributes for our distractors, such as shape and color, because previous work suggested that the preattentive character of binocular rivalry might be easily overridden~\cite{zou2017binocularity}. However, Deadeye performed surprisingly robustly, which allows us to suggest the technique as a suitable highlighting method for real-world applications. Clearly, an unstable performance under heterogeneous conditions would have significantly limited the potential of Deadeye, because visualizations, in most cases, involve a complex interplay among multiple visual attributes.
+
+Furthermore, we made two rather unexpected observations during \textit{Exp-2}. First, the performance of the \textit{depth3-color} set surpassed our expectations. We suspected that target objects on the most distant depth plane would perform significantly worse due to the small screen size and the partial occlusion. However, as shown in \FG{fig:accuracies}, a detailed analysis of missed target locations did not reveal any error trend toward a specific depth plane. Second, we assumed that thinner objects, i.e., cylinders in the \textit{depth2-color-shape} set, might perform worse due to the influence of aliasing (``shimmering'') caused by slight HMD movement. Yet again, analyzing the missed target locations did not reveal any relation between shape and error rate. The only notable connection between the target position and its likeliness to be overlooked is the angular distance from the focus point, i.e., Deadeye performance decreases for objects in the outer columns. At this point, we will not go into detail regarding this finding, because it was already described and analyzed in the original Deadeye paper~\cite{krekhov2019deadeye}. Furthermore, as the visual quality of current HMDs is very limited in peripheral areas, this aspect is of low importance compared to non-VR, multi-monitor setups. 
+
+Interestingly, a closer inspection of the NASA-TLX questionnaire outcomes does not give us a clear picture regarding the actual exertion induced by Deadeye. Although the average values are positive compared to other visual cues~\cite{Gutwin:2017:PPI:3025453.3025984}, we point our readers at the rather large standard deviations. For each subscale, the answers provided by the participants always contained both extreme values, i.e., 0 and 100. We suppose that such a spread is due to the subtle nature of Deadeye and our inability to put the perceived effect into words. This presumption is also underpinned by our custom questions that reflect an average confidence of participants regarding their made decisions.
+
+As a side note, we attribute the significant differences for physical and mental demand between \textit{Exp-1} and \textit{Exp-2} to possible sequence effects of our study. Temporal demand decreased over time, because participants got used to the fast pace of the trials. In contrast, physical demand increased with the duration of the experiment, because the HMD is still an uncomfortable device when worn over a longer period of time.
+
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=0.98\columnwidth]{figures/accuracies.jpg}
+\caption{Average success rates for the detection of a Deadeye-enhanced
+object at each position. The matrices indicate an increase of the error rate with increasing distance from the focus point and no notable difference regarding the target's depth location.}
+\label{fig:accuracies}
+\end{figure}
+
+
+% cordingly, we formulated a first hypothesis \textbf{H1}: \textit{Stereoscopic environments do not impact the accuracy of Deadeye in case of \textbf{homogeneous} distractors.} Note that although we utilized a stereoscopic equipment in the original experiments to hide the target object for one eye, the image pairs were otherwise identical, i.e., no disparity-based depth cues were present. In contrast, the experiments to be presented utilize a 3D scene that allows spatial vision and where all objects are three-dimensional as shown in \FG{fig:accuracies}. 
+
+
+
+% In a second step, we significantly extended the original setup by utilizing objects that vary in protruding properties such as color or shape to explore the robustness of our technique. Note that preattentive cues perform differently under heterogeneous conditions, and understanding such behavior is crucial because visualizations hardly consist of only one type of objects. Since prior research~\cite{zou2017binocularity} reported that dichoptic presentation is a rather weak cue that could be easily overridden by stronger features, we regard an evaluation under heterogeneous conditions as an important milestone for establishing Deadeye as a ``working'' cue for real-world visualizations. Hence, our second hypothesis is that \textit{Deadeye accuracy remains robust in scenarios where distractors and the targets have \textbf{heterogeneous} visual properties} (\textbf{H2}). 
+
+
+
+%\vspace*{0.5\textheight}
+
+% NEED FALSE POS FALSE NEG.
+
+
+% DIAGRAM:
+% bar chart, 3, 16, 30 with 2 bars each (old and new), plus three bars for heterogeneous, span over whole page.
+
+% lorem ipsum
+% could unify in one section
+
+% t-test zw homo und hetero, KEIN t-test zw neu und alt, sagen dass alt sogar länger gedauert hat
+
+% homo: anova also preattentive, allg. accuracy: identisch mit alt, aber KEIN test
+% anova auf alle 6 neue (homo und hetero) also funktioniert hetero, keine weiteren analysen.
+
+
+
+
+
+% H1 supported, avg accuracy of 90 similar to other experiments, no difference between old deadeye and vr. false positives also similar.
+
+% H2: supproted, no diff between homogeneous and any of the heterogeneous. similarly, no diff in false positives.
+% also no diff netween heterogeneous, even with inc. number of occlusion.
+
+% diff in questionnaires: no diff in tlx except success and our custom question confirms: Participants are more unsure whether they saw it or not. again, similar to real deadeye, users underestimate their performance.
+
+
+
+
+\section{Integration into VR Volume Rendering}
+
+In addition to rather fundamental studies on preattentiveness, we now consider volume rendering in VR as a real-world application scenario of Deadeye. We present an integration example and an exploratory study to demonstrate the benefits and limitations of our approach.
+
+\subsection{Implementation}
+
+Given a volume rendering system with VR support (cf. \cite{kratz2006gpu,shen2008medvis}), the technical implementation of Deadeye can be done in the following way. For simplicity, let us assume that Deadeye should be achieved by removing the target for the \textit{right eye}. To remove the footprint of the target volume regions for the right eye, we store a per-voxel mask volume on the GPU along with the volume data. During GPU-based ray-casting (cf. \cite{kruger2003acceleration}), we compare this mask value against a global constant in the shader, which whether the rendering is done for the left or right eye. A voxel is skipped if the mask is set and rendering is done for the right eye. 
+
+The generation of such a mask volume depends on the application domain. For instance, in the case of already segmented~\cite{litjens2017survey} data sets, the per-voxel segment ID of the region of interest can be utilized. Another option is to interactively create and modify the mask volume by ``erasing'' the target for one eye directly in VR, as done in our study.
+
+
+
+
+\subsection{Procedure of the Study}
+To gather more information about the behavior of Deadeye in real-world-conditions, we conducted a semistructured exploratory study based on medical volume rendering in VR. Our main goal was to determine possible limitations of our preattentive highlighting method and to generate a preliminary set of design guidelines for the application of Deadeye in such scenarios.
+
+
+Since we were interested in feedback from people who are already familiar with volume rendering, we decided to recruit our participants manually via direct e-mail requests to limit the discard rate. The experiment took place in our VR lab and was supervised by two researchers. One of them was responsible for briefing and interviewing the participant during the experiment. All participants agreed that we would perform an audio recording of the whole session to facilitate the final evaluation. The second researcher monitored the volume rendering application and executed certain requests from participants, such as resetting the highlighted regions or switching between data sets. We intentionally reduced the direct interactions of the participants with the software to a minimum to focus on the highlighting aspect. 
+
+After assessing the demographic data and conducting a hole-in-the-card-test for eye dominance (Dolman method, e.g., \cite{cheng2004association, porac1976dominant}), we equipped our participants with an HTC Vive Pro~\cite{vive} with a wireless adapter and explained the remainder of the study. For volume rendering, we used a VR-optimized, GPU-based ray caster implementation that guaranteed a minimum refresh rate of 90 frames per second. We used two data sets to simulate common medical situations, a CT scan of a human head (+neck/shoulders), and a CT scan of a human torso; both are subsets from the frozen CT visible human data set~\cite{662875}. In the first part of the study, participants explored both data sets with a medical greyscale transfer function. For the second part, we applied a transfer function that included color to explore its interplay with Deadeye. Each of these four scenarios (2x greyscale, 2x colored; cf. \FG{fig:volume}) consisted of the following tasks:
+
+ \begin{itemize}
+  \setlength\itemsep{0.02 em}
+  \item \textbf{Detection} - we displayed two different presets (scale, orientation, clip plane); each preset included between one and four Deadeye-enhanced regions. Assignment: \textit{Tell whether and how many parts of the data set pop out. Describe where the highlighted elements lie in depth relative to their surrounding.}
+  \item \textbf{Application} - participants were able to apply Deadeye on their own using the trigger button of the controller similar to 3D painting. Assignment: \textit{Pick two regions of interest and highlight them as precisely as possible.}
+  \item \textbf{Comparison} - we displayed two presets that utilized alternative popout techniques, color and flickering, to highlight between one and four regions. In the case of colored scenarios, only flickering was applied. Assignment: \textit{Locate the highlighted regions. Describe your perceived benefits and drawbacks compared to Deadeye.}
+\end{itemize}
+
+During each assignment, we explicitly asked the participants to provide feedback in a think-aloud manner if possible. We did not impose any time limit for the scenarios and encouraged brief pauses between them. Upon completion of the experiment, we offered the opportunity to provide any additional feedback if desired.
+
+
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=0.98\columnwidth]{figures/volume.jpg}
+\caption{Participants went through four different visualization scenarios based on the visible human data set: head including neck and shoulders, and torso, both with greyscale and color transfer functions. Each scenario consisted of three tasks: spotting Deadeye and determining the depth of the target (\textbf{Detection}), interactively applying Deadeye (\textbf{Application}), and comparing Deadeye to flickering and color (in greyscale scenarios only) as alternative highlighting approaches (\textbf{Comparison}).}
+\label{fig:volume}
+\end{figure}
+
+
+\subsection{Findings}
+
+The exploratory study included nine participants (three females, six males), aged 29 to 45 ($M = 36.67,\,SD = 5.68$) participated in the exploratory study. All had prior experience with volume rendering, and six of the nine participants had used VR HMDs before. The majority ($N = 7$) had a right dominant eye, and all participants reported normal or corrected to normal visual acuity. In the remainder of this section, we group the obtained results by the respective task to provide a structured exposition.
+
+
+\textbf{Detection.} In all four scenarios, participants delivered solid performances in spotting and pointing at highlighted regions via a selection ray. Only two participants made a false negative error each. Both participants missed the same small, thin region located rather deep within the data set. Four participants told us that they were \textit{able to spot target regions easier when the data sets were colored (\textbf{P3})}. All participants were able to describe the relative depth of the highlighted objects relative to the surrounding elements. Four participants stated that they had to \textit{move the head a little bit to view the object from different angles to be 100 \% sure (\textbf{P7})}.
+
+We received differing comments regarding the perception of the highlighted object. All but one participant utilized the adjective \textit{transparent} in certain variations, e.g., \textit{pseudo-transparent (\textbf{P1})} or \textit{semitransparent (\textbf{P6})}. All participants stated that they \textit{could see the target as well as the objects behind it (\textbf{P3})}. Seven participants emphasized that they \textit{seemed to be able to decide whether they want to ``see'' the highlighted region or suppress it by focusing on the background objects (\textbf{P4})}. Note that this observation aligns with general binocular rivalry behavior where we perceive both monocular images alternately instead of seeing a superimposition. Two participants were particularly intrigued by that behavior, describing it as \textit{a kind of willpower-dependent rendering where one could mentally alter the perceived visualization similar to ambiguous image puzzles (\textbf{P8})}. Three participants also noticed that one \textit{could modify the transparency level of the highlighted object by rotating the head (\textbf{P9})}. This phenomenon is caused by the rather limited field of view of the HMD, i.e., when we look at an object from a sufficiently large angle, that area is no more present for the eye that is further away. Hence, binocular rivalry becomes disabled, and we perceive a valid monocular image from the nearer eye that either contains the object or not.
+
+At the end of the detection assignment, we also varied the eye for which the object would be removed. However, participants were indecisive, and only three of them expressed a weak tendency toward the object removal for their dominant eye. Other participants stated that they \textit{felt a slight difference, but cannot say which option is better (\textbf{P4})}. 
+
+
+
+\textbf{Application.} All participants were able to manually apply Deadeye onto self-chosen regions of interest. However, the majority ($N = 8$) perceived the task as rather \textit{challenging especially when moving the controller in the depth dimension (\textbf{P2})}. One participant compared it to a VR painting tool: \textit{It feels the same as 3D painting in VR, which was not very intuitive to me, either (\textbf{P5})}. Seven participants told us that they \textit{intuitively closed one eye from time to time to verify the result and speed up the highlighting because it feels more controlled that way (\textbf{P3})}. No participants attested to any negative feelings about that one-eye trick. As expected, all participants stated that applying Deadeye is easier for colored data sets because one \textit{could just pick a region of a specific color which already has a clear visual separation from the surroundings (\textbf{P1})}. 
+
+
+
+\textbf{Comparison.} In the case of greyscale scenarios, all participants preferred color over Deadeye for two reasons. First, color as highlight is \textit{more prominent, straightforward, and already known (\textbf{P6})}. Second, as pointed out by six participants, color, in contrast to Deadeye, is not binary. One could \textit{utilize a meaningful color scheme for highlighting different regions and even have gradients and interpolations if needed (\textbf{P9})}. Deadeye instead \textit{is either active or not, without any possibility of providing an additional meaning or more granular differentiation (\textbf{P7})}. However, color is not applicable as a preattentive highlighting method in the case of colored data sets, which is an important limitation compared to Deadeye.
+
+When comparing Deadeye to flickering as a highlighting method, the majority ($N = 8$) preferred Deadeye; one participant remained indecisive. The most prominent reason for that preference was that flickering \textit{is often affected by aliasing and other artifacts (\textbf{P2})} that occur because such a VR experience is never a static scene due to the permanent view changes. Hence, the preattentiveness of temporal effects such as animation or flickering can be rather weakened in such setups, whereas the performance of Deadeye remains stable.
+
+
+
+
+\subsection{Discussion and Design Implications}
+
+The results of both studies support our vision that Deadeye is applicable as a preattentive visualization technique in real-world scenarios. Even in complex visualizations such as volume-rendered CT scans, we can still recognize the highlighted region and identify its depth. Although disparity-based depth perception is limited, our vision system is still capable of utilizing less straightforward cues such as occlusion geometry. Furthermore, if in doubt, we can easily refine our depth estimation of a region by slightly moving our head to generate different view angles.
+
+One interesting aspect of Deadeye is that we can look behind the highlighted target by focusing on objects that lie behind it. This multistable perception---induced by binocular rivalry---can be regarded as a benefit or drawback depending on the use case. On one hand, such conditional perception allows us to gather additional information without any interaction with the underlying system. In particular, we think of scenarios with very limited interaction possibilities due to, e.g., asepsis requirements. In such cases, having the ability to see or fade out certain elements by simply focusing on the region of interest might be a valuable technique. On the other hand, the focus-dependent approach is mentally more demanding compared to alternatives such as semi-transparency or hiding/showing an object via user input. Although the fatigue results of the NASA-TLX questionnaire are quite reasonable, we expect that a longer, active use of the described switching between highlighted target and background might lead to significant exhaustion. As that phenomenon is less related to the highlighting aspect of Deadeye per se, we would rather consider a more fine-grained exploration as possible follow-up research.  
+
+Ultimately, the question remains whether one should pick Deadeye or one of the more common preattentive techniques to draw and guide attention in VR visualizations. According to our qualitative evaluation, people prefer color over Deadeye in the case of greyscale scenarios. In our opinion, the most important advantage of color is its nonbinary nature, i.e., we can encode additional information into the highlighted target and differentiate between multiple targets by utilizing diverse colors. However, many visualizations are not greyscale, and applying our technique in such cases has clear advantages over other preattentive approaches: Deadeye does not alter any visual properties such as size or shape; performs well in complex, heterogeneous environments; and is straightforward to implement in stereoscopic setups. Compared to temporal approaches such as flickering, Deadeye does not suffer from typical VR-related issues such as aliasing due to constant movements of the HMD. To summarize, even though color is still superior in greyscale use cases, we emphasize the applicability and usefulness of Deadeye in colored scenarios and consider the technique as a viable addition to our visualization toolbox.
+
+
+% Wenn monochromatische transferfunktion: eher Farbe, weil auffälliger. Farbe ist multimodal, versch abstufungen und interpolationen; und deadeye ist nicht binär
+% (Wenn man subtil möchte (ausblenden), deadeye cool) -- willentlich unterdrücken
+% Wenn aber nicht monochromatisch: Deadeye funktioniert gut (überraschung!)und hat klare Vorteile zu Flickering (störend, weil kollision mit artefakten). WICHTIG: In VR gibt es keinen “statischen” view, also alle cues die unter Bewegung schlecht performen sind von nachteil. Temporalen effekte. (any temporal highlighting suffers degradation due to constant view changes in VR)
+% Auge: 5 von 7 fandens aufm dominanten angenehmer
+% Keinem wurde schlecht
+% Different tasks: gedeadeyed, suchen. Und selbst deadeyen (hier fingen leute an, auge zuzukneifen und fandens intuitiv). 2 data sets,head and torso CT scans mono und nicht
+% Effect: possible to turn on off in your head (nicht vorgesehen) transparenz durch fokussierung festlegbar
+
+
+\section{Conclusion and Future Work}
+
+This work explored the performance of Deadeye in virtual environments. Initially, Deadeye was introduced as a preattentive technique for drawing attention in 2D visualizations by removing the object of interest for one eye only. The major drawback for real-world usage was the requirement for extra stereoscopic equipment for highlighting, without taking any further advantage of such a setup. Hence, as a natural next stage of our research, we have now applied Deadeye in stereoscopic environments to study its interplay with 3D visualizations.
+
+The paper made two contributions. First, the results from our preattentive tests with homogeneous and heterogeneous distractors confirmed that Deadeye behaves preattentively in VR, and, even more important, maintains its robustness in more complex setups with distractors varying in significant visual properties such as depth, color, and shape. Second, we demonstrated how Deadeye can be integrated into VR visualizations using the example of volume rendering. The outcomes of the exploratory study underpinned the highlighting capabilities of Deadeye and confirmed our ability to estimate depth of objects highlighted in this manner. Especially in colored visualizations, Deadeye was perceived as a valuable extension to our visualization toolkit, as the technique does not alter any visual properties, maintains robustness under common issues such as aliasing (``shimmering''), and comes with a straightforward implementation.
+
+For our future work, we are particularly motivated by an observation during the presented volume rendering study: our participants noticed that the highlighted object could be faded in or out depending on focus, i.e., concentrating on the objects behind the target allows the user to suppress the target completely and see the background only, and vice versa. As possible follow-up research, we suggest investigating this multistable perception phenomenon in more detail to show its full potential for scientific visualizations beyond pure highlighting. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \section{OLD}
+
+
+
+% Designing comprehensive visualizations requires a deep understanding of how perception actually works. Therefore, the visual system is one of our most important tools for acquiring and parsing information that surrounds us. Making efficient use of certain visual characteristics helps us to create visualizations that excel in their usability and user performance. 
+
+% In particular, drawing the attention of users to certain elements is a research subject that is continuously being worked on in various fields, including psychology, computer science, psychophysics, and biology. Researchers have discovered several visual cues that can capture and guide our attendance to the object(s) of interest. The most prominent example is probably the search function of a PDF viewer, web browser, or text editor: it uses color to highlight the occurrence of a query, which allows us to instantly locate the results. A more sophisticated example is a medical visualization that utilizes flickering to  highlight suspicious cells or tissue and helps doctors with exploring the data. 
+
+% Cues such as color, flickering, shape, size, and motion are examples of so-called preattentive visual features. Such features make an object pop out and allow us to grasp the object's presence in usually less than 250 ms. One important property of preattentive cues is that they perform equally well with an increasing number of distractors -- the search time for our visual system remains constant. In other words, those features are processed in parallel by our visual system and are not searched in a serial fashion. That property is crucial when we revise our example with a full-page text search or the exploration of a huge medical dataset.
+
+
+% This paper summarizes a novel preattentive feature. Our technique, \textit{Deadeye}, is based on dichoptic presentation. We render two different images for the two eyes. The images have one difference. The object that should pop out is presented to only one eye. Surprisingly, previous research stated that binocular rivalry, an effect based on showing two different images, is not processed in parallel, with the exception of luster effects. Since then, those dichoptic techniques have lost popularity as possible popout effects. 
+
+% Our contribution is twofold. First, our finding opens the way for further research on that technique and encourages derived applications in visualization (cf. \FG{fig:teaser}). Second, Deadeye is the first preattentive cue that does not modify \textbf{any} visual properties of the target object. All existing cues have to alter the target in one way or another -- be it reshaping, recoloring or introducing motion. These changes can result in data misinterpretation, usually a highly undesired side effect. Furthermore, especially in visualization, most properties have a certain purpose and meaning, and reserving a whole dimension such as color or position for the visual popout is an expensive tradeoff. On the contrary, Deadeye solves these issues by preserving all visual properties of the target.
+
+% The paper proves that Deadeye is indeed perceived preattentively by conducting a state-of-the-art study that is common for such cues. Our evaluation also underlines the general applicability of the technique, as not a single participant reported headache or other similar physical strains. Three additional explorative experiments illustrate the usage of our technique in different real-world visualization scenarios.
+
+% In addition, we examine the phenomenon of a conjunction search based on Deadeye. Although preattentive features are processed in parallel, a conjunction of multiple cues usually leads to a serial search. In most cases, we have to inspect each object individually and check for its properties. Hence, the time needed for the task increases linearly with the number of distractors. However, there exist a few exceptions, one of which is 3D depth. Previous research shows that the depth cue can be combined with, e.g., color or motion, and still be processed in parallel. As our technique also makes use of the binocular visual system, one might assume that Deadeye also shares that property. To investigate that claim, we conduct a study by combining our technique with hue variations. The results clearly show a significant increase in time needed to accomplish the task and the overall accuracy, exposing the serial character of that task.
+
+
+
+
+
+
+
+% \section{The Deadeye Effect}
+
+
+% \begin{figure}[t!]
+% \centering
+% \includegraphics[width=1.0\columnwidth]{figures/t1}
+% \caption{An extract from the data about elections to the Australian House of Representatives, 1949-2007, represented as a line chart. In three trials of our prestudy, we highlighted one or multiple lines using Deadeye and asked the subjects to name the corresponding data.}
+% \label{fig:linechart}
+% \end{figure}
+
+
+
+
+
+% We make use of dichoptic presentation and render the target object for one eye only. The other eye sees the plain background at the target location. In contrast to most binocular rivalry experiments, we do not show different objects at the target location. We simply create one image with and one image without the object. Hence, we claim that the conflict produced by the monocular neurons can be easily resolved. Our high-level visual system does not have to decide between two different objects. Instead, we get an image that is not unusual in our daily life. Think of a distant object that you look at through a small hole -- the visual system does not report any conflicts, although the object is seen with one eye only (the dominant one). 
+
+% Despite that naturalness, we can recognize the object enhanced with Deadeye in a split second. The object is best described as ``eye-catching'' or ``somehow wrong'', although we can focus on it and perceive all details without trouble. We attribute that popping out to our stereo vision ability. Extracting depth information and fusing two slightly offset images happens nearly instantly. However, depth calculations for the target object result in an error, i.e., that a single scene element cannot be put in a depth relative to other objects and the visual system preattentively recognizes that something went wrong.
+
+% An additional explanation to be considered is self-preservation mechanisms: We instantly react to a visual stimulus that is placed right in front of our eye, e.g., by closing our lid and moving back from the possible danger. In such cases, the stimulus is too near and visible with one eye only. Hence, we encourage more in-depth research including brain monitoring via fMRI to determine the exact cause of the observed effect. Our contribution focuses in the first place on establishing Deadeye as a preattentive feature.
+
+
+
+
+% \subsection{Enhancing Visualizations With Deadeye}
+
+% Though Deadeye can be applied to a broad variety of visualization purposes, we cover a few basic examples to motivate the research on that technique. One possible scenario is the visualization of high-dimensional data via line charts where we want to attract the observers' attention to one or multiple lines of interest (cf. \FG{fig:linechart}). 
+
+% Applying Deadeye offers a unique advantage that cannot be achieved with any of the existing popout cues: highlighting the line without ``wasting'' any visual dimensions such as color or motion. The technique can be regarded as an additional degree of freedom for visual encoding that is orthogonal to the existing methods. This is essential, as real-world data visualizations tend to utilize as many visual properties (color, stroke width, etc.) as available to cover all data dimensions. Deadeye-enhanced line charts do not have to reserve a visual attribute for highlighting and, thus, can include more data dimensions. 
+
+% The same argumentation is also valid for other representations such as bar charts, pie charts, or spider diagrams. Note that applying the ``default'' stereo vision to make a line to stand out from the chart is often not an option for such cases, as depth alters the coordinates of the underlying data and might result in wrong interpretations.
+
+% Another mentionable area is comparative visualization. Hereby, one of the common methods is to expose side-by-side views of the data. Such comparison tasks can be quite difficult and are even used as a challenge in so-called spot-the-difference puzzles (cf. \FG{fig:teaser}). 
+
+% Our research on Deadeye demonstrates that there could be a much more effective way: the two images can be jointly exposed to our left and right eye. Hereby, the Deadeye effect allows a rapid recognition and localization of missing or differing objects, be it for scientific or entertaining purposes.
+
+% Note that though Deadeye requires stereo equipment, the corresponding hardware became commodity in recent years. 3D glasses, stereo projectors, and 3D TVs are wide spread but rarely used in day-to-day visualization applications. Hence, exploiting the devices for information highlighting is an alternative way of ``recycling'' such barely used equipment. 
+
+% \begin{figure}[t!]
+% \centering
+% \includegraphics[width=1.0\columnwidth]{figures/t2}
+% \caption{Visualization of a transferase (Nicotinic Acid Mononucleotide Adenylyltransferase). As part of our exploratory prestudy, we applied Deadeye on a small number of atoms (between 4 and 8) and asked the participants to count the highlighted elements.}
+% \label{fig:atoms}
+% \end{figure}
+
+
+% \begin{figure*}[t!]
+% \centering
+% \includegraphics[width=2.1\columnwidth]{figures/study}
+% \caption{Our experimental setup. We equipped participants with active shutter glasses and presented a series of images on a 3D TV. After each image, the participants decided whether there was a target object or not. The images contained a varying number of circles jittered on a 5x6 grid. The right screenshot is an example from our largest set with 30 objects.}
+% \label{fig:study}
+% \end{figure*}
+
+
+% \subsection{Prestudies}
+
+% Prior to our main study, we conducted three exploratory experiments regarding the general applicability of Deadeye in different visualization scenarios. Our goals were twofold. First, we verified that subjects are able to exactly locate the highlighted targets and not only perceive a certain visual mismatch. Second, we determined whether the presence of other cues, such as color, are limiting the applicability of our technique.
+
+% We executed the following three prestudies: naming the highlighted line in a line chart (seven subjects, three trials, task cf. \FG{fig:linechart}), counting highlighted atoms in a 3D visualization (four subjects, two trials, task cf. \FG{fig:atoms}), and naming the highlighted image elements in a spot-the-difference puzzle scenario (five subjects, one trial, task cf. \FG{fig:teaser}). We did not impose any time constraints and only recorded the correctness of the answers.
+
+% In all cases, participants were able to locate and report the targets without any side effects such as headache. Hence, we conclude that Deadeye-enhanced objects can indeed be spotted and followed in a variety of visualization scenarios. Moreover, the technique was not affected by the presence of different colors or in a 3D-context (atom counting). Note, however, that the exact interplay of the technique with other preattentive cues is subject of future research.
+
+
+% \section{Evaluation}
+
+% We conducted a user study to prove that Deadeye is indeed a preattentive visual cue. Our experiment design is based on existing best practices for determining such effects. The participants are exposed to series of images composed of distractors and possibly a target object as shown in \FG{fig:study}. The participants have to decide whether the target object is present or not. As described in the Related Work section, two approaches exist. One either displays the images for a fixed amount of time (100-250 ms) and measures the error rate, or the image is shown until the participants make a decision. In that case, one also has to consider the reaction time. In our case, we applied the fixed time option and displayed the image for 250 ms.
+
+% To prove the preattentive nature of Deadeye, the setup has to be repeated with varying set sizes. The error rate must remain nearly constant, no matter how many distractor objects are presented. Therefore, we considered four sets with the following sizes: 4, 8, 16, and 30. Additionally, we evaluated the conjunction search property of Deadeye by combining our technique with color. Since the common 3D depth is a visual cue that can be combined in parallel with other variables, one might assume the same property for our technique.
+
+
+
+
+
+% \subsection{Hypotheses}
+
+% Our main hypothesis is \textbf{H1} is that \textit{Deadeye is indeed a visual cue that can be perceived preattentively.} Therefore, the error rate has to be sufficiently low and remain constant among the different set sizes. Most of the related works consider an error rate below $10 \%$ as optimal. 
+
+% Readers might suppose that Deadeye feels uncomfortable for our visual system. Therefore, we formulate a second hypothesis \textbf{H2} as follows: \textit{Deadeye does not lead to headache or other physical strain.} Otherwise, the application possibilities of that visual cue would be rather limited. 
+
+% Our third hypothesis is about conjunction search. Nakayama et al.~\cite{nakayama1986serial} found that 3D depth can be combined in parallel with other preattentive cues. This is a rather uncommon attribute, since most combinations, e.g., color + shape, lead to a serial search. In the serial case, the time needed for task completion increases with the number of distractors because we have to consciously scan each object for the target properties. Our technique does not produce 3D depth, nevertheless Deadeye also relies on a binocular disparity. Hence, the similarity in the internal processing, i.e., the merging of two images, might lead to a similar property for our method. Therefore, we suggest that \textit{Deadeye can be combined with color as a second visual cue in parallel} as our last hypothesis \textbf{H3}.
+
+
+
+% \begin{figure*}[t!]
+% \centering
+% \includegraphics[width=2.1\columnwidth]{figures/accuracy}
+% \caption{The average accuracies for the first experiment are nearly constant and confirm that Deadeye is a preattentive feature. As often the case for such features, false negatives ($M = 0.68$) significantly dominate over false positives ($M = 0.32$). In case of the conjunction search, the images were shown until the participants made a decision. The average accuracies and reaction times significantly decrease with an increasing number of distractors, exposing the serial character of the search.}
+% \label{fig:accuracy}
+% \end{figure*}
+
+
+% \subsection{Procedure and Applied Measures}
+
+% The study took place in a virtual reality laboratory at our university. After informing participants about the study's procedure, we administered a first questionnaire to assess the general demographic data. In addition, we asked whether the participants have any visual impairment and conducted a hole-in-the-card-test for eye dominance (Dolman method, e.g., \cite{cheng2004association, porac1976dominant}). Participants had to hold a DIN A4 sheet of paper at arm's length and fixate a distant object through a hole in the middle of the paper. They closed the left and right eye in turn and reported whether they still saw the object. If the object disappeared, the closed eye was marked as the dominant eye.
+
+% \subsubsection{Preattentive Experiment}
+
+% The main part of our study took place in front of a 3D TV (W / H / D 122,40 x 74,10 x 30,60 cm, 1080p) with active shutter glasses and a refresh rate of 60 Hz. The room light was switched off and the curtains were shut in order to minimize the flickering of the shutter glasses. The participants were placed on a chair 280 cm in front of the screen, as depicted in \FG{fig:study}. The distance resulted in a horizontal viewing angle of 12.63$^{\circ}$ from the focus point (vertical: 7.54$^{\circ}$). We gave the participants a keyboard with explicitly marked \textit{yes} and \textit{no} keys and told them to use their thumbs or index fingers for executing the input. The keys were chosen to have the maximum possible distance.
+
+% We told the participants that a series of images would be presented. Each image has a blue background and contains a number of yellow circles. Possibly, one of the circles is highlighted and pops out. The image remains visible for a split second. After the inspection, the participants have to press \textit{yes} if they think that the target object was present, and \textit{no} otherwise. 
+
+
+
+
+
+% Between the images, a white crosshair on the same blue background was displayed in the middle. We explicitly advised the participants to focus on the crosshair. This is important as it prevents saccadic eye movements, i.e., the participants' eyes remain in the focus stage when they see the image, because the saccade has an initiation time of approximately 200-250 ms. The crosshair image was always presented for 2500 ms. We also informed the participants that they did not have to rush with their answer. During that period, the same blue background without the crosshair was exposed.
+
+% In addition, we explained that there would be a training stage before each set and that an audio feedback would indicate whether the given answer was correct or not. During the real experiment, the two sounds would be replaced with a third, rather neutral sound. This sound would prevent participants from becoming distracted by thinking about wrong answers and, thus, making subsequent errors due to the lack of concentration. 
+
+% Overall, that part of the experiment consisted of four set sizes: 4, 8, 16, and 30 circles. For each set, participants had the chance to practice until they felt comfortable and told the examiner to begin with the real test. After each set, the participants were asked if they needed a pause or wanted to continue. Each set consisted of 48 images, half of them with a target object in a randomized order. Each participant experienced the same configuration. For the 24 images with a target object, 12 were rendered for the right eye and 12 for the left eye. The order was again randomly chosen. We applied that variation mainly to see whether there is a dependency between the error rate for an eye regarding its dominance.
+
+
+
+% The positions for the circles were randomly generated on a 5x6 grid with a jittering/offset function, as can be seen in \FG{fig:study}. We also left a vertical margin of 11,48 cm and a horizontal margin of 17,44 cm, limiting the overall horizontal viewing angle to about 8.88$^{\circ}$ from the focus point (vertical: 5.22$^{\circ}$). Each circle had a size of 4,59 cm or approximately 0.94$^{\circ}$. This setup led to the image being located in the focal, paracentral, and near-peripheral vision areas.
+
+
+
+
+% After the four sets were completed, we administered a web-based effort questionnaire mainly based on the NASA-TLX survey~\cite{hart1988development}. The main reason for choosing NASA-TLX is that the work by Gutwin et al.~\cite{Gutwin:2017:PPI:3025453.3025984} used the same questionnaire for a variety of preattentive cues. Hence, we strived to create a meaningful comparison to other techniques.
+
+% The NASA-TLX survey contains six subscales, each scale ranges from 0 to 100 in increments of 5. Following aspects are measured: mental demand (low/high), physical demand (low/high), temporal demand (low/high), performance (good/poor), effort (low/high), and frustration level (low/high). 
+
+% We included three additional questions on a seven-point Likert scale ranging from 0 to 6 with larger numbers indicating a more positive outcome: \textit{how well have you perceived the highlighted object?}, \textit{how sure were you that you made the right decisions?}, and \textit{how well were you able to focus the crosshair?}. We will relate to these custom questions as \textit{clearness}, \textit{decision-making}, and \textit{focus}, respectively. We also included the binary question about \textit{whether the participants experienced any headache or related physical strains}.
+
+% \begin{figure*}[t!]
+% \centering
+% \includegraphics[width=2.1\columnwidth]{figures/comparison}
+% \caption{Results of the NASA-TLX survey for both experiments. Lower values are preferable.}
+% \label{fig:nasa}
+% \end{figure*}
+
+
+
+
+% \subsubsection{Conjunction Experiment}
+
+% Subsequent to the questionnaire, we explained our conjunction search experiment to the participants: Now, half of the circles would be magenta. All yellow circles are popping out, i.e., with Deadeye applied, all magenta circles are not highlighted. A target object would have one of the two properties: either it is a yellow circle that does not pop out, or it is a magenta circle that pops out. The main difference from the first experiment is that the image would be displayed until the participants make a decision. We asked the subjects to perform as quickly and as accurately as possible. The reason to change the timing strategy was its more explorative fashion, as we would gather more information about the behavior of our technique for such a conjunction search.
+
+% Since the time was not fixed for this experiment, we decided to limit it to three set sizes: 4, 8, and 16 circles. Again, we offered a training phase for each set size and each set was composed of 48 images. Also, 24 images had a target object, 12 with a popping out magenta circle and 12 with a non-highlighted yellow circle. In each subgroup, 6 of the target objects were rendered for the left eye and 6 for the right eye. The ordering was randomized in the same fashion as in the first experiment.
+
+% After completion of the three sets, we requested the participants fill out the same questionnaire as after the first experiment. Overall, the study took about one hour. 
+
+
+% \section{Results}
+
+% In sum, 21 persons (9 females, 12 males), aged 18 to 42 ($M = 25.29,\,SD = 6.21$), participated in the study. Most of them were students ($N = 15$) or employees ($N = 5$). All participants reported normal or corrected to normal acuity and no defects of vision. Most participants had a right dominant eye ($N = 16$), only few had a left dominant eye ($N = 5$).
+
+% \subsection{Performance Evaluation}
+
+% All performance-based computations were based on detailed automated logging of our experiment application. In particular, we analyzed the accuracies for both experiments and the reaction time for the second experiment. All variables were normally distributed according to Kolmogorov-Smirnov tests. 
+
+
+
+% \subsubsection{Preattentive Experiment}
+
+% We measured the accuracy rate for each set. The results are depicted in \FG{fig:accuracy}. The average accuracies (4 objects: $M = 0.88,\,SD = 0.09$; 8 objects: $M = 0.88,\,SD = 0.09$; 16 objects: $M = 0.91,\,SD = 0.06$; 30 objects: $M = 0.89,\,SD = 0.09$) are similar to other preattentive visual cues. We applied the repeated measures ANOVA with the set size as within-subject variable to investigate whether the number of distractors influences the accuracy. The result, $F(3,18) = 1.54,\,p = .213$, shows no significant difference in accuracy between the sets, i.e., the number of distractors has no influence on accuracy.
+
+
+% We took a closer look at the wrong answers regarding false negatives, i.e., undiscovered Deadeye-enhanced targets, and false positives. The measured ratio indicates that false negatives ($M = 0.68,\,SD = 0.23$) dominate over false positives ($M = 0.32,\,SD = 0.23$). A paired-samples t-test ($t(20) = -3.66, p = .002$) underlines the significance of that finding.
+
+% As we have the detailed data for each image trial of each participant, we also investigated the accuracies based on the object location. The resulting accuracy matrix is presented in \FG{fig:matrix}. Hereby, we only considered images with Deadeye-enhanced objects. Each cell of the 5x6 grid contains the successful recognition rate of a target object at that screen position. We applied a color encoding (red means lower accuracy) to facilitate the visual analysis. The findings indicate that target objects further away from the focus point were harder to recognize.
+
+% In addition, we evaluated the relation between the dominant eye of the subject and the target eye of our technique. We had only 5 participants with a left dominant eye, hence we only considered subjects with the right dominant eye for that analysis. We compared the accuracies when the target object was exposed to the dominant eye ($M = 0.84,\,SD = 0.13$) and to the non-dominant eye ($M = 0.86,\,SD = 0.10$). A paired-samples t-test ($t(15) = -1.22, p = .242$) did not expose any significant differences.
+
+% \subsubsection{Conjunction Experiment}
+
+% The average accuracies decrease with the increased object count (4 objects: $M = 0.87,\,SD = 0.09$; 8 objects: $M = 0.81,\,SD = 0.12$; 16 objects: $M = 0.77,\,SD = 0.13$). Our ANOVA result exposes a significant difference in accuracy between the sets ($F(2,19) = 6.81,\,p = .003$). Post hoc Bonferroni tests reveal the details: there is a significant difference in accuracy between 4 and 16 objects ($p = .020$) and no significant difference between 4 and 8 objects ($p = .053$) or between 8 and 16 objects ($p = .352$).
+
+% In addition to accuracy, we also measured the reaction time, i.e., the time how long the image was shown until the participants made a decision. A summary is presented in \FG{fig:accuracy}. The reaction time exposes similar tendencies as it increases for larger sets (4 objects: $M = 2.25~s,\,SD = 0.84$; 8 objects: $M = 2.63~s,\,SD = 0.88$; 16 objects: $M = 3.47~s,\,SD = 1.32$). The ANOVA outcome ($F(2,19) = 15.03,\,p < .000$) underlines the significant difference in reaction time between the sets. In detail, the post hoc Bonferroni tests show a significant difference between 4 and 16 objects ($p = .002$) and between 8 and 16 objects ($p < .000$), whereas no significant increase of the reaction time can be observed between 4 and 8 objects ($p < .292$).
+
+% We also compared the average accuracies for the popping out magenta target ($M = 0.74,\,SD = 0.24$) and the non-highlighted yellow target ($M = 0.77,\,SD = 0.10$). The result of a paired-samples t-test ($t(20) = 0.87, p = .393$) did not reveal any significant differences.
+
+% \subsection{Questionnaire Evaluation}
+
+% After each experiment, we administered a questionnaire based on the NASA-TLX survey (see \FG{fig:nasa}) and our four custom questions. All variables were normally distributed according to Kolmogorov-Smirnov tests. 
+
+% \subsubsection{Preattentive Experiment}
+
+% The NASA-TLX results for the first experiment are rather homogeneous: mental demand ($M = 40.71,\,SD = 26.80$), physical demand ($M = 27.62,\,SD = 26.20$), temporal demand ($M = 33.81,\,SD = 30.41$), performance ($M = 37.38,\,SD = 21.37$), effort ($M = 35.48,\,SD = 23.07$), and frustration ($M = 30.71,\,SD = 27.17$) were rated quite similar. However, the replies were wide spread and the reported min/max values contained both 0 and 100 for each subscale. This is also reflected in the rather large standard deviation.
+
+% The custom questions regarding clearness ($M = 4.10,\,SD = 0.99$) and focus ($M = 4.14,\,SD = 1.49$) are rather above average, whereas decision-making ($M = 3.10,\,SD = 1.53$) is slightly below, i.e., the participants were not very sure whether they made the correct decisions. All participants gave a negative answer to the question regarding headache or similar strains.
+
+
+
+
+% \subsubsection{Conjunction Experiment}
+
+% The NASA-TLX survey exposes rather high scores on the subscales mental demand ($M = 60.00,\,SD = 27.84$) and effort ($M = 53.57,\,SD = 28.29$). In contrast, participants reported to be less hurried according to the temporal demand scale ($M = 23.10,\,SD = 22.33$). The remaining subscales physical demand ($M = 43.81,\,SD = 26.88$), performance ($M = 46.90,\,SD = 26.15$), and frustration ($M = 41.19,\,SD = 32.90$) reported similar outcomes to the first experiment. The reports were also wide spread and contained both 0 and 100 as min/max values for each subscale.
+
+% Our custom requests about clearness ($M = 3.00,\,SD = 1.41$), focus ($M = 3.43,\,SD = 1.54$) and especially decision-making ($M = 2.71,\,SD = 1.65$) 
+% were all rather below the average. Nevertheless, similar to the first experiment, no participant reported a headache or similar strains.
+
+% \subsubsection{Comparison}
+
+% We conducted a paired-samples t-test to compare the outcomes of the questionnaires for the two experiments. There is a significant difference for the following subscales: mental demand ($t(20) = -3.40, p = .003$), physical demand ($t(20) = -2.43, p = .024$), performance ($t(20) = -3.41, p = .003$), focus ($t(20) = 2.37, p = .028$), and clearness ($t(20) = 3.86, p = .003$). In all cases, the conjunction search experiment performed significantly worse compared to the first experiment, as can be seen in \FG{fig:nasa}.
+
+% %\TODO{we asked: noone had headache.}
+% %
+% %plot areas with errors.
+% %
+% %\TODO{what works: different types of distractors}
+% %
+% \section{Discussion}
+
+% The performance evaluation of the first experiment proves our main hypothesis \textbf{H1} that Deadeye is indeed a preattentive feature. The participants recognized the feature in a 250 ms time frame with an average accuracy of {$\sim90$ \%} independently of the number of distractors. The accuracy is similar to the outcome of most preattentive experiments described in the Related Work section and is considered as a completely sufficient proof. 
+
+% With regard to wrong answers, $\sim70$ \% of the errors were false negatives. In other words, it is more likely to overlook a highlighted target rather than wrongly imagine its presence, which is also a common behavior for preattentive techniques. 
+
+% We can also confirm our second hypothesis \textbf{H2} that our technique does not lead to physical strains such as headache. All participants replied with \textit{no} to the corresponding question, both for the preattentive and for the conjunction experiments.
+
+% Hence, our finding is indeed an important contribution to the fundamental research, since Deadeye offers several advantages over other preattentive techniques. It is simple to implement (the object has to be removed for one eye), and, in comparison to most other methods, it does not alter any visible properties of the object such as color, position, size, or motion.
+
+
+% Our third hypothesis \textbf{H3} stated that Deadeye can be processed in parallel when combined with color as a second visual cue. Clearly, this is not the case and the hypothesis has to be rejected. The accuracy and the reaction time are both significantly worse when the set size increases. The reaction time for only 4 objects is already greater than 2 seconds (i.e., not preattentive) and increases up to 3.5 seconds for 16 objects. Similarly, such an addition of 12 distractors results in an accuracy drop from 87 \% to 77 \%. Nevertheless, the accuracies show that a conjunction is still possible, although the search has to be executed serially.
+
+% Hence, Deadeye does not share similar properties with 3D depth as visual cue regarding conjunction search. Nakayama et al.~\cite{nakayama1986serial} suggest that 3D depth works in parallel because our visual system is able separate the objects in the near and the far plane and to analyze each plane in turn. Hereby, the objects on each plane are processed in parallel. Although Deadeye eliminates any depth information of the target objects and puts them into a zero-depth plane, our experiment resulted in serial processing. 
+
+% We hypothesize that the distance between the two planes does matter. Deadeye enhancements are rather subtle compared to two planes with a significant depth offset. Hence, we propose to repeat the 3D depth experiment and to gradually reduce the distance between the planes. We assume that there is a certain minimum threshold for parallel processing. If this is not the case, either the two-plane explanation is not fully correct, or our visual system is not able to group Deadeye-enhanced objects into a single depth plane. 
+
+% \begin{figure}[t]
+% \centering
+% \includegraphics[width=0.98\columnwidth]{figures/matrix}
+% \caption{Average success rates for the recognition of a Deadeye-enhanced object at each screen position. The matrix indicates an increase of the error rate with increasing distance from the focus point.}
+% \label{fig:matrix}
+% \end{figure}
+
+% To conclude, if a conjunction search is required, the 3D depth has an advantage. However, preattentive cues are rarely used for conjunctions. For the majority of popout applications, 3D depth has the drawback on modifying the position of the target object, which is often a significant issue. Deadeye, in contrast, preserves the correct object position.
+
+% An interesting aspect for preattentive cues is the subjective user perception. The first thing we notice is that users tend to underestimate their performance. This can be seen in the rather average results on the performance scale of the NASA-TLX (\textit{how successful do you think you were in accomplishing the goals?}) and our custom question on decision-making (\textit{how sure were you that you made the right decisions?}). Both results contradict the achieved accuracy of $\sim90$ \%. On the other hand, this is not surprising when we recall that the preattentive analysis happens unconsciously. The images were shown for a split second, and subjects had to rely on a rather unchecked, intuitive result provided by the visual system. 
+
+% Our second experiment was rated significantly worse regarding mental and physical demand, performance, and clearness. Overall, we can conclude that the task was more challenging and less straightforward compared to the first experiment. The target object could be only discovered by a conscious and serial search, which explains these scores. The participants also reported a significant decrease in their ability to focus on the crosshair before each image. We attribute that outcome to the fact that a serial search does not benefit from a stationary period, and an immediate saccadic eye movement appeared more efficient to the most subjects.
+
+
+% When comparing the NASA-TLX results of our first experiment to the outcomes reported by Gutwin et al.~\cite{Gutwin:2017:PPI:3025453.3025984}, we can observe that Deadeye performed slightly better than existing cues (note: be aware of different scales). Especially the subscales performance and effort appear to be significantly better and indicate that Deadeye can compete even against canonical cues such as color. 
+
+% However, that comparison should be considered with a grain of salt. The authors explored the cues with a significantly larger viewing angle to study the behavior regarding the peripheral vision. Hence, the difference in results might be due to the viewing angle. Unfortunately, there is not much work on the comparison of different features, and we encourage to undertake further steps towards a comprehensive overview.
+
+% Our analysis shows an additional relation to the peripheral experiments of Gutwin et al., as the authors have discovered that certain cues were less efficient when applied far from the focus point. Similarly, our accuracy matrix in \FG{fig:matrix} exposes a drop-off in performance for the outer columns. This indicates that Deadeye suffers under the same reduced peripheral efficiency as, e.g., shape and color. In our experiment, the image area covered a total visual angle of $\sim19^{\circ}$ and included the central, paracentral, and the near-peripheral regions. Our depth perception decreases with the distance from the focus point (e.g., \cite{mochizuki2012magnitude}) and nearly disappears in the peripheral region. Since we assume that the depth computation process is at least partially responsible for discovering Deadeye-enhanced objects, such a drop-off or even a complete inapplicability in far-peripheral regions appears rather comprehensible.
+
+
+
+% Another observation from our experiment is that it does not matter whether Deadeye is rendered on the dominant or the non-dominant eye. That behavior is rather in line with the findings of, e.g., Logothetis et al.~\cite{logothetis1996rivalling}, stating that binocular rivalry is not eye-dependent.
+
+% Certainly, Deadeye has limitations that need to be discussed. First of all, Deadeye requires a stereoscopic environment, since a different image needs to be exposed to each eye. This fact renders the technique less convenient for everyday usage and requires additional hardware.
+
+% In addition, we suggest to evaluate Deadeye in a 3D environment such as virtual reality. Our technique eliminates the depth cues for the target object. Thus, we assume that Deadeye might perform differently in such a scenario. Another disadvantage is that Deadeye is not applicable for one-eyed users. On the other hand, this kind of visual restriction is significantly less frequent compared to, e.g., color vision deficiency.
+
+% A mentionable difference between Deadeye and most other preattentive cues is its binary character. Our current method has no graduation, i.e., the object is either highlighted or not. In contrast, cues such as hue can be applied in varying intensity levels, which is an additional degree of freedom and, e.g., allows a differentiation between target objects.
+
+
+% \section{Conclusion and Future Work}
+
+% Our contribution is \textit{Deadeye}, a novel preattentive visual cue. Such cues are used in a plethora of visualization approaches and interaction paradigms and allow us to enhance objects of interest such that they pop out independently from the number of distractors. Our technique contributes to the fundamental research in visualization in two ways. First, a discovery of a preattentive cue opens the door for further research and several possible applications. Second, Deadeye is the first preattentive feature that does not alter any visible properties of the target object. In contrast to existing cues, our technique does not displace, recolor, reshape or animate the target. Hence, the probability of misinterpreting the data is minimized, which is a significant benefit compared to existing methods.
+
+% Deadeye is based on presenting two slightly different images to the human visual system. Hereby, the target object that should pop out is rendered for one eye only. We evaluated the method by a state-of-the-art study being commonly applied for popout variables and demonstrated that Deadeye can indeed be perceived preattentively. Three smaller, explorative experiments illustrate real-world applications of our technique in different visualization setups. In addition, we conducted a conjunction search experiment by combining Deadeye with color as a second cue. Our results showed that, in contrast to common 3D depth, Deadeye conjunctions cannot be processed in parallel.
+
+% Our initial findings encourage additional research questions that we will address in future work. Our preliminary lab experiments indicate that Deadeye delivers robust performance even if distractors of different kind are present. Our first tests with objects of different shape and color support that assumption and will be further extended in the future. This would be a significant advantage over many of other preattentive cues, since the data to be visualized is often composed of heterogeneous objects.
+
+% Another interesting experiment would be to apply our technique to moving objects to evaluate how the effect performs in dynamic scenes. Furthermore, we suggest integrating and evaluating Deadeye in sophisticated attention guidance setups and existing application-level tools that already rely on popout techniques. In summary, we believe that dichoptic presentation has the potential to become a useful ingredient to the visualization toolbox beyond just stereoscopic 3D.
+
+\acknowledgments{We are immensely grateful to Christine Pickett for her comments that greatly improved the manuscript. We would also like to show our gratitude to the anonymous reviewers of the original Deadeye paper and the IEEE VIS community for motivating us to explore Deadeye in virtual reality environments. This research was made possible in part by Award Number R01NR014852 from the NINR - National Institute of Nursing Research. }
+
+
+%\bibliographystyle{abbrv}
+\bibliographystyle{abbrv-doi}
+%\bibliographystyle{abbrv-doi-narrow}
+%\bibliographystyle{abbrv-doi-hyperref}
+%\bibliographystyle{abbrv-doi-hyperref-narrow}
+
+\bibliography{deadeye}
+\end{document}
+

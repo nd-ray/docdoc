@@ -1,0 +1,653 @@
+\documentclass{sigchi}
+
+% Use this command to override the default ACM copyright statement
+% (e.g. for preprints).  Consult the conference website for the
+% camera-ready copyright statement.
+
+%% HOW TO OVERRIDE THE DEFAULT COPYRIGHT STRIP --
+%% Please note you need to make sure the copy for your specific
+%% license is used here!
+ \toappear{
+ Permission to make digital or hard copies of all or part of this work
+ for personal or classroom use is granted without fee provided that
+ copies are not made or distributed for profit or commercial advantage
+ and that copies bear this notice and the full citation on the first
+ page. Copyrights for components of this work owned by others than ACM
+ must be honored. Abstracting with credit is permitted. To copy
+ otherwise, or republish, to post on servers or to redistribute to
+ lists, requires prior specific permission and/or a fee. Request
+ permissions from \href{mailto:Permissions@acm.org}{Permissions@acm.org}.
+ \\
+ \emph{CHI PLAY '17},  October 15--18, 2017, Amsterdam, Netherlands \\
+ Copyright \copyright~2017ACM ISBN 978-1-4503-4898-0/17/10\ldots \$15.00 \\
+ DOI: \url{http://dx.doi.org/10.1145/3116595.3116615}
+ }
+
+% Arabic page numbers for submission.  Remove this line to eliminate
+% page numbers for the camera ready copy
+% \pagenumbering{arabic}
+
+% Load basic packages
+\usepackage{balance}       % to better equalize the last page
+\usepackage{graphics}      % for EPS, load graphicx instead 
+\usepackage[T1]{fontenc}   % for umlauts and other diaeresis
+\usepackage{txfonts}
+\usepackage{mathptmx}
+\usepackage[pdflang={en-US},pdftex]{hyperref}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{textcomp}
+
+% Some optional stuff you might like/need.
+\usepackage{microtype}        % Improved Tracking and Kerning
+% \usepackage[all]{hypcap}    % Fixes bug in hyperref caption linking
+\usepackage{ccicons}          % Cite your images correctly!
+% \usepackage[utf8]{inputenc} % for a UTF8 editor only
+
+% If you want to use todo notes, marginpars etc. during creation of
+% your draft document, you have to enable the "chi_draft" option for
+% the document class. To do this, change the very first line to:
+% "\documentclass[chi_draft]{sigchi}". You can then place todo notes
+% by using the "\todo{...}"  command. Make sure to disable the draft
+% option again before submitting your final document.
+\usepackage{todonotes}
+
+% Paper metadata (use plain text, for PDF inclusion and later
+% re-using, if desired).  Use \emtpyauthor when submitting for review
+% so you remain anonymous.
+\def\plaintitle{Self-Transforming Controllers for Virtual Reality First Person Shooters}
+\def\plainauthor{First Author, Second Author, Third Author,
+  Fourth Author, Fifth Author, Sixth Author}
+\def\emptyauthor{}
+\def\plainkeywords{Virtual reality controller; shape-changing interfaces; authentic input device; first-person shooter.}
+\def\plaingeneralterms{Documentation, Standardization}
+
+% llt: Define a global style for URLs, rather that the default one
+\makeatletter
+\def\url@leostyle{%
+  \@ifundefined{selectfont}{
+    \def\UrlFont{\sf}
+  }{
+    \def\UrlFont{\small\bf\ttfamily}
+  }}
+\makeatother
+\urlstyle{leo}
+
+% To make various LaTeX processors do the right thing with page size.
+\def\pprw{8.5in}
+\def\pprh{11in}
+\special{papersize=\pprw,\pprh}
+\setlength{\paperwidth}{\pprw}
+\setlength{\paperheight}{\pprh}
+\setlength{\pdfpagewidth}{\pprw}
+\setlength{\pdfpageheight}{\pprh}
+
+% Make sure hyperref comes last of your loaded packages, to give it a
+% fighting chance of not being over-written, since its job is to
+% redefine many LaTeX commands.
+\definecolor{linkColor}{RGB}{6,125,233}
+\hypersetup{%
+  pdftitle={\plaintitle},
+% Use \plainauthor for final version.
+%  pdfauthor={\plainauthor},
+  pdfauthor={\emptyauthor},
+  pdfkeywords={\plainkeywords},
+  pdfdisplaydoctitle=true, % For Accessibility
+  bookmarksnumbered,
+  pdfstartview={FitH},
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=linkColor,
+  breaklinks=true,
+  hypertexnames=false
+}
+
+% create a shortcut to typeset table headings
+% \newcommand\tabhead[1]{\small\textbf{#1}}
+\include{ivda-macros}
+\usepackage{enumitem}
+
+\begin{document}
+
+\title{\plaintitle}
+
+\numberofauthors{5}
+\author{
+  \alignauthor Andrey Krekhov\\
+    \affaddr{High Performance Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{andrey.krekhov@uni-due.de}
+  \alignauthor Katharina Emmerich\\
+    \affaddr{Entertainment Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{katharina.emmerich@uni-due.de}  
+   \alignauthor Philipp Bergmann\\
+    \affaddr{High Performance Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{philipp.bergmann@stud.uni-due.de}
+  \alignauthor Sebastian Cmentowski\\
+    \affaddr{High Performance Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{sebastian.cmentowski@stud.uni-due.de}
+  \alignauthor Jens Kr\"uger\\
+    \affaddr{High Performance Computing Group}\\
+    \affaddr{University of Duisburg-Essen}\\
+    \email{jens.krueger@uni-due.de}
+}
+
+\maketitle
+
+\begin{abstract}
+
+Immersive technologies push the boundaries of virtual reality games. In particular, input controllers play an important role for such a player experience. With regard to first-person shooters, a well-crafted controller that resembles its virtual counterpart can increase the feeling of presence. Though controllers often resemble gun handles or even two-handed rifles, the in-game weapon switching is not reflected in the physical controller. That is, swapping a tiny blaster for a big laser rifle does not alter the haptics and the behavior of the device, restricting the feeling of presence.
+
+Our contribution closes that gap and enhances the player experience by introducing the concept of a self-transforming controller. The controller adapts to the current virtual weapon by transforming between a pistol-like controller and a two-handed rifle-like device. We evaluated the concept by comparing the self-transforming controller to a state-of-the-art device. The results show a significant improvement in the player experience in terms of appearance, authenticity, efficiency, experienced realism, and flow.
+
+
+%With regard to first-person shooters, the haptics and behavoir of the input controller influence the player experience. Certain dimensions of the latter can be increaed if the real controller matches its virtual counterpart. Therefore, head-mounted displays often come with input devices that resemble the shape of a pistol handle with a trigger. Two-handed controllers with rifle-like haptics also gain popularity. However, common first-person shooters often involve more than one weapon kind and, thus, none of the mentioned controller types is able to maintain an adequate level of immersion.
+%
+
+
+
+\end{abstract}
+
+\category{H.5.2.}{Information Interfaces and Presentation
+  (e.g. HCI)}{User Interfaces} 
+
+\keywords{\plainkeywords}
+
+\section{Introduction}
+
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2.1\columnwidth]{figures/teaser}
+\caption{Our final self-transforming controller simulating a two-handed laser rifle (left) and a one-handed blaster (right). The transformation is triggered by a button at the bottom of the handle and works based on a motor and two telescopic tubes. A built-in Vive controller is used for tracking.}
+\label{fig:teaser}
+\end{figure*}
+
+
+Being there---the feeling of presence in a virtual world---is what excites players about virtual reality (VR). The feeling of being a part of that world can be increased by various immersive devices. In particular, head-mounted displays (HMDs) such as Oculus Rift and HTC Vive are already establishing the VR gaming experience for the broad masses. 
+
+With regard to user input, these devices come with handy controllers. For instance, the Vive controller resembles a gun handle with a trigger. That shape promotes first-person shooter interactions and is designed to further increase immersion. Other input controllers mimic the shape of two-handed guns to provide players a more realistic haptics for games with such weapon types.
+
+Relying on a one-handed, pistol-like controller for a game where the weapon should be a two-handed rifle is clearly less realistic than a two-handed input device, and vice versa. Hence, the input controller should be as close as possible to its virtual counterpart. Our contribution aims to close that gap and to provide an optimal controller concept for VR games with in-game weapon switching. The core idea is to create a shape-changing, self-transforming controller. The controller should adjust its shape and handling according to its game representation. In particular, the controller should feel and behave similarly to a pistol-like device in its first state, and similarly to a rifle-like device in its second state. 
+
+%We will propose a shape-changing controller concept covering these requirements and evaluate the results in terms of the impact on the player experience. Additionally, we will provide insights into our iterative design thinking approach to building the device. We will start off with low-fidelity prototypes to determine optimal weight distribution for both states. We then will iteratively improve our concepts by relying on player feedback and finally create a fully functioning and VR-compatible game controller that mechanically transforms its shape based on a telescopic bar approach. 
+%
+%To validate our assumptions, we will evaluate the impact on the player experience by comparing our device to the state-of-the-art HTC Vive controller. Our context will be a futuristic first-person shooter involving a one-handed blaster and a two-handed laser rifle as the two virtual archetypes.
+%
+%Although our research focuses on first-person shooters and goes into depth with a two-state controller model, the overall results provide significant and novel insights into the general approach of self-transforming controllers. We encourage further research such as developing prototypes for other kinds of games or VR applications, as the shape-changing concept can potentially have an important influence on the feeling of being there.
+
+
+We propose a shape-changing controller concept covering these requirements and evaluate the results in terms of the impact on the player experience. Additionally, we provide insights into our iterative design thinking approach to building the device. We start off with low-fidelity prototypes to determine optimal weight distribution for both states. We then iteratively improve our concepts by relying on player feedback and finally create a fully functioning and VR-compatible game controller that mechanically transforms its shape based on a telescopic bar approach. 
+
+To validate our assumptions, we evaluate the impact on the player experience by comparing our device to the state-of-the-art HTC Vive controller. Our context is a futuristic first-person shooter involving a one-handed blaster and a two-handed laser rifle as the two virtual archetypes.
+
+Although our research focuses on first-person shooters and goes into depth with a two-state controller model, the overall results provide significant and novel insights into the general approach of self-transforming controllers. We encourage further research such as developing prototypes for other kinds of games or VR applications, as the shape-changing concept can potentially have an important influence on the feeling of being there.
+
+
+\section{Related Work}
+
+Our contribution is based on insights from a number of research areas discussed in the following. We start off the section by briefly addressing player experience  and its manifestation in virtual reality. The main part focuses on game controllers and shape-changing interfaces in general.
+
+Improving the player experience plays a central role in the development of our controller. Player experience is a multifaceted construct and is usually regarded as a combination of a number of components, such as flow, competence, challenge, and immersion. The work by Bernhaupt~\cite{Bernhaupt2010} provides a set of evaluation approaches with regard to these criteria in order to achieve a positive user experience. IJsselsteijn et al.~\cite{ijsselsteijn2007characterising, ijsselsteijn2008measuring} formalized these elements by proposing the Game Experience Questionnaire (GEQ). The study of Takatalo et al.~\cite{Takatalo} illustrates how these aspects of player experience might vary when a first-person shooter is played at home or in the lab.
+
+Studying player experience in the context of virtual reality often puts the emphasis on the aspect of immersion. A comprehensive summary can be found in the work by Cairns et al.~\cite{cairns2014immersion}. As proposed by Slater~\cite{slater2003note}, we will refer to \textit{immersion} mostly when talking about the technical quality of a virtual reality installation~\cite{Biocca:1995:IVR:207922.207926, sherman2002understanding}. To describe the impact of such immersive 
+technologies on the human perception, we will use the term \textit{presence}. In this area, Poels et al.~\cite{Poels:2007:ALF:1328202.1328218} summarize the overall feelings and experiences of players. Presence, also referred to as the feeling of being there~\cite{heeter1992being}, is described by Lombard et al.~\cite{lombard1997heart} and IJsselsteijn et al.~\cite{IJsselsteijn}. 
+
+The work of Simeone et al.~\cite{Simeone:2015:SRU:2702123.2702389} on \textit{Substitutional Reality} shows how users perceive the counterparts of real objects in virtual reality. The authors pair every object in a room with a virtual counterpart to investigate the engagement of the users. Their results form a solid base for the design of such substitutional experiences. For instance, the participants reported a significant mismatch when the paired objects varied in terms of tactile feedback, temperature, and weight. Especially the latter aspect plays an important role with regard to our transformable controller. 
+
+The remainder of this section examines existing research on input controllers. A good starting point is the case study of Young et al.~\cite{young2016usability} on usability testing of video game controllers. The work focuses on two-dimensional pointing tasks but also provides a high-level overview of current work done with regard to controllers and player experience.
+
+With respect to the influence of game controllers on the player experience, Jennet et al.~\cite{jennett2008measuring} investigated whether immersion can be described in a quantitative way. They also presented a correlation between the mapping of controls to the corresponding in-game action and the overall perceived immersion. Klimmt et al.~\cite{klimmt2007effectance} described the correlation of interactivity and game enjoyment. Their work states that the fun declines if the experiences of effectance are limited. The impact of controller-related issues on user experience was also described by Brown et al.~\cite{brown2015beyond}. Their work underlines the importance of a natural controller mapping with regard to experienced fun and immersion.
+
+Birk et al.~\cite{Birk:2013:CYG:2470654.2470752} further examined the impact of controllers on the player experience. They applied self-determination theory to understand the player experience and shared several effects of controllers with respect to the in-game player personality. In terms of player performance, Zaranek et al.~\cite{zaranek2014performance} evaluated the targeting performance in first-person shooters. The authors compared a mouse, a game controller, the PlayStation Move, and the Kinect, stating that the mouse and controller offered much better performance.
+
+ 
+As we propose a novel interaction device, the fact that users have to potentially transition into another controller type is also important. In this area, Gerling et al.~\cite{gerling2011measuring} compared different interaction paradigms for console and PC by means of two first-person shooter games. Although the players switching to a new platform are more challenged, the overall player experience is not affected by the transitioning aspect. 
+
+Another consideration is the age of the players. Pham et al.~\cite{Pham:2012:GCO:2282338.2282401} evaluated how older adults experience button controllers, gesture controllers, and mixed button and gesture controllers. The latter controller type, represented by the Nintendo Wii, performed best. As our controller falls into the same caterogy, these results might also be true for our use case.
+
+Our input device is heavier than the default VR controllers. However, the physical exertion is often preceived positively by players as shown by Zhang et al.~\cite{zhang2009game}. The authors constructed an input device based on multiple sensors that induced more movement compared to default controllers.
+
+Prototyping and building game controllers is a complex and often multidisciplinary task. In many cases researchers apply the ISO 9241-9 standard mentioned in the work of Douglas et al.~\cite{Douglas:1999:TPD:302979.303042}. The standard describes an evaluation pipeline for pointing devices in terms of performance and comfort. In addition, the work of McNamara et al.~\cite{McNamara2011375} equips researchers with the Consumer Products Questionnaire (CPQ), a tool to measure the user satisfaction of their outcomes. Another work by McNamara et al.~\cite{mcnamara2006functionality} also encourages us to validate the functionality, usability, and user experience of our prototype.
+
+The research in the area of shape-changing interfaces has led to several novel input devices. Michelitsch et al.~\cite{Michelitsch:2004:HCN:985921.986050} presented a shape-changing user interface with force feedback, combining the advantages of tangible and haptic user interfaces. Considering games, Steins et al.~\cite{Steins:2013:IDG:2493190.2493208} researched the concept of \textit{Imaginary Devices} that allow users to freely choose their gesture-based input modality for the current game. Hereby, the transformation is also triggered by the users, however, it does not involve any haptic devices. The \textit{SHAPEIO} controller by Kajiyama et al.~\cite{kajiyama2015shapio} adapts to the current item in the game. The controller consists of triangular prisms, which allow the device to mimic several shapes. Iwafune et al.~\cite{Iwafune:2016:CSP:2988240.2988252} leveraged the shape-changing approach by introducing physically programmable materials suitable for various interface applications. Instead of ridid materials, Nakagaki et al.~\cite{Nakagaki:2016:HSC:2839462.2856517} presented a shape-changing interaction system based on water membranes. Niiyama et al.~\cite{Niiyama:2014:WVC:2540930.2540953} also avoided rigid materials by relying on liquid metal to achieve programmable mass and volume objects. These approaches have the potential to further extend our transformation procedure by removing rigid weights and replacing them with liquids.
+
+
+To further explore the advantages of shape-changing in interface design, Suh et al.~\cite{Suh:2017:BSU:3024969.3024980} created a shape-changing pushbutton, the \textit{Button+}, and classified such interfaces based on the context and identity of the users. Similarly, Rasmussen et al.~\cite{Rasmussen:2016:BUS:2839462.2839499} introduced a system for articulating the level of control provided to users via a shape-changing interface. Roudaut et al.~\cite{Roudaut:2014:CAD:2611205.2557006} focus on the designer's point of view on shape-changing interfaces (or "Changibles") and help to create accurate assemblies out of interactive wireless units. 
+
+
+A recent and related example of utilizing weight shifting for enhancing object perception in VR is \textit{Shifty} by Zenner et al.~\cite{7833030}. The authors present a plexiglass pipe with an internal belt system that transports an object filled with lead. This kind of weight shifting inside the tube allows so modify the rotational resistance, resulting in the virtual object appearing lighter, shorter, or thinner (or vice versa). The presented results show an increase in fun and realism compared with passive haptic feedback objects. Our work shares the idea of shifting weights inside such objects. However, our focus lies more on the iterative design approach, the perceived transformation aspects, and the context of FPS games. 
+
+
+Experimenting with novel VR controllers is not limited to the research area, as various devices are already available to the broad masses. Well-known virtual reality systems such as Oculus Rift~\cite{oculus}, PlayStation VR~\cite{ps}, and HTC Vive~\cite{vive} come with included controllers. Other noteable end products are \textit{StrikerVR}~\cite{strikervr} and \textit{The Delta Six Avenger Controller}~\cite{avengercontroller}. These devices offer different haptics, however, none of these supports the self-transformation concept.
+
+
+\section{Crafting the Controller}
+
+\begin{figure}
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/prototyping}
+\caption{Our first goal was to find out how to balance the controller to evoke the feeling of holding an authentic weapon. Surprisingly, only a small change of the weight distribution is required to differentiate between a pistol and a two-handed rifle. The bottom images depict our first prototype. Inside the grey tube, a motor moves an internal weight to switch between the two weapon kinds.}
+\label{fig:prototype}
+\end{figure}
+
+
+
+Our research starts at nearly ground zero as, to our knowledge, there is no other self-transforming VR controller fulfilling the requirements stated below. Hence, we rely on an iterative trial-and-error method. Our design thinking process is centered around multiple small-scale evaluations and subsequent adjustments of the prototypes to a point when enough knowledge has been gathered to construct the final version of the controller.
+
+\subsection{Requirement Analysis}
+
+To evaluate the impact of the self-transforming feature, we have construct an input controller and integrate it into an appropriate first-person VR shooter. The controller should have two states: one state representing a one-handed, pistol-like weapon, and another state for a two-handed, rifle-like weapon. 
+%For simplicity---as our game will be settled in a futuristic scenario---we will refer to these two states as blaster and laser rifle.
+
+The controller should be able to switch between these states. The player will not have any other input possibilities in our scenario. For that reason, commands such as changing the weapon and firing it must be captured and transmitted via our input controller. 
+
+Players cannot see the controller. This is a crucial point, as it allows us to ignore the appearance and focus only on haptics and behavior. In particular, the transformation process should be performed as quickly and smoothly as possible and impose no harm on the player.
+
+
+\subsection{Design Thinking Stage}
+
+%\subsubsection{Weight Distribution}
+
+Our first goal was to gather insights into the overall weight distribution and related inertness aspects of weapon-like controllers. We started off by taking water pistols and mounting differently positioned water flasks. We also varied the distance of the weights from the handle in both directions to cover a broad design space. An excerpt of the evaluated mockups is shown in \FG{fig:prototype}.
+
+To find the sweet spot in terms of weight distribution, we conducted an explorative survey ($n=20$, 11 males, 9 females). In a think-aloud protocol, our goal was to get as much player feedback as possible to narrow down the design space. After a short introduction, participants were blindfolded to imitate the VR scenario. We then handed over our water pistol experiments one by one in a randomized order. The participants were asked to estimate the perceived length of each device and comment in detail on the device haptics. These comments were recorded by the examiner.
+
+The survey provided two important insights. Firstly, the controller does not need to be as long as a real rifle. A total length of 400 mm already suffices to mimic a two-handed gun. Secondly, already a subtle shift of the weights toward the front of the device suffices to represent the transformation from a one-handed pistol to a two-handed rifle. \FG{fig:prototype} demonstrates the two final water pistol versions, both of approximately the same weight but a slighly shifted balance point.
+
+Based on these observations, we concluded that the self-transformation should rely on shifting the balance point by changing the overall weight distribution. The length of the device does not require significant transformations per se but still plays a certain role when it comes to perceived inertness when players move the device.
+
+
+%We considered several different techniques to realize the transformation. Those can be grouped in two categories: transforming the device by mechanically moving rigid parts, i.e., weights, or by relying on a liquid, e.g., water, that is moved inside the device. The latter approach involves dynamically filling and draining parts of the device based on target state.
+%
+%As both techniques could potentially provide a similar player experience, we declined the liquid-based approach due to its higher construction complexity and security concerns. 
+
+To gather further knowledge, we crafted a first mechanical prototype, depicted in \FG{fig:prototype}. With a length of 410 mm and a total weight of 1200 g, the controller relies on a motor and a rack transporting 200 g of lead inside its static tube. The resulting device appeared to be too heavy and slow in terms of its inertness. Therefore, we drew two final conclusions at this stage. Firstly, a static tube must be replaced by a dynamic solution to reduce laggardness. Secondly, the overall weight must be further reduced to improve the controller usability.
+
+
+\subsection{Device Construction}
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=1.0\columnwidth]{figures/skizzen}
+\caption{The final controller. The blueprint highlights the important components of our device. The telescoping tubes are moved by a rack and a motor, which is driven by a microcontroller. The HTC Vive controller is plugged into the soft foam.}
+\label{fig:plan}
+\end{figure}
+
+Our final controller and its components are depicted in \FG{fig:plan}. To see the device in action, please refer to \FG{fig:teaser} and the supplementary video. The core functionality is based on the previous prototype: to achieve the transformation effect, a shift of the balance point is performed by mechanically changing the weight distribution. The total weight of our controller is 710 g, the length in the pistol mode is 230 mm, and the length of the two-handed rifle state is 390 mm.
+
+
+The handle of the controller is a cropped handle of a toy weapon including the trigger part. A telescopic mechanism is located on top. It consists of two 3D-printed tubes, each one with an approximate weight of 140 g. The inner tube is moved out by a motor-powered rack mechanism. 
+
+Instead of adding artificial weights to the device, we have the HTC Vive controller inside the inner tube, such that the tracking circle barely looks out. The Vive controller weighs approximately 200 g and is already included in the 710 g total device weight. Apart from its function as moving weight, the Vive controller is also used to perform spatial tracking of our input device, i.e., no additional tracking is required.
+
+
+The motor needs around 700 ms to move the telescopic tube in or out. An Arduino-like board~\cite{arduino}, the ESP8266, is responsible for the device logic. The board controls the motor and is also wired with the trigger and the weapon transformation buttons. The latter is placed at the bottom of the handle to be easy to hit even when being in VR. \FG{fig:plan} depicts the controller components. The ESP8266 has Wi-Fi onboard and is responsible for communicating firing and weapon switching events to our VR game.
+
+
+
+
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2.1\columnwidth]{figures/game}
+\caption{Our first-person shooter used for the evaluation of the self-transforming controller. The two weapon kinds, a blaster and a laser rifle, are depicted in the center. The right image shows an attaking spaceship. The ground troops do not shoot and instead explode upon reaching the platform.}
+\label{fig:game}
+\end{figure*}
+
+
+
+\subsection{Deploying to a Virtual Environment}
+
+
+We created a futuristic first-person shooter to evaluate our device. To focus on the transformation aspects, the game mechanics are mostly limited to shooting and weapon switching.
+The game is realized with the Unity 3D Engine~\cite{unity} and takes place on a foreign planet. A human outpost is being attacked by aliens. The player is located on a small platform and has to defend the outpost by warding off the approaching waves as shown in \FG{fig:game}. 
+
+The enemies are walking aliens and flying spaceships. The former explode when they reach the player platform, whereas the latter start shooting when they come into close range. Although the platform starts to emit smoke after a certain amount of damage is inflicted, the game cannot be lost. The game always finishes after 4 minutes, reporting that the player was able to hold off the enemies.
+
+A detailed in-game tutorial explains the weapon specifics. The player can switch between two types: a one-handed blaster and a two-handed laser rifle. \FG{fig:game} shows the two weapon models. The tutorial also explains that the blaster is more effective versus the ground troops, whereas the laser rifle is best used for spaceships. The player needs about three shots to destroy an enemy with the appropriate weapon. To motivate weapon switching, shooting with the inappropriate weapon requires three times more hits. In addition, the player can move on the tiny platform to get a better aiming angle. Although the our controller needs 700 ms to perform the transformation, we decided not to include a transformation animation, as our pre-test participants did not report any negative impact of that mismatch.
+
+The game is executed on a HTC Vive and supports both the default HTC Vive controller and our self-transforming device. For the default controller, the trigger is used for firing, and the big round thumb button is used for weapon switching. The self-transforming device also fires with a trigger, and the switching is initiated by a button press at the bottom of the handle. Our controller sends the user input to the Unity game via Wi-Fi over the MQTT~\cite{mqtt} protocol. The tracking of the weapon position and orientation is done with the built-in HTC Vive controller in the front tube. This combination of standard components and the widespread MQTT protocol also guarantees a wide interoperability with other HTC Vive applications and games to facilitate further research.
+
+
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2.1\columnwidth]{figures/study}
+\caption{The participants playing our first-person shooter with the default HTC Vive device and our self-transforming controller.}
+\label{fig:setup}
+\end{figure*}
+
+
+\section{Evaluation}
+We conducted a study to evaluate our self-transforming controller. 
+% in terms of usability and its influence on the player experience. 
+We were particularly interested in players' perception and acceptance of the controller, its usability as well as its influence on the player experience compared to a common VR game controller. 
+Hence, we applied a within-subject design with the type of weapon as the independent variable comparing our self-transforming controller to the HTC Vive game controller. Participants played the testbed game with both controllers, and the order of the controllers was randomized as a between-subject factor, thereby controlling for possible sequence and learning effects.
+
+\subsection{Focus of the Study and Hypotheses}
+One goal of the study was to gather explorative qualitative and quantitative data about the usability and acceptance of our controller in general 
+% thus part of the assessed data was used in an explorative way 
+to determine the quality of our product. Furthermore, we tested three main hypotheses regarding the comparison of our controller and the standard HTC Vive controller. We assumed that the design and functionality of the self-transforming controller enhances the feeling of actually handling the weapon that is displayed in the virtual world and thus the perceived realism of the interaction. This, in turn, is hypothesized to affect the player experience, particularly in terms of immersion, presence, and flow. Hence, our first hypotheses are:
+\begin{itemize}
+  \setlength{\itemsep}{2pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+%TODO Als Aufzählung formatieren
+\item H1: Perceived realism is significantly higher for the self-transforming controller than for the HTC Vive controller. %--> CPQ authenticity und IPQ experienced realism: beides besser, stützt also beides diese Hypothese
+\item H2: The use of the self-transforming controller leads to higher 
+\begin{enumerate}[label=(\alph*)]
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+\item immersion and feelings of presence
+\item flow
+\item positive affect
+\end{enumerate}
+
+than the use of the HTC Vive controller.
+\end{itemize}
+Furthermore, we assume that the analogy between our controller and a real gun leads to intuitive and easy handling. Hence, we hypothesize:
+%TODO Als Aufzählung formatieren
+\begin{itemize}
+  \setlength{\itemsep}{2pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+\item H3(a): The use of the self-transforming controller is perceived as more intuitive than the use of the HTC Vive controller. %--> PENS intuitive controls: kein Unterschied, also nicht unterstützt, aber allgemein für beide Controller insgesamt sehr hoch (sehr positiv für beide), vielleicht daher auch kein Unterschied erkennbar
+\item H3(b): Players experience a higher feeling of competence using the self-transforming controller compared to the HTC Vive controller.
+\end{itemize}
+%--> PENS competence & GEQ competence: GEQ bestätigt dies nicht, sondern deutet darauf hin, dass hier eher Reihenfolge eine Rolle spielt: Lerneffekt kann angenommen werden, da Teilnehmer mehr Kompetenzempfinden in der zweiten Spielrunde berichten als in der ersten, unabhängig von der Controllerart; PENS competence ist dagegen signifikant besser für unseren Morph-Controller; Ergebnis erscheint widersprüchlich... könnte an den einzelnen Items liegen, PENS bezieht sich auch auf eine gute Balance zwischen Herausforderung und Können, daher eher in Richtung Flow
+
+Beside these hypotheses, our self-transforming controller will also be compared to the HTC Vive controller in terms of usability as well as players' in-game behavior and performance.
+
+\begin{table*}[]
+  \caption{Mean values and standard deviations regarding dependent variables related to player experience in both controller conditions and results of the repeated measures ANOVA comparing those values.}
+  \label{tab:means}
+  \begin{tabular}{lcccrl}
+    \toprule
+    \addlinespace
+     & Self-Transforming Controller & HTC Vive Controller \\
+%	  &	& Switching & & Collective\\     
+%     &	($ N = 24$) 	&  ($N = 31$) \\
+     \addlinespace 
+     Dependent Variable & M (SD)	& M (SD)  & \textit{F} (1, 27) & 
+     Significance
+      \textit{p} \\   
+       
+\midrule
+    \addlinespace    
+    GEQ (scale: 0 - 4)\\
+    \ \ \ Positive Affect 	&	2.77 (0.56)	&	 2.73 (0.65) & 0.15 & .701			\\ 
+    \ \ \ Negative Affect	&	0.44 (0.41)	&	 0.47 (0.44) & 0.13 & .717		\\
+   	\ \ \ Flow				& 	2.45 (0.85)	&	 2.12 (0.75) & 9.46 & .005&**		\\     
+	\ \ \ Immersion 		&	1.88 (0.67)	&	 1.78 (0.62) & 2.02 & .166			\\  
+	\ \ \ Competence 		&	2.57 (0.66)	&	 2.55 (0.81) & 0.06 & .817		\\
+	\ \ \ Annoyance 		&	0.31 (0.46)	&	 0.32 (0.44) & 0.03 & .866	\\ 
+    \ \ \ Challenge 		&	1.18 (0.54)	&	 1.05 (0.72) & 2.41 & .133	\\
+    PENS (scale: 1 -7)\\
+    \ \ \ Autonomy 				&	3.60 (1.42)	&	3.49 (1.44)	& 0.25 & .619	\\
+    \ \ \ Competence 			&	5.45 (1.04)	&	5.07 (1.25)	& 5.71 & .024&*\\
+    \ \ \ Intuitive Control 	&	6.49 (0.68)	&	6.47 (0.70)	& 0.01 & .941	\\ 
+    IPQ (scale: 0 - 6)\\
+    \ \ \ General 				&	4.48 (1.02)	&	4.31 (1.20)	& 0.94 &   	.342\\ 
+    \ \ \ Spatial Presence		&	4.12 (0.67)	&	4.20 (0.68)	& 0.40 &   	.532\\
+   	\ \ \ Involvement			& 	4.18 (1.22)	&	3.75 (1.44)	& 2.18 &   	.152\\     
+	\ \ \ Experienced Realism 	&	2.67 (1.01)	&	2.27 (0.94) & 4.83 &  	.037&*\\  
+	CPQ (scale: 0 - 4)\\
+	\ \ \ Appearance 			&	3.13 (0.62)	&	2.47 (0.94)	& 8.21 &  .008&**	\\ 
+    \ \ \ Efficiency			&	3.56 (0.44)	&	3.21 (0.49)	& 12.07 & .002&**	\\
+   	\ \ \ Controller Authenticity & 	3.01 (0.72)	&	0.89 (0.84)	& 85.42 & < .001&**\\     
+	
+  \bottomrule
+  &&&&*\textit{p} <.05, ** \textit{p} <.01
+\end{tabular}
+\end{table*}
+
+\subsection{Procedure and Applied Measures}
+
+
+
+The study took place in our virtual reality lab at the university. After informing participants about the study's procedure, we administered a first questionnaire to assess age, gender, and their prior experiences with digital games, first-person shooters, real-life guns, and VR gaming systems. We also asked the participants if they had used the common Vive controller before. Subsequently, participants were introduced to the Vive HMD, the game rules, and the first controller. Half of the participants played with the standard Vive controller first, and the other half started with our self-transforming device. 
+
+After playing the game for 4 minutes, we asked the participants to fill in questionnaires regarding their player experience and their evaluation of the game controller used. To assess player experience, the Game Experience Questionnaire (GEQ)~\cite{ijsselsteijn2008measuring} and the Player Experience of Need Satisfaction (PENS)~\cite{Ryan.2006} questionnaire were administered. The GEQ subdivides player experience into the seven subdimensions \textit{positive affect}, \textit{negative affect}, \textit{immersion}, \textit{flow}, \textit{challenge}, \textit{tension/annoyance}, and \textit{competence}. The PENS measures the degree of need satisfaction regarding the needs for \textit{autonomy} and \textit{competence} and also contains the subscale \textit{intuitive controls} referring to the ease of use of the game controls. 
+As feelings of presence and immersion are supposed to be a particularly important part of the experience in VR games, we additionally used the Igroup Presence Questionnaire (IPQ)~\cite{Schubert.1999b}, which assesses the perceived presence in general, as well as the subdimensions \textit{spatial presence}, \textit{involvement}, and \textit{experienced realism}.
+
+Furthermore, participants' evaluation of the game controller was addressed by parts of the the Consumer Products Questionnaire (CPQ)~\cite{McNamara2011375} and the Device Assessment Questionnaire (DAQ)~\cite{Douglas:1999:TPD:302979.303042}, which is based on the ISO 9241-9 standard~\cite{ISO.2000}. 
+%TODO ggf nochmal Quellen prüfen damit es zu deinen Referenzen passt
+The CPQ measures user-satisfaction with electronic consumer products. We used the subscales \textit{appearance} and \textit{efficiency} to investigate how participants liked the look and feel of the controller as well as their interaction with it. We added one item referring to the weight of the controller to the appearance scale, because this was an important aspect of the appeal of the controller discussed by participants in the pre-study. 
+In addition, we generated three additional items addressing the perceived authenticity of the controller: '\textit{I felt like actually holding the weapon displayed in the VR world}',
+%Original: 'Ich hatte das Gefühl, wirklich die Waffen aus der VR-Welt in meiner Hand zu halten',
+'\textit{I felt a shifting of weight when changing the weapon}', and
+%Original: 'Ich habe beim Waffenwechsel eine Gewichtsveränderung des Controllers gespürt',
+'\textit{Both weapons in the game (pistol and rifle) felt different in my hands}'.
+%Original: 'Die beiden Waffen im Spiel (Pistole und Rifle) fühlten sich unterschiedlich in meinen Händen an'.
+The DAQ consists of 13 items referring to the overall usability as well as issues of physical operation (effort, smoothness), accuracy, speed, general comfort, and fatigue (of fingers, wrist, arm, shoulder, and neck). 
+
+After filling in the questionnaires, the game was played a second time for another 4 minutes, this time with the other controller. Again, we administered GEQ, PENS, IPQ, CPQ, and DAQ afterwards to assess player experience and controller evaluation for the second controller.
+At the end, we presented a final questionnaire including questions about participants' physical well-being to control for simulator sickness~\cite{Kennedy.1993}. 
+
+Finally, we asked the participants to rate some details of our self-transforming controller to gain comprehensive insights into the evaluation of our specific creation, e.g., the time and process of the weapon transformation, and the look and feel.
+
+%Finally, we asked participants to state their opinion about the general concept of a self-transforming controller in terms of interest, innovation, added value, and the wish to use it in the future. Then participants were thanked and debriefed.
+
+During the two gaming sessions, we additionally logged relevant gameplay data to record players' performance and in-game behavior. These gameplay metrics include the hit ratio of both weapons, the total number of shots fired, the amount of weapon switches, and the damage taken by the platform.
+%TODO Begriff für die Basis/Station „home base“ richtig einfügen wie vorher in Spielbeschreibung
+
+
+
+%TODO Letzte Spalte vielleicht irgendwie schöner machen von der Formatierung her mit den Sternchen
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2.1\columnwidth]{figures/comparison}
+\caption{Mean scores and standard deviations for the Device Assessment Questionnaire (DAQ) items with regard to our device and the HTC Vive controller. Note that for the left group, higher values are better. The center group contains items for which lower values are best, and the items of the right group have their optimum in the middle (2.0), i.e., neither too low nor too high.
+}
+\label{fig:comparison}
+\end{figure*}
+
+\subsection{Results}
+%Stichprobenbeschreibung
+29 persons (7 females, 22 males), aged 19 to 64 ($M = 26.14,\,SD = 8.56$), participated in the study. Most of them were students ($N = 21$) or employees ($N = 6$). The majority reported to have some experience with playing first-person shooter games ($N = 24$), whereas fewer participants had some prior experiences with VR gaming systems ($N = 13$), the HTC Vive controller ($N = 7$), and real firing arms ($N = 12$). Thus, our sample included mostly players interested in first-person shooter games, and both experienced and inexperienced persons regarding VR gaming, the HTC Vive, and the use of firing arms. No participants reported problems with simulator sickness ($M = 0.21,\,SD = 0.49$).
+
+\subsubsection{Evaluation of the Self-Transforming Controller}
+We asked four questions addressing the design and functionality of our controller. 
+%TODO Unsere eigenen Fragen zu Waffendetails: übersetzen und aussortieren was du nicht brauchst, einzelne Items können ohne Probleme gestrichen werden
+Participants rated their liking of different aspects of the controller on a scale from 0 ('\textit{I did not like it at all}') to 4 ('\textit{I liked it a lot}'). Results show high mean scores for all items: '\textit{the transformation (shape and weight distribution modification) when switching the weapon}'
+%TODO ÜBERSETZEN: 'automatische Transformation (Form- und Gewichtsveränderung) beim Waffenwechsel' 
+($M = 3.59,\,SD = 0.57$), '\textit{the feeling of how the controller fits in the hand}' 
+%TODO ÜBERSETZEN: Gefühl wie der Controller in der Hand liegt
+($M = 3.31,\,SD = 0.76$), '\textit{the similarity of the controller to the weapon displayed in the VR world}' 
+%TODO ÜBERSETZEN: Die Ähnlichkeit zu den im Spiel verwendeten Waffen
+($M = 3.07,\,SD = 0.75$), and '\textit{the feeling of holding an authentic weapon}' 
+%TODO ÜBERSETZEN: Das Gefühl wirklich eine Waffe in der Hand zu halten
+($M = 2.86,\,SD = 1.22$).
+
+Participants should also rate their agreement with statements regarding the duration of the transformation on a scale from 0 ('\textit{I don't agree}') to 4 ('\textit{I totally agree}'). On average, they disagreed that '\textit{the transformation of the controller took too long}'
+%TODO ÜBERSETZEN UND SINNVOLL IN SATZ EINBAUEN: Die Zeit, die der Controller für das Wechseln der Waffe benötigt hat, empfand ich als zu lang. 
+($M = 0.66,\,SD = 0.86$), or that '\textit{the fact that the transformation is not instant was disturbing}'
+%TODO ÜBERSETZEN UND SINNVOLL IN SATZ EINBAUEN: Es hat mich gestört, dass die Transformation des Controllers beim Waffenwechsel einen Moment gedauert hat.
+($M = 0.55,\,SD = 0.78$). In contrast, they agreed that '\textit{the transformation duration appeared authentic}'
+%TODO ÜBERSETZEN UND SINNVOLL IN SATZ EINBAUEN: Die zum Waffenwechsel/der Waffentransformation benötigte Zeit wirkte auf mich realistisch.
+($M = 2.90,\,SD = 0.98$). A summary is depicted in \FG{fig:piechart}.
+
+%TODO hier dann vielleicht auch noch Verweis auf Grafik einbauen im oberen Teil, falls das noch grafisch dargestellt wird
+
+Scores of the CPQ and the ISO DAQ also provided valuable insight into how participants perceived our controller and its usability. 
+Values on the CPQ subscales are all above 3 on a scale from 0 to 4, indicating very positive evaluations of the look and feel, efficiency, and authenticity of the controller. We tested ther internal consistency of the subscale \textit{controller authenticity}, which we added to the original questionnaire, by calculating Cronbach's alpha. The calculation indicates a sufficient level of consistency for the three items ($\alpha$~=~0.76).
+
+Mean scores for all DAQ items are plotted in \FG{fig:comparison}. On a scale ranging from 0 to 4, our controller scored high on the overall ease of use ($M = 3.38,\,SD = 0.73$), smoothness ($M = 2.72,\,SD = 1.07$), and general comfort ($M = 3.07,\,SD = 0.84$). Ratings for all kinds of physical fatigue are very low (all \textit{M} < 1.31). 
+Mean values regarding the required force to operate an action ($M = 1.86,\,SD = 0.58$), the mental effort ($M = 1.62,\,SD = 0.49$), the physical effort ($M = 2.07,\,SD = 0.53$), and operation speed ($M = 2.03,\,SD = 0.57$) are near the optimum medium rating (with 2.0 indicating that the aspect is neither \textit{too low} nor \textit{too high}).
+%TODO Verweis auf Grafik richtig machen/prüfen
+
+%TODO Grafik mit ISO-Werten einfügen (Balken-Vergleichsdiagramm mit Berücksichtigung der komischen Mittelskalen bei 4 Items, nämlich bei:
+%Mental effort (too low - too high),
+%Physical effort (too low - too high),
+%Force required (too low - too high),
+%Operation speed (too fast - too slow)
+%Außerdem Achtung bei Accurate pointing, hier ist wenig gut und viel schlecht (easy - difficult)
+
+
+
+
+
+
+\subsubsection{Comparing the Two Game Controllers}
+All investigated parameters are approximately normally distributed according to Kolmogorov-Smirnov tests. Hence, we use one-way repeated measures ANOVA to compare measurements for our self-transforming controller and the HTC Vive controller while accounting for the sequence of controller types as a between-subjects factor. 
+Mean values and results of the ANOVA for all variables related to player experience are presented in Table~\ref{tab:means}.
+
+%GEQ
+The GEQ subscales show significantly higher flow values for the self-transforming controller. Mean values of all other GEQ subscales do not differ significantly. However, for the GEQ subdimension \textit{competence}, a significant sequence effect was found: Although, on average, values on the competence scale are quite equal for both controller conditions, the ANOVA indicates that competence is rated significantly higher for the second round of play, independent of controller type, $F(1, 27) = 6.78,\,p = .015$.
+
+
+%PENS
+The analysis of the PENS subscales reveals a higher feeling of competence when playing with the self-transforming controller. No sequence effects or other significant differences were found for the PENS measures. The IPQ addresses feelings of presence on four dimensions. Values for general presence, involvement, and experienced realism are higher for the self-transforming controller, but only the difference for experienced realism is significant. No sequence effects were found.
+
+\begin{figure*}[t!]
+\centering
+\includegraphics[width=2.1\columnwidth]{figures/piechart}
+\caption{We asked the subjects several questions about the design and functionality of our self-transforming controller. The pie charts illustrate the respective questions and the overall answer distribution of the 29 participants.
+}
+\label{fig:piechart}
+\end{figure*}
+
+%CPQ
+Results of the ANOVA comparing the CPQ subscales indicate that the self-transforming controller scored significantly higher on appearance, efficiency, and authenticity. In the case of the appearance subscale, the ANOVA also reveals a significant sequence effect: The HTC Vive controller has lower scores for appearance in both sequence conditions, but the difference is particularly high if participants played with the self-transforming controller first and then had to evaluate the Vive controller afterwards. In this case, the appearance rating for the HTC Vive controller is much lower ($M = 2.11,\,SD = 0.99$) than in the reverse playing order ($M = 2.86,\,SD = 0.73$). DAQ scores for the self-transforming controller also indicate high usability, as depicted in \FG{fig:comparison}. 
+%TODO Referenz anpassen/prüfen
+
+According to the ANOVA, there is only one highly significant difference in terms of physical effort, which is higher for the self-transforming controller ($M = 2.07,\,SD = 0.53$) than for the HTC Vive controller ($M = 1.21,\,SD = 0.77$), $F(1, 27) = 25.14,\,p < .000$. Differences for difficulties in accurate pointing ($F(1, 27) = 3.62,\,p = .068$) and comfort ($F(1, 27) = 3.31,\,p = .080$) are not significant and show marginally better scores for our self-transforming controller. Ratings of general comfort also showed a significant sequence effect ($F(1, 27) = 4.41,\,p = .045$): The comfort of the self-transforming controller was rated significantly higher than the comfort of the HTC Vive, if participants played with the self-transforming controller first. In contrast, in the other sequence, comfort ratings for both controllers are almost equal.
+
+%Gameplay Metrics
+The analysis of the gameplay data, which was automatically logged during play, results in few significant differences between the two controller types. Regarding the hit ratio with both game weapons, the final damage to the platform, and the total number of shots fired, both controllers show comparable values. In contrast, participants performed significantly fewer weapon changes with the self-transforming controller ($M = 19.07,\,SD = 5.09$) than with the HTC Vive controller ($M = 27.17,\,SD = 8.99$), $F(1, 27) = 30.54,\,p < .001$. Furthermore, a sequence effect was detected for the damage taken, which was significantly lower in the second play round independent of controller type, $F(1, 27) = 13.34,\,p = .001$, indicating a better player performance.
+
+%vielleicht noch perceived Schwierigkeit und so, alles was sonst noch im Fragebogen steht, paar Einzelheite gäbe es noch, aber denke eigentlich das Wichtige ist drin, Rest wäre eher unwichtige Details; keine Interessanten Unterschiede sonst jedenfalls
+
+
+
+
+\section{Discussion}
+
+%TODO auf Basis von Waffendetails und CPQ und DAQ ISO Werten erste Schlussfolgerung, dass Usability des Controllers sehr gut ist und die Transformation wie gewollt zufriedenstellend umgesetzt wurde
+
+The scores of the CPQ and the ISO DAQ confirm the outstanding usability of our device. Players reported to enjoy the overall haptics and the transformation concept, as can be seen in the high values of the CPQ subscales. Yet not being an industry product, our device performed significantly better than the Vive controller with regard to appearance, efficiency, and controller authenticity. The ISO DAQ further supports this statement as shown in \FG{fig:comparison}. Our controller achieves high scores in terms of the overall ease of use, smoothness, and general comfort. Futhermore, the mental and physical efforts to operate the device are close to the optimum as is the operation speed.
+
+The favorable feedback on our novel transformation approach is most visible in the rating presented in \FG{fig:piechart}. Nearly 83\% of the participants disagreed (1) or strongly disagreed that the transformation (700 ms) took too long. The same percentage is also observable with regard to the question whether the transformation time was disturbing. Although the transformation process happens instantly in the VR game, one might have expected issues related to that kind of delay. However, as the transformation produces a decent noise and also a slight tactile feedback, the 700 ms needed for the physical transformation do not affect players in a negative way. On the contrary, 79\% agreed (3) or strongly agreed (4) that the duration appeared authentic. The concept of transformation, being our primary contribution, was liked (3) or liked a lot (4) by \textbf{96\% of the participants.}
+
+
+%TODO Gewicht des Controllers: Ist es ein Problem? (ggf. Bezug zu Vorstudien, die den Aspekt als wichtig herausgestellt haben)
+%--> item regarding Gewicht, welches wir dem CPQ hinzugefügt haben, hat einen Durchschnitt von 2.97 auf einer Skala von 0 bis 4, was zeigt, dass die Personen on average eher zustimmen, dass das Gewicht des Controllers angemessen ist
+Our device weighs 3.5 times more than the HTC Vive controller (710 g and 200 g, respectively). Nevertheless, the current prototype was not perceived as too heavy by the players. This is underlined by our question referring to the weight that we added to the CPQ on the appearance scale. The result shows an average of 2.97 on a scale ranging from 0 to 4, i.e., players reported that the overall weight is adequate.
+
+The same is true for the experienced fatigue. According to the DAQ results, the overall fatigue is fairly low. The worst rated item is the arm fatigue ($M = 1.31,\,SD = 1.28$). In contrast, the lighter Vive controller is slightly better in all fatigue scales, yet not reaching a level of significance. However, the game was played for only 4 minutes, and longer game sessions might have a more significant impact in terms of fatigue. Tightly coupled to weight and fatigue aspects, the physical effort for our device was significantly higher compared to the Vive controller. However, this is a rather positive outcome as our controller gets significantly closer to the optimum.
+
+We summarize that our controller provided very high comfort and usability overall (DAQ) and shows noticeable trends to outperform the default HTC Vive device. The transformation concept was highly appreciated by the players and resulted in very high acceptance throughout the related scales, such as transformation time.
+
+
+
+%
+%\begin{itemize}
+%%TODO Als Aufzählung formatieren
+%\item H1: Perceived realism is significantly higher for the self-transforming controller than for the HTC Vive controller. %--> CPQ authenticity und IPQ experienced realism: beides besser, stützt also beides diese Hypothese
+%\item H2: The use of the self-transforming controller leads to higher 
+%\begin{enumerate}[label=(\alph*)]
+%\item immersion and feelings of presence
+%\item flow
+%\item positive affect
+%\end{enumerate}
+%
+%than the use of the HTC Vive controller.
+%\end{itemize}
+%Furthermore, we assume that the analogy between our controller and a real gun leads to an intuitive and easy handling. Hence, we hypothesize:
+%%TODO Als Aufzählung formatieren
+%\begin{itemize}
+%\item H3(a): The use of the self-transforming controller is perceived as more intuitive than the use of the HTC Vive controller. %--> PENS intuitive controls: kein Unterschied, also nicht unterstützt, aber allgemein für beide Controller insgesamt sehr hoch (sehr positiv für beide), vielleicht daher auch kein Unterschied erkennbar
+%\item H3(b): Players experience a higher feeling of competence using the self-transforming controller compared to the HTC Vive controller.
+%\end{itemize}
+%%--> PENS competence & GEQ competence: GEQ bestätigt dies nicht, sondern deutet darauf hin, dass hier eher Reihenfolge eine Rolle spielt: Lerneffekt kann angenommen werden, da Teilnehmer mehr Kompetenzempfinden in der zweiten Spielrunde berichten als in der ersten, unabhängig von der Controllerart; PENS competence ist dagegen signifikant besser für unseren Morph-Controller; Ergebnis erscheint widersprüchlich... könnte an den einzelnen Items liegen, PENS bezieht sich auch auf eine gute Balance zwischen Herausforderung und Können, daher eher in Richtung Flow
+
+
+
+
+
+%--> insgesamt niedrige Werte für Fatigue von Arm Schulter etc. (im DAQ questionnaire), d.h. hier auch erstmal kein Problem erkennbar; würde aber hier einräumen, dass die Personen nur 4 Minuten gespielt haben und die Fatigue-Werte in ihrer Tendenz für den Morph-Controller höher sind (wenn auch nicht signifikant), insbesondere fatigue für den Arm trat bei einigen Probanden auf; bei längeren Spielphasen könnten sich das verstärken; auch bewerteten die Probanden den physical effort zur Benutzung des self-transforming controllers als signifikant höher, ABER dieser Wert ist einfach auch näher am Optimum (nicht zu hoch nicht zu niedrig), während der Vive controller da eher bei "etwas zu niedrig" ist. So gesehen also trotzdem ein positives Ergebnis. Fazit: Am Gewicht könnte man ggf. noch schrauben, bzw. sollte den Controller nochmal im längeren Einsatz testen; 
+%--> Nutzungs-Comfort insgesamt wird aber mit 3.07 (von 4 maximal) durchschnittlich sehr gut und tendenziell sogar besser als bei Vive Controller bewertet
+%--> von hier kannst du dann sicher gut zur allgemeinen Usability und Tauglichkeit des Controllers überleiten (oder das halt vorher schon diskutieren und mit dem Gewicht dann abschließen)
+
+Our proposed hypotheses are based on the comparison between our device and the default HTC Vive controller. H1 stated that the perceived realism is significantly higher for the self-transforming controller. Both the CPQ authenticity scale ($p < .001$) and the IPQ experienced realism scale ($p = .037$) show significant improvements, and, thus, confirm this hypothesis.
+
+For H2, we assumed that immersion and feelings of presence, flow, and positive affects would be higher for our controller. Firstly, the GEQ and the IPQ confirmed the experienced realism. In terms of presence, as the HMD already offers a highly immersive experience, the resultung values were very high for both controllers according to the IPQ. The immersion scale of the GEQ shows only marginal improvements. We attribute this to the fact that the GEQ questions about immersion mostly relate to the game design and not to the overall experience, including peripherals such as the controller. In a similar way, the positive affects were not significantly better according to the GEQ. Even better, despite the high dependence of the GEQ on the game design, our device significantly outperformed the Vive controller on the flow scale which confirms that part of H2.
+
+H3(a) stated that use of our controller is perceived as more intuitive. The intuitive controls scale of the PENS questionnaire does not show any significant difference: $M = 6.49$ for our controller and $M = 6.47$ for the HTC Vive device on a scale from 1 to 7. Note that both controllers perform extremely well, hence, we argue this is the reason that no significant difference can be established. 
+
+In H3(b), we assumed that the feeling of competence would be higher when played with our controller. At a first glance, we have two contradicting results from the PENS and the GEQ here. The PENS questionnaire shows a significant difference ($p = .024$) on the competence scale in favor to our device. That scale mostly assesses competence in terms of the balance between the game's challenge and the player's skills. Such a balance rather resembles the flow scale of the GEQ, which was also significant. The competence scale of the GEQ, in contrast, does not provide significant differences. However, the GEQ shows that the feeling of competence significantly increases in the second game round, no matter which controller was used in the first round. Hence, the competence feeling of the GEQ was mostly influenced by sequence effects and not by the controller type.
+
+
+We evaluated the order of execution for all measurements and determined three significant sequence effects, apart from the GEQ competence scale. A similar learning effect was observed with respect to the damage taken, which is significantly lower in the second game round. Furthermore, the CPQ appearance score reports that the HTC Vive controller was rated notably worse if players used our self-transforming device in the first round. That is to say, players that were already exposed to the transformation concept clearly less liked the appearance of the Vive controller. The third item with a significant sequence effect is the DAQ comfort rating. Although our controller is not significantly better overall, the difference becomes significant when the subjects played with the self-transforming controller in the first round. In that case, similar to CPQ appearance, our controller was rated significantly better than the Vive controller. The fact further fortifies our statement on the overall very high comfort compared to the HTC state of the art device. All other reported controller differences are not affected by sequence effects.
+
+With regard to the logged gameplay metrics, no significant difference in player performance was observed. Thus, the novel concept does not impose any negative effects on the player performance, as the players were able to aim and shoot reliably. The total amount of performed weapon switching is significantly lower for our controller. We motivate that result by the fact that the transformation process is more complex for our controller. Players have to move their non-leading hand to a button on the bottom of the handle and deal with the transformation time. In contrast, weapon switching with the Vive controller was done by the big thumb button that is always in reach. This is also reflected in the overall physical effort scores. Overall, the transformation process leads to a more conscious, and thus, less frequent switching, and does not affect the player performance in a negative way.
+
+
+
+%TODO Lerneffekt: man kann/sollte an geeigneter Stelle noch kurz diskutieren, dass es bezüglich einer Messvariablen signifikante Seuquenz-Effekte gab, die einen Lerneffekt der Probanden zeigen (GEQ competence und Gameplay Metric Schaden an Station); die gefundenen Unterschiede zwischen den Controllern sind dadurch aber NICHT beeinflusst, weil dort keine Reihenfolgeeffekte gefunden wurden (haben wir geprüft!); AUSNAHME: CPQ-Appearance und so halb auch ISO-Comfort, daher kann/sollte man die beiden Aspekte ggf. nochmal kurz im Detail diskutieren:
+%CPQ Appearance: Unterschied zwischen Controllern ist signifikant, wobei der Morph besser abschneidet, aber es gibt hier auch Sequence-Effekt in der Form, dass der Vive Controller viel schlechter bewertet wurde, wenn er NACH dem Morph benutzt und bewertet wurde, sprich die Probanden den direkten Vergleich hatten. Man kann hier also die Vermutung anstellen, dass durch den direkten Vergleich der Morph noch besser ankommt, also im direkten Vergleich der Unterschied noch deutlicher wird, während für sich genommen beide Controller gute Werte bei der Appearance bekommen
+%ISO comfort: hier ist es ähnlich, s. Resultsbeschreibung oben, comfort ist nicht signifikant unterschiedlich in total, aber wenn erst mit dem Morph gespielt wurde und dann mit dem Vive, dann ist der Unterschied sehr deutlich, dann wird nämlich comfort vom Morph viel besser bewertet als der vom Vive, also auch hier wieder wenn man den direkten Vergleich hat. Das zeigt zudem auch nochmal, dass (zumindest im Vergleich zum Vive Controller) nun wirklich kein "Comfort-problem" bei unserem controller besteht
+
+%TODO Unterschied zwischen Controllern: Auf Hypothesen beziehen und die Ergebnisse dazu diskutieren (s. oben Kommentare bei Hypothesen, da habe ich schon einige Punkte und Schlussfolgerungen kurz hinter die Hypothesen geschrieben)
+
+%Erklärung für nicht unterschiedliche GEQ skalen und so auf Spiel beziehen, da Spiel ja dasselbe war und natürlich einen großen Einfluss auf die Gesamtexperience hat, auch unabhängig vom Controller. Umso "cooler", dass wir ein paar klare Effekte des Controllers zeigen konnten!
+
+
+%auch wenn keine Hypothese dazu, sollte diskutiert werden im Vergleich der Controller: CPQ zeigt zudem bessere Scores für Morph auf allen drei Subscalen, das ist toll! (efficiency, appearance, authenticity), bestätigt dass der Controller dem Standard in nichts nachsteht und sogar mehr gemocht wird in diesem Kontext!
+%Auch ansonsten sind Usability-Bewertungen für beide Controller schon sehr gut insgesamt
+
+
+%TODO Ergebnis Gameplay Metrics: auch die objektiven Gameplay Daten zeigen keine Unterschiede in der Spieler-Performance, Spieler waren nicht besser oder schlechter mit dem Morph-Controller, zeigt dass Spieler gut mit dem Controller zurecht kamen und auch ähnlch gut damit zielen konnten
+%Die Waffe wurde allerdings weniger oft gewechselt beim Morph. Das ist damit zu erklären, dass der Wechseln hier etwas aufwändiger ist (statt einfach Button drücken wie bei Vive und dann direkt die andere Waffe zu haben ist es hier so, dass man eine explizite Bewegung machen muss, die mehr physical effort erfordert und dann noch die kurze Transformationszeit der Waffe dazukommt - mehr Aufwand und Zeit, sodass die Spieler sich vermutlich genauer überlegt haben, wann der Waffenwechsel Sinn macht. Es hat die Performance (objektiv gemessen) nicht negativ beeinflusst und im Fragebogen zum Morph gaben die Spieler auch an, dass Sie die Zeit für Waffenwechsel angemessen fanden, daher ist nicht davon auszugehen, dass Spieler gehemmt waren, Waffe zu wechseln und es nicht so oft getan hätten, wie nötig gewesen wäre; vielmehr zeigt es, dass die Spieler angemessen oft gewechselt haben
+
+%TODO Geschlechterverteilung diskutieren? Sehr wenig Frauen...
+
+\section{Conclusion and Future Work}
+
+Our contribution is a self-transforming controller concept and its evaluation in a VR first-person shooter game. Based on a telescopic, motor-driven mechanism, the device transforms between a pistol-like and a rifle-like shape. The presented design thinking approach included a think-aloud protocol and gave us insights into the influence of weight distribution on controller perception. 
+
+We evaluated our final controller via a user study. Hereby, we compared our device to the HTC Vive controller based on the GEQ, CPQ, IPQ, and PENS questionnaires. The results show that our shape-changing device significantly outperforms the default controller with regard to scales such as appearance, efficiency, authenticity, experienced realism, and flow. Most importantly, 96\% of the participants reported to like the overall concept of a self-transforming controller.
+
+In order to further investigate the users' perception of our self-transforming controller, additional studies are of high interest. In particular, we suggest to add non-transforming pistols and rifles to the comparison, as the HTC Vive controller is designed with universality in mind and, thus, possibly does not provide sufficient similarity to its virtual counterpart with respect to haptics. Additionally, this would also further isolate the advantages of the transformation itself. Another subject to investigate is a further reduction in the weight of the controller and a determination of the sweet spot for the total weight. Additionally, the transformation function could be extended to other shapes to even further enhance the player experience.
+
+Although we focused on the transformation between a pistol and a rifle, the same design approach can also be applied to other weapons or virtual objects. Including a second rack that transports an equal weight toward the player would allow to simulate shoulder-fired missile weapons (e.g., bazooka). This would already cover most of the weapon classes for firearm-based FPS games. Making the handle retractable would further increase the design space and allow to simulate sword-shaped virtual objects. In that case, the weight based transformation could simulate the switch between, e.g., a short knife and a two-handed sword.
+
+
+
+
+
+% Balancing columns in a ref list is a bit of a pain because you
+% either use a hack like flushend or balance, or manually insert
+% a column break.  http://www.tex.ac.uk/cgi-bin/texfaq2html?label=balance
+% multicols doesn't work because we're already in two-column mode,
+% and flushend isn't awesome, so I choose balance.  See this
+% for more info: http://cs.brown.edu/system/software/latex/doc/balance.pdf
+%
+% Note that in a perfect world balance wants to be in the first
+% column of the last page.
+%
+% If balance doesn't work for you, you can remove that and
+% hard-code a column break into the bbl file right before you
+% submit:
+%
+% http://stackoverflow.com/questions/2149854/how-to-manually-equalize-columns-
+% in-an-ieee-paper-if-using-bibtex
+%
+% Or, just remove \balance and give up on balancing the last page.
+%
+\balance{}
+
+
+% REFERENCES FORMAT
+% References must be the same font size as other body text.
+\bibliographystyle{SIGCHI-Reference-Format}
+\bibliography{controller}
+\end{document}
