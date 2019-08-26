@@ -1,0 +1,853 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Lightsw",
+				"LightSwitchTransaction(MutableData mutableData)\tTransactionResult"
+			],
+			[
+				"Wash",
+				"WashPetTransaction(MutableData mutableData)\tTransactionResult"
+			],
+			[
+				"STAT_C",
+				"STAT_CLEAN\tstring"
+			],
+			[
+				"answ",
+				"answer1\tstring"
+			],
+			[
+				"ans",
+				"answer1\tstring"
+			],
+			[
+				"pri",
+				"PrintDict(Dictionary<string, object> toPrint)\tvoid"
+			],
+			[
+				"puzz",
+				"puzzleObject_\tPuzzle"
+			],
+			[
+				"getan",
+				"getAnswerOfThisUser(Dictionary<string, object> puzzle)\tint"
+			],
+			[
+				"Select",
+				"SelectAnswerTransaction(MutableData mutableData)\tTransactionResult"
+			],
+			[
+				"pla",
+				"UserPlayerId\tbyte"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "thesis/docdoc.tex",
+			"settings":
+			{
+				"buffer_size": 3660,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "thesis/my-thesis-setup.tex",
+			"settings":
+			{
+				"buffer_size": 2911,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "thesis/sample_content/chapter-system.tex",
+			"settings":
+			{
+				"buffer_size": 1030,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "thesis/content/chapter-locomotion.tex",
+			"settings":
+			{
+				"buffer_size": 662,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "cleanthesis.sty",
+			"settings":
+			{
+				"buffer_size": 24777,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "thesis/bib-refs.bib",
+			"settings":
+			{
+				"buffer_size": 57839,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Anaconda Python Builder",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				],
+				[
+					"Packages/Conda/Conda.sublime-build",
+					""
+				]
+			],
+			[
+				"Anaconda Python Builder",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"PdfLaTeX"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				],
+				[
+					"Packages/Conda/Conda.sublime-build",
+					""
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"latex",
+				"Set Syntax: BibLaTeX"
+			],
+			[
+				"bib",
+				"LaTeXTools: Clear current bibliography cache"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax md",
+				"Set Syntax: Markdown"
+			],
+			[
+				"autos",
+				"AutoSetSyntax: Auto Set Syntax"
+			],
+			[
+				"markdownlive",
+				"Preferences: MarkdownLivePreview Settings"
+			],
+			[
+				"live preview",
+				"MarkdownLivePreview: Edit Custom CSS File"
+			],
+			[
+				"user settings",
+				"Preferences: Package Control Settings – User"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"autose",
+				"AutoSetSyntax: Auto Set Syntax"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"markdownpre",
+				"MarkdownLivePreview: Edit Current File"
+			],
+			[
+				"markdownset",
+				"Preferences: MarkdownEditing Settings – Default"
+			],
+			[
+				"markdowne",
+				"Preferences: MarkdownEditing Settings – User"
+			],
+			[
+				"mardownliv",
+				"MarkdownLivePreview: Edit Current File"
+			],
+			[
+				"live pre",
+				"Preferences: MarkdownLivePreview Settings"
+			],
+			[
+				"markdown",
+				"GitHub Flavored Markdown: Preview"
+			],
+			[
+				"enable",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"preview",
+				"GitHub Flavored Markdown: Preview"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"markd",
+				"MarkdownEditing: Open Home Page"
+			],
+			[
+				"markdowned",
+				"MarkdownEditing: Open Home Page"
+			],
+			[
+				"brow",
+				"Build With: Markdown"
+			],
+			[
+				"livereload ",
+				"LiveReload: Enable/disable plug-ins"
+			],
+			[
+				"i",
+				"Package Control: Install Package"
+			],
+			[
+				"mark",
+				"MarkdownEditing: Change color scheme..."
+			],
+			[
+				"package remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"markdown unf",
+				"MarkdownEditing: Unfold All Sections"
+			],
+			[
+				"mari",
+				"MarkdownEditing: Fold Level 1 Sections"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"ui ",
+				"UI: Select Theme"
+			],
+			[
+				"ui",
+				"UI: Select Theme"
+			],
+			[
+				"acti",
+				"ayu: Activate theme"
+			],
+			[
+				"ac",
+				"ayu: Activate theme"
+			],
+			[
+				"activ",
+				"ayu: Activate theme"
+			],
+			[
+				"activa",
+				"ayu: Activate theme"
+			],
+			[
+				"install co",
+				"Package Control: Install Package"
+			],
+			[
+				"color",
+				"UI: Select Color Scheme"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 194.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Andre/Desktop/docdoc",
+		"/C/Users/Andre/Desktop/docdoc/doc",
+		"/C/Users/Andre/Desktop/docdoc/thesis"
+	],
+	"file_history":
+	[
+		"/C/Users/Andre/Desktop/docdoc/thesis/sample_content/chapter-introduction.tex",
+		"/C/Users/Andre/Desktop/docdoc/thesis/content/chapter-introduction.tex",
+		"/C/Users/Andre/Desktop/docdoc/thesis/my-thesis-setup.tex",
+		"/C/Users/Andre/Desktop/docdoc/thesis/paper_tex/gullivr.bib",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/visualization.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/motivation.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/audience.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/background.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/embodiment.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/conclusion.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/my contents",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/abstract.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/interaction.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/content/locomotion.tex",
+		"/C/Users/Andre/Desktop/dissertation/thesis/cleanthesis.sty",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/UIManager.cs",
+		"/C/Users/Andre/Desktop/dissertation/thesis/my-thesis.tex",
+		"/C/Users/Andre/Desktop/papers/animals-chiplay19/camready/beastly.bib",
+		"/C/Users/Andre/Desktop/papers/animals-chiplay19/submission/beastly.tex",
+		"/C/Users/Andre/Desktop/papers/animals-chiplay19/camready/beastly-camready.bbl",
+		"/C/Users/Andre/Downloads/gullivr.tex",
+		"/C/Users/Andre/Desktop/visa.txt",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/ChatRPC.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/PuzzleRPC.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/DBStrings.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/DBEvents.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/PuzzleUIManager.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/MockLogin.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/PetRPC.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/GlobalCfg.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/PlayRulesRPC.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/PetFactory.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/LoginProvider.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/ChatUIManager.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/Puzzle.cs",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Packages/manifest.json",
+		"/C/Users/Andre/Downloads/cuddly-e9628-users-export.json",
+		"/C/Users/Andre/Desktop/code/moana/firebase_unity_sdk_6.0.0/readme.md",
+		"/C/Users/Andre/Downloads/cuddly-e9628-dictionary-export.json",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/dict.py",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/test.txt",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/dict.json",
+		"/C/Users/Andre/Desktop/code/tmp/supcharts/src/res/DSL.json",
+		"/C/Users/Andre/Desktop/code/tmp/supcharts/csv-collection/2014_apple_stock.csv",
+		"/C/Users/Andre/Desktop/dict.json",
+		"/C/Users/Andre/Desktop/dict.py",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/moana.sublime-project",
+		"/C/Users/Andre/Desktop/code/moana/2magochi/Assets/Scripts/BubbleManager.cs",
+		"/C/Users/Andre/Desktop/thesis/thesis.tex",
+		"/C/Users/Andre/Desktop/thesis/frontpage.tex",
+		"/C/Users/Andre/Desktop/thesis/content/chapter2.tex",
+		"/C/Users/Andre/Desktop/papers/vis19/deadeye-vis19/deadeye.tex",
+		"/C/Users/Andre/Desktop/thesis/ivda-macros.tex",
+		"/C/Users/Andre/Desktop/thesis/bib/references.bib",
+		"/C/Users/Andre/Desktop/thesis/Eidesstattliche_Erklaerung.tex",
+		"/C/Users/Andre/Desktop/thesis/content/chapter1.tex",
+		"/C/Users/Andre/Desktop/deardata talk",
+		"/C/Users/Andre/AppData/Roaming/Sublime Text 3/Packages/User/MarkdownLivePreview.css",
+		"/C/Users/Andre/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/C/Users/Andre/AppData/Roaming/Sublime Text 3/Packages/MarkdownEditing/Markdown.sublime-settings",
+		"/C/Users/Andre/Desktop/HomePage.md",
+		"/C/Users/Andre/Desktop/code/deadeye.py",
+		"/C/Users/Andre/Desktop/papers/eg2019-edu/deardata_edu.tex",
+		"/C/Users/Andre/Desktop/papers/eg2019-edu/deardata-body.inc",
+		"/C/Users/Andre/Desktop/papers/eg2019-edu/EGauthorGuidelines-edu.tex",
+		"/C/Users/Andre/Downloads/egPublStyle-EG-full-star-short-edu-tut-posters-2019/EGauthorGuidelines-body.inc",
+		"/C/Users/Andre/Desktop/papers/eg2019-edu/ddata.bib",
+		"/C/Users/Andre/Desktop/papers/eg2019-edu/sublime-edu-project.sublime-project",
+		"/C/Users/Andre/Desktop/papers/eg2019-edu/Deardata-paper/vis18-deardata.tex",
+		"/C/Users/Andre/Desktop/papers/eg2019-edu/deardata_edu.bbl",
+		"/C/Users/Andre/AppData/Roaming/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
+		"/C/Users/Andre/Desktop/papers/eg2019-edu/EGauthorGuidelines-body.inc",
+		"/C/Users/Andre/Desktop/papers/chi19-paper/vranim-body.tex",
+		"/C/Users/Andre/Desktop/papers/chi19-paper/vranim.tex",
+		"/C/Users/Andre/Desktop/papers/chi19-paper/sample-sigchi.tex"
+	],
+	"find":
+	{
+		"height": 58.0
+	},
+	"find_in_files":
+	{
+		"height": 172.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"cthesissetcolor",
+			"blue",
+			"bluegree",
+			"blue",
+			"color",
+			"blue",
+			"online",
+			"msve",
+			"lst"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "thesis/docdoc.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3660,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								583,
+								583
+							]
+						],
+						"settings":
+						{
+							"markdonw_live_preview_last_run": 1566812468.91,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 63.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "thesis/my-thesis-setup.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2911,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2255,
+								2263
+							]
+						],
+						"settings":
+						{
+							"markdonw_live_preview_last_run": 1566816388.13,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 882.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "thesis/sample_content/chapter-system.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1030,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								890,
+								890
+							]
+						],
+						"settings":
+						{
+							"markdonw_live_preview_last_run": 1566815806.16,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 504.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "thesis/content/chapter-locomotion.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 662,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								60,
+								60
+							]
+						],
+						"settings":
+						{
+							"markdonw_live_preview_last_run": 1566813242.67,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "cleanthesis.sty",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24777,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6866,
+								6866
+							]
+						],
+						"settings":
+						{
+							"markdonw_live_preview_last_run": 1566815102.33,
+							"syntax": "Packages/LaTeX/TeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 3556.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "thesis/bib-refs.bib",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 57839,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								57839,
+								57839
+							]
+						],
+						"settings":
+						{
+							"markdonw_live_preview_last_run": 1566812480.54,
+							"syntax": "Packages/LaTeXTools/BibLaTeX.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 35390.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 30.0
+	},
+	"input":
+	{
+		"height": 58.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.exec":
+	{
+		"height": 156.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.languagetool":
+	{
+		"height": 140.0
+	},
+	"output.latextools":
+	{
+		"height": 235.0
+	},
+	"output.variable_get":
+	{
+		"height": 140.0
+	},
+	"pinned_build_system": "",
+	"project": "docdoc.sublime-project",
+	"replace":
+	{
+		"height": 56.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"deardata_edu.tex"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 247.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

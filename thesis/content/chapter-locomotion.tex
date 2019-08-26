@@ -1,0 +1,78 @@
+\chapter{Locomotion in VR}
+\label{sec:locomotion}
+
+
+
+
+
+
+\section{Motivation}
+
+Exploration is awesome. (see paper of Sebastian/Outstanding for formulations)
+Examples: Witcher, Skyrim.
+
+Exploration became more awesome in VR. The setups are available and more and more devs target that audience. The HW helps to immerse, feel present in the world, thus, explo should be even cooler.
+
+BUT: one of the show stoppers is navigation/locomotion. How to explore the world? M/KBD dont work. (First, reduce immersion, second, lead to cybersickness. Briefly explain cybersickness.)
+Therefore, the goal of the chapter is to examine possible locomotions and discuss their pros and cons.
+
+Outline: we introduce the most natural locomotion, state why it is best and yet not possible. Second, to stay in the “natural” area, we look at hardware-based substitutions. Finally, we explore current advances in locomotion alternatives implemented in SW and based on, e.g., perceptual phenomena like redirected walking.
+
+
+\section{The Nature of VR: Presence and Cybersickness}
+
+Briefly explain why VR is different and needs a separate chapter on locomotion.
+
+
+
+
+
+\section{VR Locomotion Landscape}
+
+We will start by static (non-walking) locomotion mechanics known from traditional games: Gamepads. Then transition to more “immersive” input, yet same mechanics: gestures, head movement, gaze. Finally, we explore VR-specific approaches: teleport as state of the art in games. Natural walking as non-plus-ultra, in combi with WiM as alternative for MSVE.
+
+
+
+
+\subsection{Stationary Approaches}
+
+Similar to non-VR games, some VR HW does not support player movement, and game devs need to work around it. This section focuses on such techniques.
+
+
+
+\subsubsection{Traditional I/O Approaches}
+Mouse and kbd and gamepad and joystick, look at STAR.
+
+
+
+\subsubsection{Gestures}
+Head motion, arm swinging, (maybe human joystick - look it up), all sorts of climbing games. No knowledge here - maybe it does not exist and should be assimilated by "physical walking".
+
+
+
+\subsubsection{Teleportation}
+Arc-based teleport as state of the art. Also dashes/NODES. Mention that it seldom used on its own but often in combi with walking.
+
+
+
+
+\subsection{Walking-Centered Techniques}
+Approaches that include or resemble our most intuitive locomotion: walking.
+
+
+\subsubsection{Natural Walking}
+\subsubsection{Physical Treadmills}
+\subsubsection{Walking in Place}
+\subsubsection{Redirected Walking}
+
+
+\subsubsection{Multiscale Navigation}
+
+(example)
+GulliVR changes the size ratio between the virtual body and the virtual world. Hence, in the broader sense, our approach can be classified as a multiscale virtual environment (MSVE) navigation. In that context, the technique that most resembles GulliVR is \textit{GiAnt} by Argelaguet et al.~\cite{argelaguet2016giant}, but with the focus on automated speed and scale factor adjustments to account for negative effects such as diplopia~\cite{lambooij2009visual}. Similar to our findings, the authors emphasize the advantages of providing a navigation speed that is perceived to be constant by users.
+
+
+
+\section{Design Implications}
+
+Put all charts here! (realism vs difficulty, physical effort, …) Consider audience and goal of the game. Should players get physically active? Or rather relaxed? How fast-paced is the game? Design around cybersickness and presence, keep in mind that natural walking is superior to most other things.

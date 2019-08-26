@@ -7,14 +7,16 @@
 \PassOptionsToPackage{utf8}{inputenc}
 \usepackage{inputenc}
 
-
+% by andrey
+\usepackage{listings}
+\usepackage{tabularx}
 % **************************************************
 % Information and Commands for Reuse
 % **************************************************
-\newcommand{\thesisTitle}{The Clean Thesis Style}
-\newcommand{\thesisName}{Ricardo Langner}
+\newcommand{\thesisTitle}{7 Ways to Improve the Virtual Experience - Exploring the Hidden Obstacles of Mainstream Virtual Reality}
+\newcommand{\thesisName}{Andrey Krekhov}
 \newcommand{\thesisSubject}{Documentation}
-\newcommand{\thesisDate}{June 21, 2016}
+\newcommand{\thesisDate}{October 4, 2015}
 \newcommand{\thesisVersion}{My First Draft}
 
 \newcommand{\thesisFirstReviewer}{Jane Doe}
@@ -46,6 +48,8 @@
 % **************************************************
 % Load and Configure Packages
 % **************************************************
+
+
 \usepackage[english]{babel} % babel system, adjust the language of the content
 \PassOptionsToPackage{% setup clean thesis style
     figuresep=colon,%
@@ -63,6 +67,9 @@
     bibsorting=nty,%
 }{cleanthesis}
 \usepackage{cleanthesis}
+
+
+
 
 \hypersetup{% setup the hyperref-package options
     pdftitle={\thesisTitle},    %   - title (PDF meta)

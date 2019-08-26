@@ -29,7 +29,7 @@
 %
 % **************************************************
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{cleanthesis}[2019/06/21 v0.4.0 A clean LaTeX style for thesis documents]
+\ProvidesPackage{cleanthesis_new}[2019/06/21 v0.4.0 A clean LaTeX style for thesis documents]
 %
 % **************************************************
 % Package options
@@ -84,8 +84,8 @@
 
 % OPTION colortheme
 % --> values = bluemagenta|bluegreen
-\define@choicekey*[ct]{cthesis}{colortheme}[\val\themenr]{bluemagenta,bluegreen}[bluemagenta]{\def\cthesis@colortheme{\themenr}}
-\setkeys[ct]{cthesis}{colortheme=bluemagenta}
+\define@choicekey*[ct]{cthesis}{colortheme}[\val\themenr]{bluemagenta,bluegreen}[bluegreen]{\def\cthesis@colortheme{\themenr}}
+\setkeys[ct]{cthesis}{colortheme=bluegreen}
 
 % OPTION bibsys
 % --> values = biber|bibtex
@@ -193,15 +193,30 @@
 	\ct@cthesis@updatecolors%
 }
 
-% sets the blue-magenta color theme (blue/magenta)
+
+%sets the blue-magenta color theme (blue/magenta)
+% \def\cthesissetcolorbluemagenta{%
+% 	\cthesissetcolor{cmyk}{1, .50, .10, .01}{.18, .98, .18, 0}%
+% }
+%\def\cthesissetcolorbluemagenta{%
+%	\cthesissetcolor{cmyk}{.18, .98, .18, 0}{1, .50, .10, .01}%
+%}
+
+
 \def\cthesissetcolorbluemagenta{%
-	\cthesissetcolor{cmyk}{1, .50, .10, .01}{.18, .98, .18, 0}%
-}
+ 	\cthesissetcolor{cmyk}{.98, .28, .00, .25}{.00, .98, .98, .15}%
+ }
+
+%98, 28, 0, 25 {.98, .28, .00, .25}
+
+%0, 98, 98, 15
 
 % sets the blue-green color theme (blue/green)
 \def\cthesissetcolorbluegreen{%
-	\cthesissetcolor{cmyk}{.61, .47, .03, 0}{.48, .05, .91, 0}%
+ 	\cthesissetcolor{cmyk}{.98, .28, .00, .25}{.00, .98, .98, .15}%
 }
+
+
 
 % defines general colors
 \definecolor{ctcolorblack}{gray}{0}

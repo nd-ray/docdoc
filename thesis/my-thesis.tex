@@ -68,18 +68,18 @@
 % --------------------------
 \pagenumbering{arabic}			% arabic page numbering
 \setcounter{page}{1}			% set page counter
-\pagestyle{scrheadings}			% header and footer style
+\pagestyle{maincontentstyle}			% header and footer style
 
 %% Uncomment the following lines using the \part command
 %% to add part sections
 %\part{Example Part}
-\input{content/chapter-introduction}   % INCLUDE: introduction
-\input{content/chapter-related-work}   % INCLUDE: related work
 
-%\part{Additional Example Part}
-\input{content/chapter-system}         % INCLUDE: system
-\input{content/chapter-concepts}       % INCLUDE: concepts
-\input{content/chapter-conclusion}     % INCLUDE: conclusion
+
+
+%\input{sample_content/chapter-system}
+
+\input{content/chapter-locomotion}  
+
 
 % --------------------------
 % Back matter
@@ -106,10 +106,10 @@
 \cleardoublepage
 
 \appendix\cleardoublepage
-\input{content/chapter-appendix}       % INCLUDE: appendix
+%\input{content/chapter-appendix}       % INCLUDE: appendix
 
 \cleardoublepage
-\input{content/colophon}
+%\input{content/colophon}
 
 \cleardoublepage
 \input{content/declaration}
