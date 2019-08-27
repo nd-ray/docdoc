@@ -48,48 +48,40 @@
 	"buffers":
 	[
 		{
-			"file": "thesis/docdoc.tex",
+			"file": "/Users/andrey/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
 			"settings":
 			{
-				"buffer_size": 3660,
+				"buffer_size": 25266,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "thesis/my-thesis-setup.tex",
+			"file": "thesis/my-thesis.tex",
 			"settings":
 			{
-				"buffer_size": 2911,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"buffer_size": 3663,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "thesis/sample_content/chapter-system.tex",
+			"contents": "Package Control Messages\n========================\n\nLaTeXTools\n----------\n\n  LaTeXTools Plugin version 3.14.1 (2017-06-01)\n  \n  Thank you for installing the LaTeXTools plugin!\n  \n  To learn about the features of this plugin, go to the Github page:\n  \n  https://github.com/SublimeText/LaTeXTools\n  \n  and scroll down to the README file. Actually, the Markdown source of that file is in the plugin directory, which you can open using \"Browse Packages...\" in Sublime Text.\n  \n  You can also check out Marciano's blog at\n  \n  tekonomist.wordpress.com\n  \n  Happy TeXing!\n  Ian Bacher, Marciano Siniscalchi, and Richard Stein\n",
 			"settings":
 			{
-				"buffer_size": 1030,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"buffer_size": 619,
+				"line_ending": "Unix",
+				"name": "Package Control Messages",
+				"read_only": true,
+				"scratch": true
 			}
 		},
 		{
 			"file": "thesis/content/chapter-locomotion.tex",
 			"settings":
 			{
-				"buffer_size": 662,
+				"buffer_size": 3441,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "cleanthesis.sty",
-			"settings":
-			{
-				"buffer_size": 24777,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -262,6 +254,10 @@
 		"selected_items":
 		[
 			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
 				"latex",
 				"Set Syntax: BibLaTeX"
 			],
@@ -271,10 +267,6 @@
 			],
 			[
 				"install",
-				"Package Control: Install Package"
-			],
-			[
-				"ins",
 				"Package Control: Install Package"
 			],
 			[
@@ -438,12 +430,17 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Andre/Desktop/docdoc",
-		"/C/Users/Andre/Desktop/docdoc/doc",
-		"/C/Users/Andre/Desktop/docdoc/thesis"
+		"/Users/andrey/Research/docdoc",
+		"/Users/andrey/Research/docdoc/thesis",
+		"/Users/andrey/Research/docdoc/thesis/content"
 	],
 	"file_history":
 	[
+		"/Users/andrey/Research/docdoc/thesis/my-thesis-setup.tex",
+		"/Users/andrey/Research/docdoc/cleanthesis.sty",
+		"/Users/andrey/Research/docdoc/thesis/sample_content/chapter-system.tex",
+		"/Users/andrey/Research/docdoc/thesis/content/chapter-introduction.tex",
+		"/Users/andrey/Research/docdoc/thesis/docdoc.tex",
 		"/C/Users/Andre/Desktop/docdoc/thesis/sample_content/chapter-introduction.tex",
 		"/C/Users/Andre/Desktop/docdoc/thesis/content/chapter-introduction.tex",
 		"/C/Users/Andre/Desktop/docdoc/thesis/my-thesis-setup.tex",
@@ -522,7 +519,7 @@
 	],
 	"find":
 	{
-		"height": 58.0
+		"height": 54.0
 	},
 	"find_in_files":
 	{
@@ -536,6 +533,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"preview",
 			"cthesissetcolor",
 			"blue",
 			"bluegree",
@@ -562,66 +560,63 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "thesis/docdoc.tex",
+					"file": "/Users/andrey/Library/Application Support/Sublime Text 3/Packages/User/LaTeXTools.sublime-settings",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3660,
+						"buffer_size": 25266,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								583,
-								583
+								19403,
+								19403
 							]
 						],
 						"settings":
 						{
-							"markdonw_live_preview_last_run": 1566812468.91,
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 63.0,
+						"translation.y": 8810.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "thesis/my-thesis-setup.tex",
-					"semi_transient": false,
+					"file": "thesis/my-thesis.tex",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 2911,
+						"buffer_size": 3663,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2255,
-								2263
+								1081,
+								1081
 							]
 						],
 						"settings":
 						{
-							"markdonw_live_preview_last_run": 1566816388.13,
 							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 882.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -629,28 +624,29 @@
 				},
 				{
 					"buffer": 2,
-					"file": "thesis/sample_content/chapter-system.tex",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1030,
+						"buffer_size": 619,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								890,
-								890
+								249,
+								249
 							]
 						],
 						"settings":
 						{
-							"markdonw_live_preview_last_run": 1566815806.16,
-							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+							"auto_indent": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_width": 2,
+							"word_wrap": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 504.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -662,15 +658,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 662,
+						"buffer_size": 3441,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								60,
-								60
+								56,
+								56
 							]
 						],
 						"settings":
@@ -683,40 +679,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "cleanthesis.sty",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 24777,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6866,
-								6866
-							]
-						],
-						"settings":
-						{
-							"markdonw_live_preview_last_run": 1566815102.33,
-							"syntax": "Packages/LaTeX/TeX.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3556.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "thesis/bib-refs.bib",
 					"semi_transient": false,
 					"settings":
@@ -735,14 +702,15 @@
 						"settings":
 						{
 							"markdonw_live_preview_last_run": 1566812480.54,
-							"syntax": "Packages/LaTeXTools/BibLaTeX.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 35390.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
