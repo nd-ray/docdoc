@@ -3,7 +3,163 @@
 \chapter{Introduction}
 \label{sec:intro}
 
-Annti tweeted: VR bad. is it true?
-Fin: VR isnt good, but research makes it better. Does it fix it? No.
-BUT: curiosity is human nature, and everyone in the studies loved trying vr. So, even if
-it is only an intermediate solution, we should keep it, because we are humans, after all.
+% Annti tweeted: VR bad. is it true?
+% Fin: VR isnt good, but research makes it better. Does it fix it? No.
+% BUT: curiosity is human nature, and everyone in the studies loved trying vr. So, even if
+% it is only an intermediate solution, we should keep it, because we are humans, after all.
+
+
+1-2 sentences what the thesis is all about. 
+
+
+VR is big hype, mainstream. yet voices become loud that say its doomed, both public and science (antti). Yet we do see a lot of research going on. So what to believe?
+
+thesis tackles this question by advancing (!)ü in multiple areas, on foundamental levels and application levels to gather a big picture. 
+
+to make read easy, this section is dedicated to answer thee basic questions: why writing and reading, what inside and what not, and how is it organized?
+
+
+
+
+\section{Motives for Revisiting VR}
+
+vr is not novel (look into thesis of jonas), and one could argue its pointless going over it again and again. however, multiple things changed: (mb make textbf)
+
+- better and lighter hardware (and availability)
+- more sophisticated software (tracking and things from research that were merged into vr)
+- more digital people (less cs) --most important aspect maybe
+
+highest impact on aspects such as locomotion, interaction, and perception, so thats why we exactly revisit it and see what we can make out of it.
+
+
+% on other hand, still lots of concerns from research that say its useless, e.g., anttis tweet.
+
+% so its polarizing, things changed and change, and thats why we need a closer look to provide some current estimates whether its holzweg wnd where the reise goes.
+
+
+
+
+\section{Scope and Contentual Boundaries}
+what is it about and what it is not about
+- what is scope, what is outside?
+
+to have some sort of impression, we need some big picture, and need lot of areas. time limitations so we picked representatives (things that changed most maybe). main focus on walk, see, and touch.
+
+describe what particular questions will be answered.
+- (antti) take look how to locomote in vr and present novel approaches. In particular, cybersickness and presence will be handled here (?)
+
+
+- (annti) interaction in terms of gestures, haptics, representation, and software logistics
+
+
+- what can we use vr for? differing perception is great
+
+
+Limit to mainstream vr, no exotic setups.
+many studies are with vr games as example, as one of the most important motor of such setups.
+
+
+examples of what is not inside but still important: text input, multi-user.
+
+
+
+
+\section{Structure of the Synopsis}
+
+how the big picture is collected. diff areas, ranging from vr techniques (locomotion) over interaction modalities and taxonomies to perception phenomena that make vr unique and beneficial.
+
+
+
+\section{anttis vr rant}
+%%%%%%%% ANTTI TWEET
+% https://twitter.com/oulasvirta/status/1103298711382380545?lang=en
+
+Rant: Nine reasons why I don't believe in current VR/AR technology.
+
+HoloLens, Magic Leap, and Oculus: Mind-blowing videos, and the market is estimated to explode to 200 billion by 2025 (Statista). So what's wrong?
+
+HCI research tells why we haven't seen a killer app yet:
+
+
+
+
+\subsection{the gorilla arm}
+
+First, the gorilla arm. The videos show smiling users holding their arms up for extended periods. But that will cause shoulder pain. The Consumed Endurance model estimates that a user can hold arm up for just 90 seconds before starting to fatigue. 
+% https://t.co/5MgNriW4BV
+
+Anecdotally, when drsrinathsridha was working on a CHI paper, he could not find a comfortable posture for doing freehand gestures and had days of sore neck and arm. Well, you could try "gun slinging, but then you lose hand-to-display coupling and fall back to mouse-like input
+
+So, either we lose hand input or we're limited to applications that that don't need more than 90 seconds of "air time". 
+
+
+
+
+\subsection{hands have evolved for manipulating objects}
+Second, our hands have evolved for manipulating objects, not for poking in the air. 
+
+
+While vision-based tracking of hand movement has taken leaps forward, tracking of hands WITH objects hasn't. Here's a screencap from our ECCV paper from a few years back. Tracking works if you're slow and occlusions are bearable
+
+
+So, it seems you can forget interactions with (arbitrary) physical objects. We're going to be designing poking-in-the-air applications for years to come. 
+
+\subsection{poking-in-the-air is also inferior}
+Third, poking-in-the-air is also inferior as a means of interaction. Mechanoreceptive feedback is specialized and important for input. We don't want to lose it. Even pressing a button or hitting a virtual ball becomes hard. 
+
+Well, you could try 3 things: 1) forget applications where contact is needed (boo!), 2) wear gloves (clumsy, unhygienic), or 3) assume an instrumented environment. Ultrahaptics - as far as I have tried it - is too weak to replace real contact. 
+
+Users will miss real buttons. 
+
+
+\subsection{gesturing is not "natural"}
+Fourth, gesturing is not "natural". There are few if any instinctual gestures. HCI research has sought for natural gestures for a decade, but found out that the gesture elicitation method artificially inflates claimed consensus: 
+% https://t.co/RBslSzBSnO
+
+So, either you forget "natural interaction", and assume that your users are willing to spend time learning new gestures, or you're stuck with simple pointing-and-pinching type gestures that users can transfer from the mobile device.
+
+
+
+\subsection{body misalignment}
+Fifth, body misalignment. This is my fav: The virtual and the physical body will never be perfectly aligned in time and space. The sensing+computation pipeline that mediates motion and display can only worsen alignment. Try petting a cat with Leap Motion. Ouch.
+
+This is a serious issue for motor control, causing coordinate disturbance, temporal asynchrony, and poorer cue integration. Users cannot rely on their senses as they normally do when moving. Imagine tracking a bee in 3D space: Hard IRL, harder in VR
+
+
+\subsection{text}
+Sixth, say goodbye to text entry. Unless you fall back to in-hand controllers, you can forget applications that require fast and precise motor control. Entering text is very prevalent in computer use but practically unusable with mid-air input. 
+
+
+
+Example: VULTURE is a gestural mid-air text entry technique. A CHI Best Paper. But how fast is it? Meagre 21 words per minute.  Adults type around 35-40wpm on smartphones. Can you imagine their reaction when they're dumbed down to half of that?
+%https://t.co/Xtgf82ofGH
+
+Well, you could design a new open-loop gesture set, like a sign language. We tried exactly that (CHI'15), predicting that you might get up to 50 WPM with simple gestures and LeapMotion-level sensing. Downside? You need to practice around 10-20 hours
+% https://t.co/EtemobxzhQ
+
+
+\subsection{simulator sickness}
+Seventh, simulator sickness, a long-standing problem, still unsolved. This is what NASA wrote about its VR adventure in the 1990s: "The only thing consistently real about VR were headaches and motion sickness" 
+
+ut surely we have solved motion sickness by now with better hardware? No. Depending on task, up to 56 percent of participants felt motion sickness with Oculus Rift in a recent study: 
+%https://t.co/GbEr7GuXX1
+
+
+\subsection{locomotion}
+Eighth, locomotion: also still unsolved, at least for customer-grade devices. How to move around comfortably when you don't have a treadmill or full body tracking? By throwing yourself, pulling, teleporting or what? Poor replacements for just walking.
+
+
+
+\subsection{fov}
+Ninth, another persisting problem still with us: the narrow field of view. HoloLens had a notoriously narrow FOV "like a card deck". 
+
+When the HMD's FOV is narrower than your (real) peripheral vision, you lose visual context. Users need to turn and glance around to orient. 
+
+But peripheral vision is actually important in many visual tasks. NASA reported that pilots did better with traditional displays than with VR because of this. 
+% https://t.co/wMKwVMCMaq
+
+
+\subsection{summary}
+To sum up, definite progress has been made, but the scope of today's VR/AR technology is narrow. It is locked into applications where a few seconds of waving in the air is worth the hassle of putting on an HMD.
+
+
